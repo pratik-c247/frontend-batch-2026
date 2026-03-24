@@ -13,20 +13,11 @@ import { AUTH_TEXTS } from '@/features/auth/auth.constant'
 import { codeValidation } from '@/validations/auth.validations'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { LABELS } from '@/constant/labels'
-
+import { ROUTES } from '@/constant/routes'
 
 export const SetupAuthenticator = () => {
-  const {
-    router,
-    secret,
-    register,
-    handleSubmit,
-    errors,
-    onSubmit,
-    showSecret,
-    setShowSecret,
-    otpUri,
-  } = useAuthenticatorSetup()
+  const { router, register, handleSubmit, errors, onSubmit, otpUri } =
+    useAuthenticatorSetup()
   return (
     <div>
       <div className={styles.container}>
@@ -78,22 +69,14 @@ export const SetupAuthenticator = () => {
 
           <p className={styles.manualText}>
             {AUTH_TEXTS.SETUP_AUTHENTICATOR.MANUAL_TEXT_PART1}{' '}
-            <Button
-              variant={VARIANTS.GHOST}
-              type={BUTTON_TYPES.BUTTON}
+            <Link
+              href={ROUTES.MFA.RECOVERY_CODES}
               className={styles.setupKeyLink}
-              onClick={() => setShowSecret((p) => !p)}
             >
               {AUTH_TEXTS.SETUP_AUTHENTICATOR.SETUP_KEY_LABEL}
-            </Button>{' '}
+            </Link>{' '}
             {AUTH_TEXTS.SETUP_AUTHENTICATOR.MANUAL_TEXT_PART2}
           </p>
-
-          {showSecret && (
-            <div className={styles.secretBox}>
-              <code className={styles.secretCode}>{secret}</code>
-            </div>
-          )}
 
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <Input

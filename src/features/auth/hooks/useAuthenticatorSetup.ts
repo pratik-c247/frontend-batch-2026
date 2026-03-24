@@ -84,9 +84,7 @@ export const useAuthenticatorSetup = () => {
     handleSubmit,
     errors,
     onSubmit,
-    showSecret,
-    setShowSecret,
-    otpUri,
+      otpUri,
     router,
     secret,
   }
