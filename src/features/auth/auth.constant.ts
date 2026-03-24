@@ -4,7 +4,8 @@ export const AUTH_TEXTS = {
       AUTHENTICATOR: 'authenticator',
       EMAIL: 'email',
       SMS: 'sms',
-    },
+      RECOVERY:'recovery'
+    } as const,
 
     ACTIVATED: {
       TITLE: 'MFA Activated!',
@@ -162,4 +163,10 @@ export const AUTH_TEXTS = {
   SING_UP: {
     TITLE: 'Create your Auth-MFA Account',
   },
+  SESSION_VARIABLES: {
+    EMAIL_OTP: 'email_otp',
+    EMAIL_OTP_EXPIRES: 'email_otp_expires',
+    SMS_OTP: 'sms_otp',
+    SMS_OTP_EXPIRES: 'sms_otp_expires',
+  }as const,
 }

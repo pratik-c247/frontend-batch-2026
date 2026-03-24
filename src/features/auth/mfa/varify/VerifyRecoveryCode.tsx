@@ -8,7 +8,7 @@ import { KeyIcon } from '@/assets/icons/KeyIcon'
 import { useRecoveryCodeVerify } from '../../hooks/useRecoveryCodeverify'
 import { VARIANTS } from '@/constant/common'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
-import { codeValidation } from '@/validations/auth.validations'
+import { recoveryCode } from '@/validations/auth.validations'
 import { LABELS } from '@/constant/labels'
 import { AUTH_TEXTS } from '../../auth.constant'
 
@@ -34,7 +34,7 @@ export const VerifyRecoveryCode = () => {
             <Input
               label={LABELS.CODE_INPUT_LABEL_RECOVERY_CODE}
               placeholder=""
-              {...register('recoveryCode', codeValidation)}
+              {...register('recoveryCode', recoveryCode)}
               error={errors.recoveryCode?.message}
             />
             <div className={styles.btnRow}>

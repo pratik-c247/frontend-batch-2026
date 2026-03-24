@@ -3,15 +3,14 @@ import { Header } from '../layout/Header'
 import styles from './OuterWrapper.module.scss'
 import type { ReactNode } from 'react'
 
-interface props{
-  children:ReactNode
+interface props {
+  children: ReactNode
 }
-export const OuterWrapper = ({children}:props) => {
+export const OuterWrapper = ({ children }: props) => {
   return (
     <section className={`container-fluid ${styles.OuterContainer}`}>
       <div className={styles.leftSec}>
         <Header />
-
         <div className={styles.childBox}>
           <div className={styles.innerContent}>{children}</div>
         </div>

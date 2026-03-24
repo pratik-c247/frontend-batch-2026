@@ -99,7 +99,7 @@ export const SetupAuthenticator = () => {
             <Input
               label={LABELS.CODE_INPUT_LABEL}
               placeholder=""
-              {...register('code',codeValidation  )}
+              {...register('code', codeValidation)}
               error={errors.code?.message}
             />
             <div className={styles.btnRow}>
@@ -109,17 +109,17 @@ export const SetupAuthenticator = () => {
                 onClick={() => router.back()}
                 className={styles.cancelBtn}
               >
-               {BUTTON_NAMES.CANCEL}
+                {BUTTON_NAMES.CANCEL}
               </Button>
               <Button type={BUTTON_TYPES.SUBMIT} className={styles.submitBtn}>
-              {BUTTON_NAMES.SUBMIT}
+                {BUTTON_NAMES.SUBMIT}
               </Button>
             </div>
           </form>
         </div>
 
         <SetupOtherMethodsBox
-          currentMethod="authenticator"
+          currentMethod={AUTH_TEXTS.MFA.SETUP_WAYS.AUTHENTICATOR}
           showRecovery={false}
         />
       </div>

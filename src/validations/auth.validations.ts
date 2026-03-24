@@ -59,6 +59,10 @@ export const codeValidation = {
   maxLength: { value: 6, message: VALIDATION_MESSAGES.MAX_LENGTH(6) },
 }
 
+export const recoveryCode = {
+  required:VALIDATION_MESSAGES.REQUIRED('Code')
+}
+
 // export const confirmPasswordValidation = <T extends FieldValues>(
 //   passwordField: Path<T>,
 // ): RegisterOptions<T, Path<T>> => ({

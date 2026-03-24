@@ -125,7 +125,7 @@ export const SetupEmail = () => {
           )}
         </div>
 
-        <SetupOtherMethodsBox currentMethod="email" showRecovery={false} />
+        <SetupOtherMethodsBox currentMethod={AUTH_TEXTS.MFA.SETUP_WAYS.EMAIL} showRecovery={false} />
       </div>
     </div>
   )

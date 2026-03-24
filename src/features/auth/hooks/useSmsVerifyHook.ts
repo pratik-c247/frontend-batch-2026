@@ -6,6 +6,7 @@ import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { AUTH_TEXTS } from '../auth.constant'
 
 type FormData = { code: string }
 const OTP_EXPIRY_SECONDS = Number(
@@ -56,8 +57,11 @@ export const useSmsVerifyHook = () => {
   const sendOtp = () => {
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiresAt = Date.now() + OTP_EXPIRY_SECONDS * 1000
-    sessionStorage.setItem('sms_otp', otp.toString())
-    sessionStorage.setItem('sms_otp_expires', expiresAt.toString())
+    sessionStorage.setItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP, otp.toString())
+    sessionStorage.setItem(
+      AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES,
+      expiresAt.toString(),
+    )
     notify.success(`Code sent to ${user?.mfa?.sms?.phone}`)
     startTimer()
     setOtpSent(true)
@@ -70,8 +74,12 @@ export const useSmsVerifyHook = () => {
   }
 
   const onSubmit = async (data: FormData) => {
-    const storedOtp = sessionStorage.getItem('sms_otp')
-    const expiresAt = Number(sessionStorage.getItem('sms_otp_expires'))
+    const storedOtp = sessionStorage.getItem(
+      AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP,
+    )
+    const expiresAt = Number(
+      sessionStorage.getItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES),
+    )
 
     if (Date.now() > expiresAt) {
       notify.error(AUTH_MESSAGES.CODE_EXPIRED)
@@ -82,10 +90,10 @@ export const useSmsVerifyHook = () => {
       return
     }
 
-    sessionStorage.removeItem('sms_otp')
-    sessionStorage.removeItem('sms_otp_expires')
+    sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
+    sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES)
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
-    router.push('/dashboard')
+    router.push(ROUTES.DASHBOARD.ROOT)
   }
 
   const hasRecoveryCodes = (user?.mfa?.recoveryCodes || []).some(

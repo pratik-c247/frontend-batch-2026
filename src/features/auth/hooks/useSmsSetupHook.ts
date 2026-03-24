@@ -1,4 +1,5 @@
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { ROUTES } from '@/constant/routes'
 import type { User } from '@/types/auth.types'
 import { generateOtp, getExpiry } from '@/utils/helpers'
@@ -6,6 +7,7 @@ import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { AUTH_TEXTS } from '../auth.constant'
 
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
@@ -46,7 +48,7 @@ export const useSmsSetupHook = () => {
 
 
   const onSendCode = (data: PhoneFormData) => {
-    const { expiry } = storeOtp('sms_otp')
+    const { expiry } = storeOtp(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
     expiresAtRef.current = expiry
     setPhone(`+1 ${data.phone}`)
     setStep('verify')
@@ -55,17 +57,19 @@ export const useSmsSetupHook = () => {
   }
 
   const onVerify = async (data: OtpFormData) => {
-    const storedOtp = sessionStorage.getItem('sms_otp')
+    const storedOtp = sessionStorage.getItem(
+      AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP,
+    )
     if (timeLeft <= 0) {
-      notify.error('Code expired. Please resend.')
+      notify.error(AUTH_MESSAGES.CODE_EXPIRED)
       return
     }
     if (data.code !== storedOtp) {
-      notify.error('Invalid code. Please try again.')
+      notify.error(AUTH_MESSAGES.INVALID_CODE)
       return
     }
     try {
-      const email = localStorage.getItem('currentUserEmail') || ''
+      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const user: User = await getUserByEmail(email)
       if (!user) return
       await saveUser({
@@ -76,21 +80,21 @@ export const useSmsSetupHook = () => {
           sms: { otp: null, expiresAt: null, verified: true, phone },
         },
       })
-      sessionStorage.removeItem('sms_otp')
-      sessionStorage.removeItem('sms_otp_expires')
-      notify.success('SMS authentication configured!')
+      sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
+      sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES)
+      notify.success(AUTH_MESSAGES.SMS_SETUP_CONFIGURED)
       router.push(ROUTES.MFA.ACTIVATED)
     } catch {
-      notify.error('Something went wrong.')
+      notify.error(AUTH_MESSAGES.SOMETHING_WENT_WRONG)
     }
   }
 
   const onResend = () => {
     if (timerRef.current) clearInterval(timerRef.current)
-    const { expiry } = storeOtp('sms_otp')
+    const { expiry } = storeOtp(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
     expiresAtRef.current = expiry
     startTimer()
-    notify.success('New code sent!')
+    notify.success(AUTH_MESSAGES.NEW_CODE_SENT)
   }
 
   useEffect(() => {

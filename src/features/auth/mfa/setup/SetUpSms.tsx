@@ -87,7 +87,7 @@ export const SetupSms = () => {
                   {BUTTON_NAMES.CANCEL}
                 </Button>
                 <Button type={BUTTON_TYPES.SUBMIT} className={styles.submitBtn}>
-         {BUTTON_NAMES.SEND_CODE}
+                  {BUTTON_NAMES.SEND_CODE}
                 </Button>
               </div>
             </form>
@@ -124,16 +124,14 @@ export const SetupSms = () => {
             </form>
             <div className={styles.timerRow}>
               <span className={styles.timerText}>
-       {LABELS.TIMER_LABEL}
+                {LABELS.TIMER_LABEL}
                 <span className={styles.timerValue}>
                   {formatTime(timeLeft)}
                 </span>
               </span>
             </div>
             <div className={styles.resendRow}>
-              <span className={styles.resendText}>
-         {LABELS.RESEND_TEXT}
-              </span>
+              <span className={styles.resendText}>{LABELS.RESEND_TEXT}</span>
               <Button
                 variant={VARIANTS.GHOST}
                 type={BUTTON_TYPES.BUTTON}
@@ -147,7 +145,10 @@ export const SetupSms = () => {
           </div>
         )}
 
-        <SetupOtherMethodsBox currentMethod="sms" showRecovery={false} />
+        <SetupOtherMethodsBox
+          currentMethod={AUTH_TEXTS.MFA.SETUP_WAYS.SMS}
+          showRecovery={false}
+        />
       </div>
     </div>
   )

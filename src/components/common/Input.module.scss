@@ -2,7 +2,7 @@
 @use '@/styles/abstracts/mixins' as *;
 
 .wrapper {
-@include flex-column;
+  @include flex-column;
   gap: 6px;
 }
 
@@ -25,7 +25,7 @@
 
 .error {
   font-size: $font-size-sm;
-  color:$lite-red-color;
+  color: $lite-red-color;
 }
 
 .inputContainer {
@@ -54,9 +54,9 @@
 
 .icon {
   position: absolute;
-  right:$spacing-5;
+  right: $spacing-5;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-@include flex-align-center;
+  @include flex-align-center;
 }

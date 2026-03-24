@@ -6,6 +6,7 @@ import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { AUTH_TEXTS } from '../auth.constant'
 
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
@@ -48,14 +49,16 @@ export const useEmailSetupHook = () => {
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiry = Date.now() + OTP_EXPIRY_SECONDS * 1000
     expiresAtRef.current = expiry
-    sessionStorage.setItem('email_otp', otp.toString())
-    sessionStorage.setItem('email_otp_expires', expiry.toString())
+    sessionStorage.setItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP, otp.toString())
+    sessionStorage.setItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP_EXPIRES, expiry.toString())
     startTimer()
     notify.success(AUTH_MESSAGES.NEW_CODE_SENT)
   }
 
   const onSubmit = async (data: OtpFormData) => {
-    const storedOtp = sessionStorage.getItem('email_otp')
+    const storedOtp = sessionStorage.getItem(
+      AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP,
+    )
     if (timeLeft <= 0) {
       notify.error(AUTH_MESSAGES.CODE_EXPIRED)
       return
@@ -75,8 +78,8 @@ export const useEmailSetupHook = () => {
           email: { otp: null, expiresAt: null, verified: true },
         },
       })
-      sessionStorage.removeItem('email_otp')
-      sessionStorage.removeItem('email_otp_expires')
+      sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP)
+      sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP_EXPIRES)
       notify.success(AUTH_MESSAGES.EMAIL_SETUP_CONFIGURED)
       router.push(ROUTES.MFA.ACTIVATED)
     } catch {
@@ -90,8 +93,14 @@ export const useEmailSetupHook = () => {
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiry = Date.now() + OTP_EXPIRY_SECONDS * 1000
     expiresAtRef.current = expiry
-    sessionStorage.setItem('email_otp', otp.toString())
-    sessionStorage.setItem('email_otp_expires', expiry.toString())
+    sessionStorage.setItem(
+      AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP,
+      otp.toString(),
+    )
+    sessionStorage.setItem(
+      AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP_EXPIRES,
+      expiry.toString(),
+    )
     notify.success(`Verification code sent to ${email}`)
     startTimer()
     setOtpSent(true)

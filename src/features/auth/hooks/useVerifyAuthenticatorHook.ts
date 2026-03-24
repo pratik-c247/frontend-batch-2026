@@ -35,7 +35,7 @@ export const useVerifyAuthenticatorHook = () => {
   const onSubmit = async (data: FormData) => {
     if (!user) return
     if (!user.mfa?.authenticator?.secret) {
-      notify.error('Authenticator not set properly')
+      notify.error(AUTH_MESSAGES.AUTHENTICATOR_NOT_SET_PROPERLY)
       return
     }
     const totp = new OTPAuth.TOTP({

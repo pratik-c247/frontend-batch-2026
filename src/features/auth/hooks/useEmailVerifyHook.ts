@@ -6,6 +6,7 @@ import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { AUTH_TEXTS } from '../auth.constant'
 
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
@@ -56,8 +57,11 @@ export const useEmailVerifyHook = () => {
   const sendOtp = () => {
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiresAt = Date.now() + OTP_EXPIRY_SECONDS * 1000
-    sessionStorage.setItem('email_otp', otp.toString())
-    sessionStorage.setItem('email_otp_expires', expiresAt.toString())
+    sessionStorage.setItem(
+      AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP,
+      otp.toString(),
+    )
+    sessionStorage.setItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP_EXPIRES, expiresAt.toString())
     notify.success(`Code sent to ${user?.email}`)
     startTimer()
     setOtpSent(true)
@@ -70,8 +74,12 @@ export const useEmailVerifyHook = () => {
   }
 
   const onSubmit = async (data: FormData) => {
-    const storedOtp = sessionStorage.getItem('email_otp')
-    const expiresAt = Number(sessionStorage.getItem('email_otp_expires'))
+    const storedOtp = sessionStorage.getItem(
+      AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP,
+    )
+    const expiresAt = Number(
+      sessionStorage.getItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP_EXPIRES),
+    )
 
     if (Date.now() > expiresAt) {
       notify.error(AUTH_MESSAGES.CODE_EXPIRED)
@@ -82,8 +90,8 @@ export const useEmailVerifyHook = () => {
       return
     }
 
-    sessionStorage.removeItem('email_otp')
-    sessionStorage.removeItem('email_otp_expires')
+    sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP)
+    sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.EMAIL_OTP_EXPIRES)
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
     router.push(ROUTES.DASHBOARD.ROOT)
   }

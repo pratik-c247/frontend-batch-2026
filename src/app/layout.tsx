@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Toaster } from 'react-hot-toast'
-
 import QueryProvider from '@/providers/QueryProvider'
 import { OuterWrapper } from '@/components/common/OuterWrapper'
 
@@ -13,8 +12,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <QueryProvider>
-          <OuterWrapper>{children}
-          <Toaster/>
+          <OuterWrapper>
+            {children}
+            <Toaster />
           </OuterWrapper>
         </QueryProvider>
       </body>

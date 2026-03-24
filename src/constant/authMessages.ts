@@ -12,6 +12,7 @@ export const AUTH_MESSAGES = {
   PASSWORD_CHANGE_SUCCESS: 'Password changed successfully',
   AUTHENTICATOR_APP_CONFIGURED: 'Authenticator app configured!',
   EMAIL_SETUP_CONFIGURED: 'Email authentication configured!',
+  SMS_SETUP_CONFIGURED:'SMS authentication configured!',
   NEW_CODE_SENT: 'New code sent',
   CODE_COPY_TO_CLIPBOARD: 'Codes copied to clipboard!',
   RECOVERY_CODE_GENERATED: 'Recovery codes generated!',
@@ -36,6 +37,7 @@ export const AUTH_MESSAGES = {
   USER_NOT_FOUND: 'User not found',
   INVALID_CODE: 'Invalid code. Please try again.',
   CODE_EXPIRED: 'Code expired. Please resend.',
+ AUTHENTICATOR_NOT_SET_PROPERLY :"Authenticator not set properly",
   CODE_ALREADY_GENERATED: 'Recovery codes are already generated.',
   NO_RECOVERY_CODES_GENERATED:
     'No recovery codes generated. Please use another method.',

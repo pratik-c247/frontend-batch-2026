@@ -3,13 +3,12 @@ import type { MFAType, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { AUTH_TEXTS } from '../auth.constant'
 
 export const useActivatedHook = () => {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
-  const [lastMethod, setLastMethod] = useState<
-    'email' | 'sms' | 'authenticator'
-  >('email')
+  const [lastMethod, setLastMethod] = useState<MFAType>(AUTH_TEXTS.MFA.SETUP_WAYS.EMAIL)
 
   useEffect(() => {
     const fetchUser = async () => {

@@ -17,7 +17,7 @@ export const useAuthenticatorSetup = () => {
   const [{ secret, otpUri }] = useState(() => {
     const email =
       typeof window !== 'undefined'
-        ? localStorage.getItem('currentUserEmail') || ''
+        ? localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
         : ''
 
     const totp = new OTPAuth.TOTP({

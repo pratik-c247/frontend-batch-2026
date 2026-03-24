@@ -107,7 +107,10 @@ export const SetupRecoveryCodes = () => {
         )}
 
         {!generated && (
-          <SetupOtherMethodsBox currentMethod="recovery" showRecovery={true} />
+          <SetupOtherMethodsBox
+            currentMethod={AUTH_TEXTS.MFA.SETUP_WAYS.RECOVERY}
+            showRecovery={true}
+          />
         )}
       </div>
     </div>
