@@ -12,7 +12,6 @@ type FormData = {
 }
 export const useAuthenticatorSetup = () => {
   const router = useRouter()
-  const [showSecret, setShowSecret] = useState(false)
 
   const [{ secret, otpUri }] = useState(() => {
     const email =
@@ -84,7 +83,7 @@ export const useAuthenticatorSetup = () => {
     handleSubmit,
     errors,
     onSubmit,
-      otpUri,
+    otpUri,
     router,
     secret,
   }

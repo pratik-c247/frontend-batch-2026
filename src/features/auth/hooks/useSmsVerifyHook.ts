@@ -6,7 +6,7 @@ import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { AUTH_TEXTS } from '../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 type FormData = { code: string }
 const OTP_EXPIRY_SECONDS = Number(

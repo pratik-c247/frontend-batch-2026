@@ -3,7 +3,7 @@ import type { MFAType, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { AUTH_TEXTS } from '../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 export const useActivatedHook = () => {
   const router = useRouter()
