@@ -2,10 +2,11 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as OTPAuth from 'otpauth'
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
 import type { User } from '@/types/auth.types'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { ROUTES } from '@/constant/routes'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 type FormData = {
   code: string
 }
@@ -51,11 +52,12 @@ export const useAuthenticatorSetup = () => {
 
       const delta = totp.validate({ token: data.code.trim(), window: 1 })
       if (delta === null) {
-        notify.error('Invalid code. Please try again.')
+        notify.error(AUTH_MESSAGES.INVALID_CODE)
         return
       }
 
-      const email = localStorage.getItem('currentUserEmail') || ''
+      const email =
+        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const user: User = await getUserByEmail(email)
       if (!user) return
 
@@ -70,11 +72,10 @@ export const useAuthenticatorSetup = () => {
         },
       })
 
-      notify.success('Authenticator app configured!')
+      notify.success(AUTH_MESSAGES.AUTHENTICATOR_APP_CONFIGURED)
       router.push(ROUTES.MFA.ACTIVATED)
     } catch (error) {
-      console.error('TOTP verify error:', error)
-      notify.error('Something went wrong.')
+      notify.error(AUTH_MESSAGES.SOMETHING_WENT_WRONG)
     }
   }
 

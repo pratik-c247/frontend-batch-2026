@@ -1,4 +1,4 @@
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
 import { ROUTES } from '@/constant/routes'
 import type { RecoveryCode, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { verifyRecoveryCode } from '@/utils/recoveryCodeHelper'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 
 type FormData = { recoveryCode: string }
 export const useRecoveryCodeVerify = () => {
@@ -19,7 +20,7 @@ export const useRecoveryCodeVerify = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email = localStorage.getItem('currentUserEmail') || ''
+      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)
@@ -30,7 +31,7 @@ export const useRecoveryCodeVerify = () => {
         (c: RecoveryCode) => !c.used,
       )
       if (!hasCodes) {
-        notify.error('No recovery codes generated. Please use another method.')
+        notify.error(AUTH_MESSAGES.NO_RECOVERY_CODES_GENERATED)
         router.back()
         return
       }
@@ -40,15 +41,15 @@ export const useRecoveryCodeVerify = () => {
   }, [])
 
   const onSubmit = async (data: FormData) => {
-    const email = localStorage.getItem('currentUserEmail') || ''
+    const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
     const result = await verifyRecoveryCode(email, data.recoveryCode)
 
     if (!result.success) {
       notify.error(result.message)
       return
     }
-    notify.success('Recovery code accepted! Login successful.')
-    router.push('/dashboard')
+    notify.success(AUTH_MESSAGES.RECOVERY_CODE_ACCEPTED)
+    router.push(ROUTES.DASHBOARD.ROOT)
   }
 
   return {

@@ -1,4 +1,5 @@
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { ROUTES } from '@/constant/routes'
 import type { RecoveryCode, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
@@ -25,7 +26,7 @@ export const useSmsVerifyHook = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email = localStorage.getItem('currentUserEmail') || ''
+      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)
@@ -65,7 +66,7 @@ export const useSmsVerifyHook = () => {
   const onResend = () => {
     if (timerRef.current) clearInterval(timerRef.current)
     sendOtp()
-    notify.success('New code sent!')
+    notify.success(AUTH_MESSAGES.NEW_CODE_SENT)
   }
 
   const onSubmit = async (data: FormData) => {
@@ -73,17 +74,17 @@ export const useSmsVerifyHook = () => {
     const expiresAt = Number(sessionStorage.getItem('sms_otp_expires'))
 
     if (Date.now() > expiresAt) {
-      notify.error('Code expired. Please resend.')
+      notify.error(AUTH_MESSAGES.CODE_EXPIRED)
       return
     }
     if (data.code.trim() !== storedOtp) {
-      notify.error('Invalid code. Please try again.')
+      notify.error(AUTH_MESSAGES.INVALID_CODE)
       return
     }
 
     sessionStorage.removeItem('sms_otp')
     sessionStorage.removeItem('sms_otp_expires')
-    notify.success('Login successful!')
+    notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
     router.push('/dashboard')
   }
 

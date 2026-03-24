@@ -1,3 +1,4 @@
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import type { MFAType, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
@@ -12,7 +13,7 @@ export const useActivatedHook = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const email = localStorage.getItem('currentUserEmail') || ''
+      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
 
       setUser(u)

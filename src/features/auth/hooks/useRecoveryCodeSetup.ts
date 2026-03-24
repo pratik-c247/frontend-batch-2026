@@ -1,4 +1,5 @@
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import type { User } from '@/types/auth.types'
 import { generateCodes } from '@/utils/generateCode'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
@@ -12,12 +13,12 @@ export const useRecoveryCodeSetup = () => {
 
   const handleGenerate = async () => {
     const newCodes = generateCodes()
-    const email = localStorage.getItem('currentUserEmail') || ''
+    const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
     const user: User = await getUserByEmail(email)
     if (!user) return
 
     if (user.mfa.recoveryCodes) {
-      notify.error('Recovery codes are already generated.')
+      notify.error(AUTH_MESSAGES.CODE_ALREADY_GENERATED)
       return
     }
 
@@ -29,7 +30,7 @@ export const useRecoveryCodeSetup = () => {
 
     setCodes(newCodes)
     setGenerated(true)
-    notify.success('Recovery codes generated!')
+    notify.success(AUTH_MESSAGES.RECOVERY_CODE_GENERATED)
   }
 
   const handleDownload = () => {
@@ -45,7 +46,7 @@ export const useRecoveryCodeSetup = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(codes.join('\n'))
-    notify.success('Codes copied to clipboard!')
+    notify.success(AUTH_MESSAGES.CODE_COPY_TO_CLIPBOARD)
   }
 
   const leftCodes = codes.slice(0, 5)

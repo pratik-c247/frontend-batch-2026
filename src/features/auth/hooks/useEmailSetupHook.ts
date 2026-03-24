@@ -1,4 +1,5 @@
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { ROUTES } from '@/constant/routes'
 import type { User } from '@/types/auth.types'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
@@ -50,17 +51,17 @@ export const useEmailSetupHook = () => {
     sessionStorage.setItem('email_otp', otp.toString())
     sessionStorage.setItem('email_otp_expires', expiry.toString())
     startTimer()
-    notify.success('New code sent!')
+    notify.success(AUTH_MESSAGES.NEW_CODE_SENT)
   }
 
   const onSubmit = async (data: OtpFormData) => {
     const storedOtp = sessionStorage.getItem('email_otp')
     if (timeLeft <= 0) {
-      notify.error('Code expired. Please resend.')
+      notify.error(AUTH_MESSAGES.CODE_EXPIRED)
       return
     }
     if (data.code !== storedOtp) {
-      notify.error('Invalid code. Please try again.')
+      notify.error(AUTH_MESSAGES.INVALID_CODE)
       return
     }
     try {
@@ -76,15 +77,15 @@ export const useEmailSetupHook = () => {
       })
       sessionStorage.removeItem('email_otp')
       sessionStorage.removeItem('email_otp_expires')
-      notify.success('Email authentication configured!')
+      notify.success(AUTH_MESSAGES.EMAIL_SETUP_CONFIGURED)
       router.push(ROUTES.MFA.ACTIVATED)
     } catch {
-      notify.error('Something went wrong.')
+      notify.error(AUTH_MESSAGES.SOMETHING_WENT_WRONG)
     }
   }
 
   const sendOtp = () => {
-    const email = localStorage.getItem('currentUserEmail') || ''
+    const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
     setUserEmail(email)
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiry = Date.now() + OTP_EXPIRY_SECONDS * 1000

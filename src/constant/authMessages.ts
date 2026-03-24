@@ -10,6 +10,12 @@ export const AUTH_MESSAGES = {
   LOGOUT_SUCCESS: 'Logged out successfully',
   PROFIEL_UPDATE_SUCCESS: 'Profile updated successfully',
   PASSWORD_CHANGE_SUCCESS: 'Password changed successfully',
+  AUTHENTICATOR_APP_CONFIGURED: 'Authenticator app configured!',
+  EMAIL_SETUP_CONFIGURED: 'Email authentication configured!',
+  NEW_CODE_SENT: 'New code sent',
+  CODE_COPY_TO_CLIPBOARD: 'Codes copied to clipboard!',
+  RECOVERY_CODE_GENERATED: 'Recovery codes generated!',
+  RECOVERY_CODE_ACCEPTED:"Recovery code accepted! Login successful.",
   DELETE_SUCCESS: (value: string) => `${value} deleted successfully`,
   UPDATED_SUCCESS: (value: string) => `${value} updated successfully`,
   CREATED_SUCCESS: (value: string) => `${value} created successfully`,
@@ -28,12 +34,15 @@ export const AUTH_MESSAGES = {
   PASSWORD_CHANGE_FAIL: 'Failed to change password',
   NO_ATTEMPT_ID_RETURNED: 'No attempt ID returned',
   USER_NOT_FOUND: 'User not found',
+  INVALID_CODE: 'Invalid code. Please try again.',
+  CODE_EXPIRED: 'Code expired. Please resend.',
+  CODE_ALREADY_GENERATED: 'Recovery codes are already generated.',
+  NO_RECOVERY_CODES_GENERATED:
+    'No recovery codes generated. Please use another method.',
   UPDATE_FAILED: (value: string) => `Failed to update ${value} `,
   DELETE_FAILED: (value: string) => `Failed to delete ${value} `,
   CREATE_FAILED: (value: string) => `Failed to create ${value} `,
 }
-
-
 
 export const notify = {
   success: (msg: string) => {

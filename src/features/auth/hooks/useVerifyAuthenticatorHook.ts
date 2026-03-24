@@ -1,4 +1,4 @@
-import { notify } from '@/constant/authMessages'
+import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
 import { ROUTES } from '@/constant/routes'
 import type { RecoveryCode, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as OTPAuth from 'otpauth'
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 
 type FormData = { code: string }
 
@@ -20,7 +21,7 @@ export const useVerifyAuthenticatorHook = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email = localStorage.getItem('currentUserEmail') || ''
+      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)
@@ -47,12 +48,12 @@ export const useVerifyAuthenticatorHook = () => {
 
     const delta = totp.validate({ token: data.code.trim(), window: 1 })
     if (delta === null) {
-      notify.error('Invalid code. Please try again.')
+      notify.error(AUTH_MESSAGES.INVALID_CODE)
       return
     }
 
-    notify.success('Login successful!')
-    router.push('/dashboard')
+    notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
+    router.push(ROUTES.DASHBOARD.ROOT)
   }
 
   const hasRecoveryCodes = (user?.mfa?.recoveryCodes || []).some(
