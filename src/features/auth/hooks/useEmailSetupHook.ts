@@ -42,7 +42,6 @@ export const useEmailSetupHook = () => {
     }, 1000)
   }
 
-
   const onResend = () => {
     if (timerRef.current) clearInterval(timerRef.current)
     const otp = Math.floor(100000 + Math.random() * 900000)
@@ -114,6 +113,5 @@ export const useEmailSetupHook = () => {
     onResend,
     sendOtp,
     onSubmit,
-
   }
 }

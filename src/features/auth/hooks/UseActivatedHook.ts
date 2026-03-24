@@ -1,4 +1,3 @@
-
 import type { MFAType, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'

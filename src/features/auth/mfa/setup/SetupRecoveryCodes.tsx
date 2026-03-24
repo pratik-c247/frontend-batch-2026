@@ -6,7 +6,7 @@ import { KeyIcon } from '@/assets/icons/KeyIcon'
 import { SetupOtherMethodsBox } from '../setupOtherMethodsBox/SetupOtherMethodBox'
 import { useRecoveryCodeSetup } from '../../hooks/useRecoveryCodeSetup'
 import { VARIANTS } from '@/constant/common'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/features/auth/auth.constant'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 
 export const SetupRecoveryCodes = () => {

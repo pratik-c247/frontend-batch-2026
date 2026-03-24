@@ -2,7 +2,7 @@ import { notify } from '@/constant/authMessages'
 import { ROUTES } from '@/constant/routes'
 import type { RecoveryCode, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { verifyRecoveryCode } from '@/utils/recoveryCodeHelper'
@@ -34,7 +34,6 @@ export const useRecoveryCodeVerify = () => {
         router.back()
         return
       }
-
       setUser(u)
     }
     load()
@@ -48,7 +47,6 @@ export const useRecoveryCodeVerify = () => {
       notify.error(result.message)
       return
     }
-
     notify.success('Recovery code accepted! Login successful.')
     router.push('/dashboard')
   }

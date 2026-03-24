@@ -53,9 +53,7 @@ export const useRecoveryCodeSetup = () => {
 
   return {
     router,
-
     generated,
-
     handleGenerate,
     handleCopy,
     leftCodes,

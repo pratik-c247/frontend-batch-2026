@@ -107,7 +107,6 @@ export const useSmsSetupHook = () => {
     step,
     onResend,
     onVerify,
-
     onSendCode,
   }
 }

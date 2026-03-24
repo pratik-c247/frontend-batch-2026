@@ -8,7 +8,7 @@ import { ROUTES } from '@/constant/routes'
 import { Button } from '@/components/common/Button'
 import { VARIANTS } from '@/constant/common'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
-import { AUTH_TEXTS } from '../auth.constant'
+import { AUTH_TEXTS } from '@/features/auth/auth.constant'
 
 const mfaMethods = [
   {

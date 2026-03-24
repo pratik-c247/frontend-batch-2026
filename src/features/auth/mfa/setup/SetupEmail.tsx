@@ -6,15 +6,14 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { EmailIcon } from '@/assets/icons/EmailIcon'
 import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
 import { SetupOtherMethodsBox } from '../setupOtherMethodsBox/SetupOtherMethodBox'
-import { useEmailSetupHook } from '../../hooks/useEmailSetupHook'
+import { useEmailSetupHook } from '@/features/auth/hooks/useEmailSetupHook'
 import { maskEmail } from '@/utils/maskEmail'
 import { formatTime } from '@/utils/helpers'
 import { VARIANTS } from '@/constant/common'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/features/auth/auth.constant'
 import { codeValidation } from '@/validations/auth.validations'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { LABELS } from '@/constant/labels'
-
 
 export const SetupEmail = () => {
   const {
@@ -55,7 +54,7 @@ export const SetupEmail = () => {
                 <Input
                   label={AUTH_TEXTS.SETUP_EMAIL.CODE_INPUT_LABEL}
                   placeholder=""
-                  {...register('code',codeValidation)}
+                  {...register('code', codeValidation)}
                   error={errors.code?.message}
                 />
                 <div className={styles.btnRow}>
@@ -65,7 +64,7 @@ export const SetupEmail = () => {
                     className={styles.cancelBtn}
                     onClick={() => router.back()}
                   >
-                 {BUTTON_NAMES.CANCEL}
+                    {BUTTON_NAMES.CANCEL}
                   </Button>
                   <Button
                     type={BUTTON_TYPES.SUBMIT}
@@ -77,23 +76,21 @@ export const SetupEmail = () => {
               </form>
               <div className={styles.timerRow}>
                 <span className={styles.timerText}>
-                {LABELS.TIMER_LABEL}
+                  {LABELS.TIMER_LABEL}
                   <span className={styles.timerValue}>
                     {formatTime(timeLeft)}
                   </span>
                 </span>
               </div>
               <div className={styles.resendRow}>
-                <span className={styles.resendText}>
-                {LABELS.RESEND_TEXT}
-                </span>
+                <span className={styles.resendText}>{LABELS.RESEND_TEXT}</span>
                 <button
                   type={BUTTON_TYPES.BUTTON}
                   className={styles.resendLink}
                   onClick={onResend}
                   disabled={timeLeft > 0}
                 >
-                {BUTTON_NAMES.RESEND_CODE}
+                  {BUTTON_NAMES.RESEND_CODE}
                 </button>
               </div>
             </>
@@ -113,7 +110,7 @@ export const SetupEmail = () => {
                   className={styles.cancelBtn}
                   onClick={() => router.back()}
                 >
-                   {BUTTON_NAMES.CANCEL}
+                  {BUTTON_NAMES.CANCEL}
                 </Button>
                 <Button
                   type={BUTTON_TYPES.BUTTON}

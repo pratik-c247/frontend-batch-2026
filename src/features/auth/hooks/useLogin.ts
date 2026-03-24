@@ -15,37 +15,32 @@ export const useLogin = () => {
     setShowPassword((prev) => !prev)
   }
 
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset,
-    } = useForm<LoginFormData>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<LoginFormData>()
 
   const login = async (email: string, password: string) => {
-    const user:User  = await getUserByEmail(email)
+    const user: User = await getUserByEmail(email)
 
     if (!user) {
       notify.error(AUTH_MESSAGES.USER_NOT_FOUND)
       return
     }
-
     if (user.password !== password) {
       notify.error(AUTH_MESSAGES.SOMETHING_WENT_WRONG)
       return
     }
-
     localStorage.setItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL, email)
-
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
-
     const mfaEnabled: string[] = user?.mfaEnabled || []
 
     if (mfaEnabled.length === 0) {
       router.push(ROUTES.MFA.MFA_SETUP)
       return
     }
-
     router.push(ROUTES.VERIFY.ROOT)
   }
 
