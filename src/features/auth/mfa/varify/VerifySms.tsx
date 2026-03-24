@@ -12,7 +12,7 @@ import { VARIANTS } from '@/constant/common'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { LABELS } from '@/constant/labels'
 import { codeValidation } from '@/validations/auth.validations'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 export const VerifySms = () => {
   const {

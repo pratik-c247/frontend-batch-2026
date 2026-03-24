@@ -5,7 +5,7 @@ import { getUserByEmail } from '@/utils/indexedDB'
 import { ROUTES } from '@/constant/routes'
 import type { User } from '@/types/auth.types'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 export default function MfaVerifyRouter() {
   const router = useRouter()

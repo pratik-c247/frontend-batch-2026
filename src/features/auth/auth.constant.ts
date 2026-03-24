@@ -4,7 +4,7 @@ export const AUTH_TEXTS = {
       AUTHENTICATOR: 'authenticator',
       EMAIL: 'email',
       SMS: 'sms',
-      RECOVERY:'recovery'
+      RECOVERY: 'recovery',
     } as const,
 
     ACTIVATED: {
@@ -168,5 +168,5 @@ export const AUTH_TEXTS = {
     EMAIL_OTP_EXPIRES: 'email_otp_expires',
     SMS_OTP: 'sms_otp',
     SMS_OTP_EXPIRES: 'sms_otp_expires',
-  }as const,
+  } as const,
 }

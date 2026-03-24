@@ -6,7 +6,7 @@ import { ROUTES } from '@/constant/routes'
 import styles from './OtherMethodsBox.module.scss'
 import { Button } from 'react-bootstrap'
 import { VARIANTS } from '@/constant/common'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 
 interface Props {

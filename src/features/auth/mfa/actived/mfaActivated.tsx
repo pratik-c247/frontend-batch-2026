@@ -8,11 +8,11 @@ import { ROUTES } from '@/constant/routes'
 import type { User } from '@/types/auth.types'
 import { ActivatedIcon } from '@/assets/icons/ActivatedIcon'
 import { SetupOtherMethodsBox } from '../setupOtherMethodsBox/SetupOtherMethodBox'
-import { useActivatedHook } from '../../hooks/UseActivatedHook'
+import { useActivatedHook } from '@/auth/hooks/UseActivatedHook'
 import { maskEmail } from '@/utils/maskEmail'
 import { VARIANTS } from '@/constant/common'
 import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 
 export const MfaActivated = () => {

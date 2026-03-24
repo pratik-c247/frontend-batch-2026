@@ -5,13 +5,13 @@ import { MobileIcon } from '@/assets/icons/MobileIcon'
 import styles from './VerifyShared.module.scss'
 import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
 import { ROUTES } from '@/constant/routes'
-import { OtherMethodsBox } from '../OtherMethodsBox/OtherMethodsBox'
-import { useVerifyAuthenticatorHook } from '../../hooks/useVerifyAuthenticatorHook'
+import { OtherMethodsBox } from '@/auth/mfa/OtherMethodsBox/OtherMethodsBox'
+import { useVerifyAuthenticatorHook } from '@/auth/hooks/useVerifyAuthenticatorHook'
 import { VARIANTS } from '@/constant/common'
 import { codeValidation } from '@/validations/auth.validations'
 import { LABELS } from '@/constant/labels'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 
 export const VerifyAuthenticator = () => {
   const {
@@ -34,7 +34,7 @@ export const VerifyAuthenticator = () => {
           </span>
           <h4 className={styles.title}>{LABELS.MULTI_FACTOR_AUTHENTICATION}</h4>
           <p className={styles.subtitle}>
-            {AUTH_TEXTS.VERIFY_AUTHENTICAOR.YOU_WILL_RECEIVE_THE_TOTP}
+            {AUTH_TEXTS.VERIFY_AUTHENTICAOR.YOU_WILL_RECEIVE_THE_TOTP}{' '}
             <span className={styles.highlight}>
               {AUTH_TEXTS.VERIFY_AUTHENTICAOR.AUTHENTICATOR_APP}
             </span>

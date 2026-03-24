@@ -11,7 +11,7 @@ import { maskEmail } from '@/utils/maskEmail'
 import { useEmailVerifyHook } from '../../hooks/useEmailVerifyHook'
 import { VARIANTS } from '@/constant/common'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
-import { AUTH_TEXTS } from '../../auth.constant'
+import { AUTH_TEXTS } from '@/auth/auth.constant'
 import { LABELS } from '@/constant/labels'
 import { codeValidation } from '@/validations/auth.validations'
 
@@ -37,19 +37,17 @@ export const VerifyEmail = () => {
           <span className={styles.icon}>
             <EmailIcon size={56} />
           </span>
-          <h4 className={styles.title}>
-            {LABELS.MULTI_FACTOR_AUTHENTICATION}
-          </h4>
+          <h4 className={styles.title}>{LABELS.MULTI_FACTOR_AUTHENTICATION}</h4>
 
           {!otpSent ? (
             <p className={styles.subtitle}>
-              {AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}
+              {AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}{" "}
               <span className={styles.highlight}>Email</span> (
               {maskEmail(user?.email || '')})
             </p>
           ) : (
             <p className={styles.subtitle}>
-              {AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE}(
+                {AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE}{' '}(
               {maskEmail(user?.email || '')})
             </p>
           )}
