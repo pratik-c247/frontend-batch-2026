@@ -1,0 +1,71 @@
+import { notify } from '@/constant/authMessages'
+import { ROUTES } from '@/constant/routes'
+import type { RecoveryCode, User } from '@/types/auth.types'
+import { getUserByEmail } from '@/utils/indexedDB'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as OTPAuth from 'otpauth'
+
+type FormData = { code: string }
+
+export const useVerifyAuthenticatorHook = () => {
+  const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
+
+  useEffect(() => {
+    const load = async () => {
+      const email = localStorage.getItem('currentUserEmail') || ''
+      const u: User = await getUserByEmail(email)
+      if (!u) {
+        router.push(ROUTES.LOGIN)
+        return
+      }
+      setUser(u)
+    }
+    load()
+  }, [])
+
+  const onSubmit = async (data: FormData) => {
+    if (!user) return
+    if (!user.mfa?.authenticator?.secret) {
+      notify.error('Authenticator not set properly')
+      return
+    }
+    const totp = new OTPAuth.TOTP({
+      issuer: 'Auth-MFA',
+      secret: OTPAuth.Secret.fromBase32(user.mfa.authenticator.secret),
+      algorithm: 'SHA1',
+      digits: 6,
+      period: 30,
+    })
+
+    const delta = totp.validate({ token: data.code.trim(), window: 1 })
+    if (delta === null) {
+      notify.error('Invalid code. Please try again.')
+      return
+    }
+
+    notify.success('Login successful!')
+    router.push('/dashboard')
+  }
+
+  const hasRecoveryCodes = (user?.mfa?.recoveryCodes || []).some(
+    (c: RecoveryCode) => !c.used,
+  )
+
+  return {
+    router,
+    register,
+    handleSubmit,
+    hasRecoveryCodes,
+    onSubmit,
+    errors,
+    user,
+  }
+}

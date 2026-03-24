@@ -1,0 +1,107 @@
+import { notify } from '@/constant/authMessages'
+import { ROUTES } from '@/constant/routes'
+import type { RecoveryCode, User } from '@/types/auth.types'
+import { getUserByEmail } from '@/utils/indexedDB'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+
+const OTP_EXPIRY_SECONDS = Number(
+  process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
+)
+type FormData = { code: string }
+export const useEmailVerifyHook = () => {
+  const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+  const [otpSent, setOtpSent] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(OTP_EXPIRY_SECONDS)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
+
+  useEffect(() => {
+    const load = async () => {
+      const email = localStorage.getItem('currentUserEmail') || ''
+      const u: User = await getUserByEmail(email)
+      if (!u) {
+        router.push(ROUTES.LOGIN)
+        return
+      }
+      setUser(u)
+    }
+    load()
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
+  }, [])
+
+  const startTimer = () => {
+    setTimeLeft(OTP_EXPIRY_SECONDS)
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current!)
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+  }
+
+  const sendOtp = () => {
+    const otp = Math.floor(100000 + Math.random() * 900000)
+    const expiresAt = Date.now() + OTP_EXPIRY_SECONDS * 1000
+    sessionStorage.setItem('email_otp', otp.toString())
+    sessionStorage.setItem('email_otp_expires', expiresAt.toString())
+    notify.success(`Code sent to ${user?.email}`)
+    startTimer()
+    setOtpSent(true)
+  }
+
+  const onResend = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    sendOtp()
+    notify.success('New code sent!')
+  }
+
+  const onSubmit = async (data: FormData) => {
+    const storedOtp = sessionStorage.getItem('email_otp')
+    const expiresAt = Number(sessionStorage.getItem('email_otp_expires'))
+
+    if (Date.now() > expiresAt) {
+      notify.error('Code expired. Please resend.')
+      return
+    }
+    if (data.code.trim() !== storedOtp) {
+      notify.error('Invalid code. Please try again.')
+      return
+    }
+
+    sessionStorage.removeItem('email_otp')
+    sessionStorage.removeItem('email_otp_expires')
+    notify.success('Login successful!')
+    router.push('/dashboard')
+  }
+
+  const hasRecoveryCodes = (user?.mfa?.recoveryCodes || []).some(
+    (c: RecoveryCode) => !c.used,
+  )
+
+  return {
+    router,
+    onResend,
+    onSubmit,
+    register,
+    handleSubmit,
+    hasRecoveryCodes,
+    otpSent,
+    user,
+    sendOtp,
+    errors,
+    timeLeft,
+  }
+}

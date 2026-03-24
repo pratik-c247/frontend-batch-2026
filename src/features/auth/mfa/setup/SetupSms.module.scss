@@ -1,0 +1,260 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+// .goBack {
+//   @include go-back-btn;
+// }
+
+.container {
+  padding-top: $spacing-9;
+  width: 100%;
+  max-width: 500px;
+  @include flex-column;
+  gap: $spacing-7;
+}
+
+.header {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-4;
+  text-align: center;
+}
+
+.icon {
+  @include flex-center;
+  margin-bottom: $spacing-2;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $gray-full-color;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 460px;
+}
+
+.formBox {
+  background-color: $gray-very-light-color;
+  border-radius: $radius-md;
+  padding: $spacing-9 $spacing-8;
+  @include flex-column;
+  gap: $spacing-6;
+}
+
+.form {
+  @include flex-column;
+  gap: $spacing-7;
+}
+
+// Phone input
+.fieldGroup {
+  @include flex-column;
+  gap: $spacing-2;
+}
+
+.fieldLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $gray-dark-color;
+}
+
+.phoneInputRow {
+  @include flex-align-center;
+  border: 1px solid $gray-light-color;
+  border-radius: $radius-sm;
+  background: $white-color;
+  overflow: hidden;
+  height: 44px;
+}
+
+.flagBox {
+  @include flex-align-center;
+  gap: $spacing-1;
+  padding: 0 $spacing-4;
+  cursor: pointer;
+}
+
+.flag {
+  font-size: $font-size-lg;
+}
+
+.caret {
+  font-size: $font-size-xs;
+  color: $gray-medium-color;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: $gray-light-color;
+}
+
+.dialCode {
+  padding: 0 $spacing-4;
+  font-size: $font-size-sm;
+  color: $gray-dark-color;
+  font-weight: $font-weight-medium;
+}
+
+.phoneInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: $font-size-sm;
+  color: $gray-full-color;
+  background: transparent;
+  padding: 0 $spacing-4 0 0;
+
+  &::placeholder {
+    color: $gray-medium-color;
+  }
+}
+
+.errorText {
+  font-size: $font-size-xs;
+  color: $lite-red-color;
+}
+
+// reCAPTCHA
+.captchaBox {
+  @include flex-center;
+}
+
+
+// OTP verify step
+.otpNote {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  margin: 0;
+  text-align: center;
+}
+
+.otpPhone {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $gray-full-color;
+  margin: 0;
+  text-align: center;
+}
+
+// Buttons
+.btnRow {
+  display: flex;
+  gap: $spacing-5;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.cancelBtn {
+  border: 1px solid $gray-light-color;
+  background: $white-color;
+  color: $gray-dark-color;
+
+  &:hover {
+    background-color: $gray-very-light-color;
+  }
+}
+
+.submitBtn {
+  background-color: $sky-blue-color;
+  color: $white-color;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Timer & resend
+.timerRow {
+  text-align: center;
+}
+
+.timerText {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+}
+
+.timerValue {
+  color: $red-color;
+  font-weight: $font-weight-semibold;
+}
+
+.resendRow {
+  text-align: center;
+}
+
+.resendText {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+}
+
+.resendLink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: $sky-blue-color;
+  font-size: $font-size-sm;
+  text-decoration: underline;
+
+  &:disabled {
+    color: $gray-medium-color;
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+
+  &:not(:disabled):hover {
+    color: $sky-blue-slight-dark-color;
+  }
+}
+
+// More methods
+.moreMethodsBox {
+  background-color: $gray-very-light-color;
+  border-radius: $radius-md;
+  padding: $spacing-8;
+  @include flex-column;
+  gap: $spacing-3;
+  text-align: center;
+}
+
+.moreMethodsTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $gray-full-color;
+  margin: 0 0 $spacing-3;
+}
+
+.moreMethodItem {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  margin: 0;
+}
+
+.methodLink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: $sky-blue-color;
+  font-size: $font-size-sm;
+  text-decoration: underline;
+
+  &:hover {
+    color: $sky-blue-slight-dark-color;
+  }
+}

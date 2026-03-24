@@ -1,0 +1,62 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.wrapper {
+@include flex-column;
+  gap: 6px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.label {
+  font-size: $font-size-sm;
+  color: $gray-dark-color;
+}
+
+.required {
+  color: $lite-red-color;
+  padding-left: 1px;
+}
+.errorInput {
+  border-color: $lite-red-color;
+}
+
+.error {
+  font-size: $font-size-sm;
+  color:$lite-red-color;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-5 $spacing-6;
+  border: 1px solid $gray-light-color;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  outline: none;
+  transition: 0.2s ease;
+
+  &:focus {
+    border-color: $sky-blue-color;
+    box-shadow: 0 0 0 2px rgba(5, 171, 238, 0.2);
+  }
+}
+
+.withIcon {
+  padding-right: 40px;
+}
+
+.icon {
+  position: absolute;
+  right:$spacing-5;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+@include flex-align-center;
+}

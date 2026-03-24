@@ -1,0 +1,124 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.container {
+  padding-top: $spacing-12;
+  width: 100%;
+  max-width: 480px;
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-7;
+}
+
+.successIcon {
+  @include flex-center;
+  margin-bottom: $spacing-2;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $gray-full-color;
+  margin: 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  line-height: 1.6;
+  margin: 0;
+  text-align: center;
+}
+
+.configuredCard {
+  width: 100%;
+  border: 1px solid $gray-light-color;
+  border-radius: $radius-md;
+  padding: $spacing-7 $spacing-8;
+  @include flex-column;
+  gap: $spacing-3;
+  background-color: $white-color;
+}
+
+.configuredHeader {
+  @include flex-align-center;
+  gap: $spacing-4;
+}
+
+.configuredIcon {
+  @include flex-center;
+  color: $gray-semi-dark-color;
+  flex-shrink: 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.configuredLabel {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $gray-full-color;
+}
+
+.configuredBadge {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: #166534;
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+  border-radius: $radius-2xl;
+  padding: 2px $spacing-4;
+}
+
+.configuredDetail {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  margin: 0;
+  padding-left: calc(20px + $spacing-4);
+}
+
+.portalBtn {
+  width: 100%;
+  background-color: $sky-blue-color;
+  color: $white-color;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+  }
+}
+
+// moreBox, moreTitle, moreItem, moreLink — removed ✅
+// Ab SetupOtherMethodsBox apni styles handle karta hai
+
+.recoveryBox {
+  width: 100%;
+  border: 1px solid $gray-light-color;
+  border-radius: $radius-md;
+  padding: $spacing-8;
+  text-align: center;
+  background-color: $white-color;
+}
+
+.recoveryText {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.recoveryLink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: $sky-blue-color;
+  font-size: $font-size-sm;
+  text-decoration: underline;
+
+  &:hover {
+    color: $sky-blue-slight-dark-color;
+  }
+}

@@ -1,0 +1,8 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.headerWrapper {
+  display: flex;
+  gap:$spacing-4;
+  padding:$spacing-4 $spacing-7;
+}

@@ -1,0 +1,30 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.loginText {
+  text-align: center;
+  color:$gray-dark-plus-color;
+
+}
+.loginContainer {
+  max-width: 400px;
+  margin-left: 5vw;
+   @include flex-column;
+
+  gap: $spacing-5;
+
+
+}
+.btn {
+  margin-top: $spacing-7;
+}
+.passwordBox {
+  display: flex;
+  align-items: center;
+}
+.eyeBox {
+  border: 1px solid black;
+}
+.notHaveText {
+  @include authRedirectText;
+}

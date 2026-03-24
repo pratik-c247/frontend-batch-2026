@@ -1,0 +1,61 @@
+@use './variables' as *;
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin flex-align-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+@mixin go-back-btn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $sky-blue-text-color;
+  font-size: $font-size-lg !important;
+  font-weight: $font-weight-medium;
+  padding: 0;
+  margin-bottom: $spacing-9;
+  position: absolute;
+  left: 52px;
+  top: 75px;
+
+  &:hover {
+    color: $sky-blue-text-dark-color;
+    transform: scale(0.97);
+  }
+}
+
+@mixin authRedirectText {
+  width: 100%;
+  padding-top: $spacing-5;
+  font-size: $font-size-md;
+  margin-left: $spacing-4;
+  @include flex-center;
+  a {
+    color: $sky-blue-color;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    margin-left: $spacing-2;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
