@@ -1,4 +1,3 @@
-// assets/icons/KeyIcon.tsx
 interface Props {
   size?: number
   color?: string

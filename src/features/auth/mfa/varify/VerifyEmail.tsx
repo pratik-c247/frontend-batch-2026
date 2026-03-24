@@ -41,13 +41,13 @@ export const VerifyEmail = () => {
 
           {!otpSent ? (
             <p className={styles.subtitle}>
-              {AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}{" "}
+              {AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}{' '}
               <span className={styles.highlight}>Email</span> (
               {maskEmail(user?.email || '')})
             </p>
           ) : (
             <p className={styles.subtitle}>
-                {AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE}{' '}(
+              {AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE} (
               {maskEmail(user?.email || '')})
             </p>
           )}
@@ -108,14 +108,15 @@ export const VerifyEmail = () => {
               </div>
               <div className={styles.resendRow}>
                 <span className={styles.resendText}>{LABELS.RESEND_TEXT}</span>
-                <button
+                <Button
+                  variant={VARIANTS.OUTLINE}
                   type={BUTTON_TYPES.BUTTON}
                   className={styles.resendLink}
                   onClick={onResend}
                   disabled={timeLeft > 0}
                 >
                   {BUTTON_NAMES.RESEND_CODE}
-                </button>
+                </Button>
               </div>
             </>
           )}

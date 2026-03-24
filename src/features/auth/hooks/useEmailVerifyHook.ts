@@ -11,6 +11,7 @@ import { AUTH_TEXTS } from '@/auth/auth.constant'
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
 )
+
 type FormData = { code: string }
 export const useEmailVerifyHook = () => {
   const router = useRouter()

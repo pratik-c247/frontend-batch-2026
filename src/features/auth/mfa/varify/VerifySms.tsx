@@ -41,12 +41,12 @@ export const VerifySms = () => {
 
           {!otpSent ? (
             <p className={styles.subtitle}>
-            {AUTH_TEXTS.VERIFY_SMS.WHEN_YOUR_PHONE_READY} <span className={styles.highlight}>SMS</span> (
-              {maskPhone(phone)})
+              {AUTH_TEXTS.VERIFY_SMS.WHEN_YOUR_PHONE_READY}{' '}
+              <span className={styles.highlight}>SMS</span> ({maskPhone(phone)})
             </p>
           ) : (
             <p className={styles.subtitle}>
-          {AUTH_TEXTS.VERIFY_SMS.YOU_WILL_RECIEVE_ONE_TIME_CODE}   (
+              {AUTH_TEXTS.VERIFY_SMS.YOU_WILL_RECIEVE_ONE_TIME_CODE} (
               {maskPhone(phone)})
             </p>
           )}
@@ -100,24 +100,23 @@ export const VerifySms = () => {
 
               <div className={styles.timerRow}>
                 <span className={styles.timerText}>
-              {LABELS.TIMER_LABEL}
+                  {LABELS.TIMER_LABEL}
                   <span className={styles.timerValue}>
                     {formatTime(timeLeft)}
                   </span>
                 </span>
               </div>
               <div className={styles.resendRow}>
-                <span className={styles.resendText}>
-              {LABELS.RESEND_TEXT}
-                </span>
-                <button
+                <span className={styles.resendText}>{LABELS.RESEND_TEXT}</span>
+                <Button
+                  variant={VARIANTS.OUTLINE}
                   type={BUTTON_TYPES.BUTTON}
                   className={styles.resendLink}
                   onClick={onResend}
                   disabled={timeLeft > 0}
                 >
                   {BUTTON_NAMES.RESEND_CODE}
-                </button>
+                </Button>
               </div>
             </>
           )}
