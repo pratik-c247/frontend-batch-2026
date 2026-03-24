@@ -1,6 +1,11 @@
+
 export const LABELS = {
   EMAIL: 'Email',
   PASSWORD: 'Password',
+  FIRST_NAME: "First Name",
+  LAST_NAME: "Last Name",
+  PHONE_NUMBER: 'Phone Number',
+  CONFIRM_PASSWORD:'Confirm Password',
   CODE_INPUT_LABEL: 'Verify the code from the app',
   CODE_INPUT_LABEL_EMAIL: 'Verify the code from the Email',
   CODE_INPUT_LABEL_RECOVERY_CODE: 'Verify the code from the recovery codes',

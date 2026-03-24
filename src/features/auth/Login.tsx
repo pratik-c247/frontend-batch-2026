@@ -12,10 +12,11 @@ import { useLogin } from './hooks/useLogin'
 import type { LoginFormData } from '@/types/auth.types'
 import {
   emailValidation,
-  passwordValidation,
+  passwordRequired,
 } from '@/validations/auth.validations'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { AUTH_TEXTS } from './auth.constant'
+import { INPUT_FIELD_NAMES } from '@/constant/inputFieldsNames'
 
 export const Login = () => {
   const {
@@ -41,7 +42,7 @@ export const Login = () => {
           required
           label={LABELS.EMAIL}
           type={INPUT_TYPES.EMAIL}
-          {...register('email', emailValidation)}
+          {...register(INPUT_FIELD_NAMES.EMAIL, emailValidation)}
           error={errors.email?.message}
         />
 
@@ -49,11 +50,11 @@ export const Login = () => {
           required
           label={LABELS.PASSWORD}
           type={showPassword ? INPUT_TYPES.TEXT : INPUT_TYPES.PASSWORD}
-          {...register('password', passwordValidation)}
+          {...register(INPUT_FIELD_NAMES.PASSWORD, passwordRequired)}
           error={errors.password?.message}
           rightIcon={
             <span onClick={togglePassword}>
-              {showPassword ? <EyeCloseIcon /> : <EyeIcon />}
+              {showPassword ? <EyeIcon /> : <EyeCloseIcon />}
             </span>
           }
         />

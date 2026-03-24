@@ -50,6 +50,12 @@ export const passwordValidation = {
   },
 }
 
+export const passwordRequired = {
+  required: VALIDATION_MESSAGES.REQUIRED('Password'),
+}
+
+
+
 export const codeValidation = {
   required: VALIDATION_MESSAGES.REQUIRED('Code'),
   minLength: {
