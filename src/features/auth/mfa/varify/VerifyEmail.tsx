@@ -6,7 +6,6 @@ import styles from './VerifyShared.module.scss'
 import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
 import { ROUTES } from '@/constant/routes'
 import { OtherMethodsBox } from '../OtherMethodsBox/OtherMethodsBox'
-import { formatTime } from '@/utils/helpers'
 import { maskEmail } from '@/utils/maskEmail'
 import { useEmailVerifyHook } from '@/auth/hooks/useEmailVerifyHook'
 import { VARIANTS } from '@/constant/common'
@@ -14,11 +13,13 @@ import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
 import { LABELS } from '@/constant/labels'
 import { codeValidation } from '@/validations/auth.validations'
+import { TimerDisplay } from '../../TimerDisplay'
+
 
 export const VerifyEmail = () => {
   const {
     onResend,
-    timeLeft,
+    timerStore, 
     hasRecoveryCodes,
     router,
     otpSent,
@@ -98,26 +99,7 @@ export const VerifyEmail = () => {
                 </div>
               </form>
 
-              <div className={styles.timerRow}>
-                <span className={styles.timerText}>
-                  {LABELS.TIMER_LABEL}
-                  <span className={styles.timerValue}>
-                    {formatTime(timeLeft)}
-                  </span>
-                </span>
-              </div>
-              <div className={styles.resendRow}>
-                <span className={styles.resendText}>{LABELS.RESEND_TEXT}</span>
-                <Button
-                  variant={VARIANTS.OUTLINE}
-                  type={BUTTON_TYPES.BUTTON}
-                  className={styles.resendLink}
-                  onClick={onResend}
-                  disabled={timeLeft > 0}
-                >
-                  {BUTTON_NAMES.RESEND_CODE}
-                </Button>
-              </div>
+              <TimerDisplay timerStore={timerStore} onResend={onResend} />
             </>
           )}
         </div>

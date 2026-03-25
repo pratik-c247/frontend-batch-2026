@@ -4,20 +4,22 @@ import { ROUTES } from '@/constant/routes'
 import type { RecoveryCode, User } from '@/types/auth.types'
 import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
-
-type FormData = { code: string }
+import { useTimerStore } from '@/auth/hooks/useTimerStore'
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
 )
+
+type FormData = { code: string }
+
 export const useSmsVerifyHook = () => {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
   const [otpSent, setOtpSent] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(OTP_EXPIRY_SECONDS)
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const timerStore = useTimerStore()
 
   const {
     register,
@@ -27,7 +29,8 @@ export const useSmsVerifyHook = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email =
+        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)
@@ -36,39 +39,26 @@ export const useSmsVerifyHook = () => {
       setUser(u)
     }
     load()
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [])
 
-  const startTimer = () => {
-    setTimeLeft(OTP_EXPIRY_SECONDS)
-    timerRef.current = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timerRef.current!)
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-  }
+    return () => timerStore.stop()
+  }, [])
 
   const sendOtp = () => {
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiresAt = Date.now() + OTP_EXPIRY_SECONDS * 1000
+
     sessionStorage.setItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP, otp.toString())
     sessionStorage.setItem(
       AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES,
       expiresAt.toString(),
     )
+
     notify.success(`Code sent to ${user?.mfa?.sms?.phone}`)
-    startTimer()
+    timerStore.start(OTP_EXPIRY_SECONDS)
     setOtpSent(true)
   }
 
   const onResend = () => {
-    if (timerRef.current) clearInterval(timerRef.current)
     sendOtp()
     notify.success(AUTH_MESSAGES.NEW_CODE_SENT)
   }
@@ -110,9 +100,9 @@ export const useSmsVerifyHook = () => {
     phone,
     sendOtp,
     onSubmit,
-    timeLeft,
     onResend,
     user,
     hasRecoveryCodes,
+    timerStore,
   }
 }

@@ -6,13 +6,14 @@ import styles from './VerifyShared.module.scss'
 import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
 import { ROUTES } from '@/constant/routes'
 import { OtherMethodsBox } from '../OtherMethodsBox/OtherMethodsBox'
-import { formatTime, maskPhone } from '@/utils/helpers'
+import { maskPhone } from '@/utils/helpers'
 import { useSmsVerifyHook } from '@/auth/hooks/useSmsVerifyHook'
 import { VARIANTS } from '@/constant/common'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { LABELS } from '@/constant/labels'
 import { codeValidation } from '@/validations/auth.validations'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
+import { TimerDisplay } from '../../TimerDisplay'
 
 export const VerifySms = () => {
   const {
@@ -24,10 +25,10 @@ export const VerifySms = () => {
     phone,
     sendOtp,
     onSubmit,
-    timeLeft,
     onResend,
     user,
     hasRecoveryCodes,
+    timerStore,
   } = useSmsVerifyHook()
 
   return (
@@ -98,26 +99,7 @@ export const VerifySms = () => {
                 </div>
               </form>
 
-              <div className={styles.timerRow}>
-                <span className={styles.timerText}>
-                  {LABELS.TIMER_LABEL}
-                  <span className={styles.timerValue}>
-                    {formatTime(timeLeft)}
-                  </span>
-                </span>
-              </div>
-              <div className={styles.resendRow}>
-                <span className={styles.resendText}>{LABELS.RESEND_TEXT}</span>
-                <Button
-                  variant={VARIANTS.OUTLINE}
-                  type={BUTTON_TYPES.BUTTON}
-                  className={styles.resendLink}
-                  onClick={onResend}
-                  disabled={timeLeft > 0}
-                >
-                  {BUTTON_NAMES.RESEND_CODE}
-                </Button>
-              </div>
+              <TimerDisplay timerStore={timerStore} onResend={onResend} />
             </>
           )}
         </div>
