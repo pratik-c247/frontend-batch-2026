@@ -3,7 +3,7 @@
 
 .wrapper {
   @include flex-column;
-  gap: 6px;
+  gap: $spacing-3;
 }
 
 .fullWidth {

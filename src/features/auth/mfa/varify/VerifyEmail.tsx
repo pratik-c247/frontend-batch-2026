@@ -1,115 +1,31 @@
+
 'use client'
-import { Input } from '@/components/common/Input'
-import { Button } from '@/components/common/Button'
 import { EmailIcon } from '@/assets/icons/EmailIcon'
-import styles from './VerifyShared.module.scss'
-import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
-import { ROUTES } from '@/constant/routes'
-import { OtherMethodsBox } from '../OtherMethodsBox/OtherMethodsBox'
 import { maskEmail } from '@/utils/maskEmail'
 import { useEmailVerifyHook } from '@/auth/hooks/useEmailVerifyHook'
-import { VARIANTS } from '@/constant/common'
-import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
 import { LABELS } from '@/constant/labels'
-import { codeValidation } from '@/validations/auth.validations'
-import { TimerDisplay } from '../../TimerDisplay'
-
+import { VerifyBase } from './VerifyBase'
 
 export const VerifyEmail = () => {
-  const {
-    onResend,
-    timerStore, 
-    hasRecoveryCodes,
-    router,
-    otpSent,
-    user,
-    sendOtp,
-    handleSubmit,
-    onSubmit,
-    register,
-    errors,
-  } = useEmailVerifyHook()
+  const hook = useEmailVerifyHook()
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <span className={styles.icon}>
-            <EmailIcon size={56} />
-          </span>
-          <h4 className={styles.title}>{LABELS.MULTI_FACTOR_AUTHENTICATION}</h4>
-
-          {!otpSent ? (
-            <p className={styles.subtitle}>
-              {AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}{' '}
-              <span className={styles.highlight}>Email</span> (
-              {maskEmail(user?.email || '')})
-            </p>
-          ) : (
-            <p className={styles.subtitle}>
-              {AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE} (
-              {maskEmail(user?.email || '')})
-            </p>
-          )}
-        </div>
-
-        <div className={styles.formBox}>
-          {!otpSent ? (
-            <div className={styles.btnRow}>
-              <Button
-                type={BUTTON_TYPES.BUTTON}
-                variant={VARIANTS.OUTLINE}
-                className={styles.cancelBtn}
-                onClick={() => router.push(ROUTES.LOGIN)}
-              >
-                {BUTTON_NAMES.CANCEL}
-              </Button>
-              <Button
-                type={BUTTON_TYPES.BUTTON}
-                className={styles.submitBtn}
-                onClick={sendOtp}
-              >
-                {BUTTON_NAMES.SEND_CODE}
-              </Button>
-            </div>
-          ) : (
-            <>
-              <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                <Input
-                  label={LABELS.CODE_INPUT_LABEL_EMAIL}
-                  {...register('code', codeValidation)}
-                  error={errors.code?.message}
-                />
-                <div className={styles.btnRow}>
-                  <Button
-                    type={BUTTON_TYPES.BUTTON}
-                    variant={VARIANTS.OUTLINE}
-                    className={styles.cancelBtn}
-                    onClick={() => router.push(ROUTES.LOGIN)}
-                  >
-                    {BUTTON_NAMES.CANCEL}
-                  </Button>
-                  <Button
-                    type={BUTTON_TYPES.SUBMIT}
-                    className={styles.submitBtn}
-                  >
-                    {BUTTON_NAMES.SUBMIT}
-                  </Button>
-                </div>
-              </form>
-
-              <TimerDisplay timerStore={timerStore} onResend={onResend} />
-            </>
-          )}
-        </div>
-
-        <OtherMethodsBox
-          enabledMethods={user?.mfaEnabled || []}
-          currentMethod="email"
-          hasRecoveryCodes={hasRecoveryCodes}
-        />
-      </div>
-    </div>
+    <VerifyBase
+      icon={<EmailIcon size={56} />}
+      title={LABELS.MULTI_FACTOR_AUTHENTICATION}
+      subtitleBefore={AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}
+      subtitleAfter={AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE}
+      maskedValue={maskEmail(hook.user?.email || '')}
+      onSendOtp={hook.sendOtp}
+      {...hook}
+      label={LABELS.CODE_INPUT_LABEL_EMAIL}
+      enabledMethods={hook.user?.mfaEnabled || []}
+      currentMethod="email"
+    />
   )
 }
+
+
+
+

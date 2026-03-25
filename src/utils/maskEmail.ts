@@ -1,4 +1,3 @@
-// maskEmail.ts
 export const maskEmail = (email: string) => {
   if (!email) return ''
 

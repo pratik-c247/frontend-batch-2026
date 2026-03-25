@@ -1,4 +1,4 @@
-export const BUTTON_NAMES = {
+export const BUTTON_NAMES = { //Todo :- single file for button related constant
   CANCEL: 'Cancel',
   SUBMIT: 'Submit',
   RESEND_CODE: 'Resend code',

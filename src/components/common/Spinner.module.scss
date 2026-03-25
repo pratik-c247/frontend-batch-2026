@@ -1,6 +1,6 @@
 .spinner {
-  border: 2px solid #e5e7eb;
-  border-top: 2px solid #05abee;  
+  border: $spacing-1 solid #e5e7eb;
+  border-top: $spacing-1 solid #05abee;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }

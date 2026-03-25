@@ -1,26 +1,14 @@
 'use client'
 
-import { SetupRecoveryCodes } from '@/features/auth/mfa/setup/SetupRecoveryCodes'
-import { VerifyAuthenticator } from '@/features/auth/mfa/varify/VerifyAuthenticator'
-import { VerifyEmail } from '@/features/auth/mfa/varify/VerifyEmail'
-import { VerifySms } from '@/features/auth/mfa/varify/VerifySms'
+
+import { MFA_VERIFY_COMPONENTS } from '@/constant/authMfaComponent'
 import { useParams } from 'next/navigation'
 
 export default function VerifyPage() {
   const { method } = useParams()
 
-  const renderComponent = () => {
-    switch (method) {
-      case 'email':
-        return <VerifyEmail />
-      case 'sms':
-        return <VerifySms />
-      case 'authenticator':
-        return <VerifyAuthenticator />
-      case 'recovery-codes':
-        return <SetupRecoveryCodes/>
-    }
-  }
+  const Component =
+    MFA_VERIFY_COMPONENTS[method as keyof typeof MFA_VERIFY_COMPONENTS]
 
-  return <>{renderComponent()}</>
+  return Component ? <Component /> : null
 }

@@ -1,41 +1,11 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import styles from './MfaSetup.module.scss'
-import { AuthenticatorIcon } from '@/assets/icons/AuthenticatorIcon'
-import { EmailIcon } from '@/assets/icons/EmailIcon'
-import { SmsIcon } from '@/assets/icons/SmsIcon'
-import { ROUTES } from '@/constant/routes'
 import { Button } from '@/components/common/Button'
 import { VARIANTS } from '@/constant/common'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
 import { AUTH_TEXTS } from '@/features/auth/auth.constant'
-
-const mfaMethods = [
-  {
-    id: 'authenticator',
-    icon: <AuthenticatorIcon />,
-    label: 'Authenticator App',
-    recommended: true,
-    description: 'Use an authenticator app to generate a one-time code.',
-    route: ROUTES.MFA.AUTHENTICATOR_SETUP,
-  },
-  {
-    id: 'email',
-    icon: <EmailIcon />,
-    label: 'Email',
-    recommended: false,
-    description: 'Use email to generate a one-time code.',
-    route: ROUTES.MFA.EMAIL_SETUP,
-  },
-  {
-    id: 'sms',
-    icon: <SmsIcon />,
-    label: 'SMS/Text Message',
-    recommended: false,
-    description: 'Use a mobile number to generate a one-time code.',
-    route: ROUTES.MFA.SMS_SETUP,
-  },
-]
+import { mfaMethods } from '@/constant/authMfaComponent'
 
 export const MfaSetup = () => {
   const router = useRouter()

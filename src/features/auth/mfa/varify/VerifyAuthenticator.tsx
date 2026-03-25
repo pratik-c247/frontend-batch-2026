@@ -45,7 +45,6 @@ export const VerifyAuthenticator = () => {
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <Input
               label={LABELS.CODE_INPUT_LABEL}
-              placeholder=""
               {...register('code', codeValidation)}
               error={errors.code?.message}
             />

@@ -11,7 +11,7 @@ export default function MfaVerifyRouter() {
   const router = useRouter()
 
   useEffect(() => {
-    const go = async () => {
+    const handleMfaRouting = async () => {
       const email =
         localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const user: User = await getUserByEmail(email)
@@ -33,7 +33,7 @@ export default function MfaVerifyRouter() {
       else if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.SMS))
         router.push(ROUTES.VERIFY.SMS)
     }
-    go()
+    handleMfaRouting()
   }, [])
 
   return null

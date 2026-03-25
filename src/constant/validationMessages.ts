@@ -19,10 +19,4 @@ export const VALIDATION_MESSAGES = {
   MAX_VALUE: (value: number) => `Value must not exceed ${value}`,
 
   INVALID_PHONE: 'Please enter a valid phone number',
-
-  INVALID_URL: 'Please enter a valid URL',
-
-  FILE_REQUIRED: 'File is required',
-  INVALID_FILE_TYPE: 'Invalid file type',
-  FILE_TOO_LARGE: 'File size is too large',
 } as const
