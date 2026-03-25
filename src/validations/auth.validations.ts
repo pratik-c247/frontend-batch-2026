@@ -54,8 +54,6 @@ export const passwordRequired = {
   required: VALIDATION_MESSAGES.REQUIRED('Password'),
 }
 
-
-
 export const codeValidation = {
   required: VALIDATION_MESSAGES.REQUIRED('Code'),
   minLength: {
@@ -66,13 +64,5 @@ export const codeValidation = {
 }
 
 export const recoveryCode = {
-  required:VALIDATION_MESSAGES.REQUIRED('Code')
+  required: VALIDATION_MESSAGES.REQUIRED('Code'),
 }
-
-// export const confirmPasswordValidation = <T extends FieldValues>(
-//   passwordField: Path<T>,
-// ): RegisterOptions<T, Path<T>> => ({
-//   required: VALIDATION_MESSAGES.REQUIRED(FIELD_NAMES.CONFIRM_PASSWORD),
-//   validate: (value, formValues) =>
-//     value === formValues[passwordField] || AUTH_MESSAGES.PASSWORD_DO_NOT_MATCH,
-// })

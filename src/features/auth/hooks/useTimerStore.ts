@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useMemo } from 'react'
 
 export type TimerSubscriber = (timeLeft: number) => void
 
@@ -14,7 +14,7 @@ export const useTimerStore = (): TimerStore => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const subscribersRef = useRef<Set<TimerSubscriber>>(new Set())
 
-  const notify = useCallback((value: number) => {
+  const notifySubscribers = useCallback((value: number) => {
     subscribersRef.current.forEach((cb) => cb(value))
   }, [])
 
@@ -29,23 +29,22 @@ export const useTimerStore = (): TimerStore => {
     (seconds: number) => {
       stop()
       timeLeftRef.current = seconds
-      notify(seconds)
+      notifySubscribers(seconds)
 
       intervalRef.current = setInterval(() => {
         timeLeftRef.current -= 1
-        notify(timeLeftRef.current)
+        notifySubscribers(timeLeftRef.current)
 
         if (timeLeftRef.current <= 0) {
           stop()
         }
       }, 1000)
     },
-    [stop, notify],
+    [stop, notifySubscribers],
   )
 
   const subscribe = useCallback((cb: TimerSubscriber) => {
     subscribersRef.current.add(cb)
-
     cb(timeLeftRef.current)
     return () => {
       subscribersRef.current.delete(cb)
@@ -54,5 +53,8 @@ export const useTimerStore = (): TimerStore => {
 
   const getTimeLeft = useCallback(() => timeLeftRef.current, [])
 
-  return { subscribe, start, stop, getTimeLeft }
+  return useMemo(
+    () => ({ subscribe, start, stop, getTimeLeft }),
+    [subscribe, start, stop, getTimeLeft],
+  )
 }

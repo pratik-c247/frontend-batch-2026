@@ -6,13 +6,14 @@ import { useEmailVerifyHook } from '@/auth/hooks/useEmailVerifyHook'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
 import { LABELS } from '@/constant/labels'
 import { VerifyBase } from './VerifyBase'
+import { useMemo } from 'react'
 
 export const VerifyEmail = () => {
   const hook = useEmailVerifyHook()
-
+   const icon = useMemo(() => <EmailIcon size={56} />, [])
   return (
     <VerifyBase
-      icon={<EmailIcon size={56} />}
+      icon={icon}
       title={LABELS.MULTI_FACTOR_AUTHENTICATION}
       subtitleBefore={AUTH_TEXTS.VERIFY_EMAIL.WHEN_YOU_ARE_READY}
       subtitleAfter={AUTH_TEXTS.VERIFY_EMAIL.YOU_WILL_RECEIVE_ONE_TIME_CODE}

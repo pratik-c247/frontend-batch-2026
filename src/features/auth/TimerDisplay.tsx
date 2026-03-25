@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { TimerStore } from '@/auth/hooks/useTimerStore'
 import { formatTime } from '@/utils/helpers'
 import { LABELS } from '@/constant/labels'
@@ -16,6 +16,11 @@ interface TimerDisplayProps {
 
 export const TimerDisplay = ({ timerStore, onResend }: TimerDisplayProps) => {
   const [timeLeft, setTimeLeft] = useState(() => timerStore.getTimeLeft())
+  const onResendRef = useRef(onResend)
+
+  useEffect(() => {
+    onResendRef.current = onResend
+  })
 
   useEffect(() => {
     const unsubscribe = timerStore.subscribe(setTimeLeft)
@@ -36,7 +41,7 @@ export const TimerDisplay = ({ timerStore, onResend }: TimerDisplayProps) => {
           variant={VARIANTS.OUTLINE}
           type={BUTTON_TYPES.BUTTON}
           className={styles.resendLink}
-          onClick={onResend}
+          onClick={() => onResendRef.current()}
           disabled={timeLeft > 0}
         >
           {BUTTON_NAMES.RESEND_CODE}
