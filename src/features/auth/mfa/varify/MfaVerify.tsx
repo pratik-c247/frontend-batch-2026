@@ -25,13 +25,20 @@ export default function MfaVerifyRouter() {
         router.push(ROUTES.MFA.MFA_SETUP)
         return
       }
-
-      if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.AUTHENTICATOR))
+      if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.AUTHENTICATOR)) {
         router.push(ROUTES.VERIFY.APP)
-      else if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.EMAIL))
+        return
+      }
+
+      if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.EMAIL)) {
         router.push(ROUTES.VERIFY.EMAIL)
-      else if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.SMS))
+        return
+      }
+
+      if (mfaEnabled.includes(AUTH_TEXTS.MFA.SETUP_WAYS.SMS)) {
         router.push(ROUTES.VERIFY.SMS)
+        return
+      }
     }
     handleMfaRouting()
   }, [])
