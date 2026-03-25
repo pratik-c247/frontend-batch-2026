@@ -187,7 +187,7 @@ export const VerifyBase = memo(
                 router={router}
               />
 
-         
+
               <TimerDisplay timerStore={timerStore} onResend={onResend} />
             </>
           )}
