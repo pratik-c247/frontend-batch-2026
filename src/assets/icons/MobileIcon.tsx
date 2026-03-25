@@ -1,9 +1,9 @@
-interface Props{
+interface Props {
   width?: number
-  height?:number
+  height?: number
 }
 
-export const MobileIcon = ({width=52,height=60}:Props) => {
+export const MobileIcon = ({ width = 52, height = 60 }: Props) => {
   return (
     <svg
       width={width}

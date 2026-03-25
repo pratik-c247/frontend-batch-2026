@@ -17,19 +17,11 @@ import { LABELS } from '@/constant/labels'
 
 export const SetupEmail = () => {
   const {
-    timeLeft,
     router,
-    setIsVerified,
-    userEmail,
-    onResend,
-    otpSent,
-    handleSubmit,
-    register,
-    onSubmit,
-    errors,
-
-    sendOtp,
-    isVerified,
+    states: { userEmail, otpSent, isVerified, setIsVerified },
+    timer: { timeLeft, onResend },
+    form: { register, handleSubmit, errors, onSubmit },
+    actions: { sendOtp },
   } = useEmailSetupHook()
 
   return (
@@ -125,7 +117,10 @@ export const SetupEmail = () => {
           )}
         </div>
 
-        <SetupOtherMethodsBox currentMethod={AUTH_TEXTS.MFA.SETUP_WAYS.EMAIL} showRecovery={false} />
+        <SetupOtherMethodsBox
+          currentMethod={AUTH_TEXTS.MFA.SETUP_WAYS.EMAIL}
+          showRecovery={false}
+        />
       </div>
     </div>
   )

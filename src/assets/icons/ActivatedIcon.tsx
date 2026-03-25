@@ -1,10 +1,8 @@
-
-interface Props{
-  size?:number
+interface Props {
+  size?: number
 }
 
-
-export const ActivatedIcon = ({ size=64 }:Props) => {
+export const ActivatedIcon = ({ size = 64 }: Props) => {
   return (
     <svg
       width={size}

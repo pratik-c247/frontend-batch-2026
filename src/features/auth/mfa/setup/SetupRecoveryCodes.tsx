@@ -22,9 +22,9 @@ export const SetupRecoveryCodes = () => {
 
   return (
     <div>
-      <button className={styles.goBack} onClick={() => router.back()}>
+      <Button variant={VARIANTS.GHOST} className={styles.goBack} onClick={() => router.back()}>
         {BUTTON_NAMES.GO_BACK}
-      </button>
+      </Button>
 
       <div className={styles.container}>
         <div className={styles.header}>
@@ -49,13 +49,13 @@ export const SetupRecoveryCodes = () => {
               {AUTH_TEXTS.SETUP_RECOVERY_CODES.GENERATE_TITLE}
             </h6>
             <p className={styles.generateDesc}>
-              <button
+              <Button variant={VARIANTS.OUTLINE}
                 type={BUTTON_TYPES.BUTTON}
                 className={styles.generateLink}
                 onClick={handleGenerate}
               >
                 {AUTH_TEXTS.SETUP_RECOVERY_CODES.GENERATE_LINK_LABEL}
-              </button>{' '}
+              </Button>{' '}
               {AUTH_TEXTS.SETUP_RECOVERY_CODES.GENERATE_DESC_PART1}
             </p>
           </div>

@@ -16,13 +16,9 @@ import { AUTH_TEXTS } from '@/auth/auth.constant'
 export const VerifyAuthenticator = () => {
   const {
     router,
-    register,
-    handleSubmit,
-
-    onSubmit,
-    errors,
-    user,
+    form: { register, onSubmit, errors, handleSubmit },
     hasRecoveryCodes,
+    user,
   } = useVerifyAuthenticatorHook()
 
   return (

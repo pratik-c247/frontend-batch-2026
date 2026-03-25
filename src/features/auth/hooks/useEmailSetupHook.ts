@@ -108,20 +108,28 @@ export const useEmailSetupHook = () => {
 
   return {
     router,
-    timeLeft,
-    userEmail,
-    timerRef,
-    expiresAtRef,
-    isVerified,
-    setIsVerified,
-    otpSent,
-    setOtpSent,
-    //form
-    register,
-    handleSubmit,
-    errors,
-    onResend,
-    sendOtp,
-    onSubmit,
+    states: {
+        userEmail,
+  otpSent,
+  setOtpSent,
+  isVerified,
+  setIsVerified,
+    },
+    timer: {
+      timeLeft,
+      timerRef,
+      expiresAtRef,
+      onResend
+    },
+    form: {
+      register,
+      handleSubmit,
+      errors,
+      onSubmit
+    },
+    actions:{
+    sendOtp
+    }
+
   }
 }

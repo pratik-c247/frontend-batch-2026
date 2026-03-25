@@ -95,15 +95,17 @@ export const useEmailVerifyHook = () => {
 
   return {
     router,
-    onResend,
+    //form
     onSubmit,
     register,
     handleSubmit,
-    hasRecoveryCodes,
-    otpSent,
-    user,
-    sendOtp,
     errors,
+    //timer
+    sendOtp,
     timerStore,
+    onResend,
+    otpSent,
+    hasRecoveryCodes,
+    user,
   }
 }

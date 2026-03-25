@@ -62,11 +62,13 @@ export const useVerifyAuthenticatorHook = () => {
 
   return {
     router,
-    register,
-    handleSubmit,
+    form: {
+      register,
+      onSubmit,
+      errors,
+      handleSubmit,
+    },
     hasRecoveryCodes,
-    onSubmit,
-    errors,
     user,
   }
 }

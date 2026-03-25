@@ -1,6 +1,4 @@
 'use client'
-
-
 import { MFA_VERIFY_COMPONENTS } from '@/constant/authMfaComponent'
 import { useParams } from 'next/navigation'
 

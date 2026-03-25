@@ -51,15 +51,19 @@ export const useSignupHook = () => {
   const password = watch('password')
 
   return {
-    onSubmit,
-    handleSubmit,
-    register,
 
-    errors,
-    showPassword,
-    setShowPassword,
-    showConfirmPassword,
-    setShowConfirmPassword,
-    password,
+    form: {
+      onSubmit,
+      register,
+      handleSubmit,
+      errors,
+      password,
+    },
+    state: {
+      showPassword,
+      setShowPassword,
+      showConfirmPassword,
+      setShowConfirmPassword,
+    }
   }
 }

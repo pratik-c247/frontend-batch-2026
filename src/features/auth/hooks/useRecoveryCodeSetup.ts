@@ -37,10 +37,10 @@ export const useRecoveryCodeSetup = () => {
     const text = codes.join('\n')
     const blob = new Blob([text], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'recovery-codes.txt'
-    a.click()
+    const downloadLink = document.createElement('a')
+    downloadLink.href = url
+    downloadLink.download = 'recovery-codes.txt'
+    downloadLink.click()
     URL.revokeObjectURL(url)
   }
 

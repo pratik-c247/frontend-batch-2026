@@ -2,7 +2,7 @@ interface props {
   size?: number
 }
 
-export const EmailIcon = ({size=16 }:props) => {
+export const EmailIcon = ({ size = 16 }: props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
