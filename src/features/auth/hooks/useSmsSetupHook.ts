@@ -2,7 +2,7 @@ import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { ROUTES } from '@/constant/routes'
 import type { User } from '@/types/auth.types'
-import { generateOtp, getExpiry } from '@/utils/helpers'
+import { storeOtp } from '@/utils/helpers'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -38,22 +38,13 @@ export const useSmsSetupHook = () => {
     }, 1000)
   }
 
-  function storeOtp(key: 'sms_otp' | 'email_otp') {
-    const otp = generateOtp()
-    const expiry = getExpiry()
-    sessionStorage.setItem(key, otp)
-    sessionStorage.setItem(`${key}_expires`, expiry.toString())
-    return { otp, expiry }
-  }
-
-
   const onSendCode = (data: PhoneFormData) => {
     const { expiry } = storeOtp(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
     expiresAtRef.current = expiry
-    setPhone(`+1 ${data.phone}`)
+    setPhone(`${data.phone}`)
     setStep('verify')
     startTimer()
-    notify.success(`Code sent to +1 ${data.phone}`)
+    notify.success(`Code sent to${data.phone}`)
   }
 
   const onVerify = async (data: OtpFormData) => {
@@ -69,7 +60,8 @@ export const useSmsSetupHook = () => {
       return
     }
     try {
-      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email =
+        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const user: User = await getUserByEmail(email)
       if (!user) return
       await saveUser({

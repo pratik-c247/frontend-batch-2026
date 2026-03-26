@@ -1,13 +1,12 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { BUTTON_TYPES } from '@/constant/Input&ButtonTypes'
-import { ROUTES } from '@/constant/routes'
 import styles from './SetupOtherMethodBox.module.scss'
 import { Button } from '@/components/common/Button'
 import { VARIANTS } from '@/constant/common'
 import { AUTH_TEXTS } from '@/features/auth/auth.constant'
 import { BUTTON_NAMES } from '@/constant/buttonNames'
-
+import { ALL_METHODS, METHOD_CONFIG } from '../OtherMethodsBox/OtherMethodsBox.constant'
 
 interface Props {
   currentMethod: 'email' | 'sms' | 'authenticator' | 'recovery'
@@ -15,29 +14,7 @@ interface Props {
   showRecovery?: boolean
 }
 
-const METHOD_CONFIG: Record<
-  string,
-  { label: string; route: string; description: string }
-> = {
-  authenticator: {
-    label: AUTH_TEXTS.SETUP_OTHER_METHODS_BOX.METHODS.authenticator.label,
-    route: ROUTES.MFA.AUTHENTICATOR_SETUP,
-    description:
-      AUTH_TEXTS.SETUP_OTHER_METHODS_BOX.METHODS.authenticator.description,
-  },
-  email: {
-    label: AUTH_TEXTS.SETUP_OTHER_METHODS_BOX.METHODS.email.label,
-    route: ROUTES.MFA.EMAIL_SETUP,
-    description: AUTH_TEXTS.SETUP_OTHER_METHODS_BOX.METHODS.email.description,
-  },
-  sms: {
-    label: AUTH_TEXTS.SETUP_OTHER_METHODS_BOX.METHODS.sms.label,
-    route: ROUTES.MFA.SMS_SETUP,
-    description: AUTH_TEXTS.SETUP_OTHER_METHODS_BOX.METHODS.sms.description,
-  },
-}
 
-const ALL_METHODS = ['authenticator', 'email', 'sms']
 
 export const SetupOtherMethodsBox = ({
   currentMethod,
@@ -80,10 +57,9 @@ export const SetupOtherMethodsBox = ({
           variant={VARIANTS.GHOST}
           type={BUTTON_TYPES.BUTTON}
           className={styles.skipLink}
-          // onClick={() => router.push(ROUTES.MFA.ACTIVATED)}
           onClick={() => router.back()}
         >
-        {BUTTON_NAMES.SKIP_NOW}
+          {BUTTON_NAMES.SKIP_NOW}
         </Button>
       )}
     </div>

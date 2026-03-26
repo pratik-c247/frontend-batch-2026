@@ -13,11 +13,11 @@ export const useActivatedHook = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
-      const u: User = await getUserByEmail(email)
+      const localUser: User = await getUserByEmail(email)
 
-      setUser(u)
+      setUser(localUser)
 
-      const enabled: string[] = u?.mfaEnabled || []
+      const enabled: string[] = localUser?.mfaEnabled || []
       if (enabled.length > 0) {
         setLastMethod(enabled[enabled.length - 1] as MFAType)
       }

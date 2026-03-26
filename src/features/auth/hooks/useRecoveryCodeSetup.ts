@@ -2,6 +2,7 @@ import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import type { User } from '@/types/auth.types'
 import { generateCodes } from '@/utils/generateCode'
+import { copyToClipboard, downloadTextFile } from '@/utils/helpers'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -34,19 +35,17 @@ export const useRecoveryCodeSetup = () => {
   }
 
   const handleDownload = () => {
-    const text = codes.join('\n')
-    const blob = new Blob([text], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const downloadLink = document.createElement('a')
-    downloadLink.href = url
-    downloadLink.download = 'recovery-codes.txt'
-    downloadLink.click()
-    URL.revokeObjectURL(url)
+    downloadTextFile('recovery-codes.txt', codes.join('\n'))
   }
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(codes.join('\n'))
-    notify.success(AUTH_MESSAGES.CODE_COPY_TO_CLIPBOARD)
+  const handleCopy = async () => {
+    const success = await copyToClipboard(codes.join('\n'))
+
+    if (success) {
+      notify.success(AUTH_MESSAGES.CODE_COPY_TO_CLIPBOARD)
+    } else {
+      notify.error(AUTH_MESSAGES.FAILED_TO_COPY)
+    }
   }
 
   const leftCodes = codes.slice(0, 5)

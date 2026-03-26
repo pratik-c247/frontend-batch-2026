@@ -66,9 +66,9 @@
 .configuredBadge {
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
-  color: #166534;
-  background-color: #dcfce7;
-  border: 1px solid #bbf7d0;
+  color: $green-dark-color;
+  background-color:$green-very-light-color;
+  border: 1px solid $green-light-color;
   border-radius: $radius-2xl;
   padding: 2px $spacing-4;
 }

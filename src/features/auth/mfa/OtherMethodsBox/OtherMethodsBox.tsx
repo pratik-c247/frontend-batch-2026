@@ -7,6 +7,7 @@ import styles from './OtherMethodsBox.module.scss'
 import { Button } from 'react-bootstrap'
 import { VARIANTS } from '@/constant/common'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
+import { METHOD_LABELS } from './OtherMethodsBox.constant'
 
 
 interface Props {
@@ -15,26 +16,6 @@ interface Props {
   hasRecoveryCodes: boolean
 }
 
-const METHOD_LABELS: Record<
-  string,
-  { label: string; route: string; description: string }
-> = {
-  authenticator: {
-    label: AUTH_TEXTS.OTHER_METHODS_BOX.METHODS.authenticator.label,
-    route: ROUTES.VERIFY.APP,
-    description: AUTH_TEXTS.OTHER_METHODS_BOX.METHODS.authenticator.description,
-  },
-  email: {
-    label: AUTH_TEXTS.OTHER_METHODS_BOX.METHODS.email.label,
-    route: ROUTES.VERIFY.EMAIL,
-    description: AUTH_TEXTS.OTHER_METHODS_BOX.METHODS.email.description,
-  },
-  sms: {
-    label: AUTH_TEXTS.OTHER_METHODS_BOX.METHODS.sms.label,
-    route: ROUTES.VERIFY.SMS,
-    description: AUTH_TEXTS.OTHER_METHODS_BOX.METHODS.sms.description,
-  },
-}
 
 export const OtherMethodsBox = ({
   enabledMethods,

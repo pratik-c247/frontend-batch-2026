@@ -41,6 +41,7 @@ export const AUTH_MESSAGES = {
   NO_RECOVERY_CODES_GENERATED_YET:'No recovery codes generated yet.',
  AUTHENTICATOR_NOT_SET_PROPERLY :"Authenticator not set properly",
   CODE_ALREADY_GENERATED: 'Recovery codes are already generated.',
+  FAILED_TO_COPY:'Failed to copy',
  INVALID_OR_ALREADY_USED_RECOVERY_CODE :'Invalid or already used recovery code.',
   NO_RECOVERY_CODES_GENERATED:
     'No recovery codes generated. Please use another method.',
