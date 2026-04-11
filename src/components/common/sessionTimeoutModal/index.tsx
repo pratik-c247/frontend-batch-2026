@@ -18,7 +18,7 @@ export default function SessionTimeoutModal({
 }: SessionProps) {
   const progress = countdown / TOTAL
   const dashOffset = CIRCUMFERENCE * (1 - progress)
-  const strokeColor = countdown <= 10 ? '#dc2626' : '#f59e0b'
+  const strokeColor = countdown <= 15 ? '#dc2626' : '#f59e0b'
 
   return (
     <div className={styles.overlay}>
