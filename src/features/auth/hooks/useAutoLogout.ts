@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { COUNTDOWN_DURATION, INACTIVITY_TIMEOUT } from '@/constant/common'
-
-
+import { LOCAL_VARIABLES } from '@/constant/localVariables'
 
 const clearTimeoutSafe = (timer: ReturnType<typeof setTimeout> | null) => {
   if (timer) clearTimeout(timer)
@@ -25,8 +24,8 @@ export const useAutoLogout = () => {
 
     isWarningVisibleRef.current = false
     setShowWarning(false)
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('user')
+
+    localStorage.removeItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL)
     sessionStorage.clear()
 
     router.push('/login')
