@@ -1,0 +1,126 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  @include flex-center;
+}
+
+.modal {
+  background: $white-color;
+  border-radius: $radius-xl;
+  padding: $spacing-12 $spacing-11;
+  width: 100%;
+  max-width: 420px;
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-5;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.timerWrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  @include flex-center;
+  margin-bottom: $spacing-4;
+}
+
+.timerSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.timerText {
+  position: relative;
+  z-index: 1;
+  @include flex-column;
+  align-items: center;
+  gap: 2px;
+}
+
+.timerCount {
+  font-size: 28px;
+  font-weight: $font-weight-bold;
+  color: $sky-blue-text-color;
+  line-height: 1;
+}
+
+.timerLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $gray-medium-color;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $sky-blue-text-color;
+  margin: 0;
+  text-align: center;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $gray-medium-color;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.actions {
+  @include flex-align-center;
+  gap: $spacing-7;
+  width: 100%;
+  margin-top: $spacing-4;
+}
+
+.logoutBtn {
+  flex: 1;
+  padding: $spacing-5 $spacing-7;
+  border: 1.5px solid $gray-light-color;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $sky-blue-text-color;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $gray-very-light-color;
+    color:$gray-dark-color;
+    border-color: $gray-medium-color;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.stayBtn {
+  flex: 1;
+  padding: $spacing-5 $spacing-7;
+  border: none;
+  border-radius: $radius-md;
+  background: $sky-blue-color;
+  color: $white-color;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $sky-blue-slight-dark-color;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
