@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getUserByEmail } from '@/utils/indexedDB'
 import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
@@ -6,6 +6,7 @@ import { ROUTES } from '@/constant/routes'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { useForm } from 'react-hook-form'
 import type { LoginFormData, User } from '@/types/auth.types'
+import { isAuthenticated } from '@/utils/auth'
 
 export const useLogin = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -44,6 +45,11 @@ export const useLogin = () => {
     router.push(ROUTES.VERIFY.ROOT)
   }
 
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.replace('/dashboard')
+    }
+  }, [router])
   return {
     showPassword,
     togglePassword,
