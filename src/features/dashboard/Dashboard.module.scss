@@ -7,7 +7,6 @@
   background: $gray-very-light-color;
 }
 
-// ── Navbar ──────────────────────────────────────────────
 .navbar {
   @include flex-align-between;
   padding: $spacing-7 $spacing-16;
@@ -39,7 +38,7 @@
 
   &:hover {
     background: $gray-very-light-color;
-    border-color: $gray-semi-dark-color;
+    border-color: $lite-red-color;
     color: $lite-red-color;
   }
 
@@ -48,12 +47,10 @@
   }
 }
 
-// ── Main content ─────────────────────────────────────────
 .main {
   flex: 1;
-  @include flex-column;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
+  flex-direction: column;
   gap: $spacing-5;
   padding: $spacing-16;
   text-align: center;
