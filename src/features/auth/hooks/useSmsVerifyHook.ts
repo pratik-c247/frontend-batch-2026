@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
 import { useTimerStore } from '@/auth/hooks/useTimerStore'
+import { LOGIN_KEY } from '@/constant/common'
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
 )
@@ -83,6 +84,7 @@ export const useSmsVerifyHook = () => {
     sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
     sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES)
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
+      localStorage.setItem(LOGIN_KEY, Date.now().toString())
     router.push(ROUTES.DASHBOARD.ROOT)
   }
 

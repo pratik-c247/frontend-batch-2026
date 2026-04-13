@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as OTPAuth from 'otpauth'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
+import { LOGIN_KEY } from '@/constant/common'
 
 type FormData = { code: string }
 
@@ -21,7 +22,8 @@ export const useVerifyAuthenticatorHook = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email =
+        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)
@@ -53,6 +55,7 @@ export const useVerifyAuthenticatorHook = () => {
     }
 
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
+    localStorage.setItem(LOGIN_KEY, Date.now().toString())
     router.push(ROUTES.DASHBOARD.ROOT)
   }
 
