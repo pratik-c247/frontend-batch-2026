@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { verifyRecoveryCode } from '@/utils/recoveryCodeHelper'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
+import { LOGIN_KEY } from '@/constant/common'
 
 type FormData = { recoveryCode: string }
 export const useRecoveryCodeVerify = () => {
@@ -49,6 +50,7 @@ export const useRecoveryCodeVerify = () => {
       return
     }
     notify.success(AUTH_MESSAGES.RECOVERY_CODE_ACCEPTED)
+      localStorage.setItem(LOGIN_KEY, Date.now().toString())
     router.push(ROUTES.DASHBOARD.ROOT)
   }
 

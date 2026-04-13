@@ -7,6 +7,7 @@ import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { useForm } from 'react-hook-form'
 import type { LoginFormData, User } from '@/types/auth.types'
 import { isAuthenticated } from '@/utils/auth'
+import { COUNTDOWN_START_KEY, LAST_ACTIVITY_KEY, LOGIN_KEY, LOGOUT_KEY, STAY_LOGGED_IN_KEY } from '@/constant/common'
 
 export const useLogin = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -35,6 +36,10 @@ export const useLogin = () => {
       return
     }
     localStorage.setItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL, email)
+      localStorage.removeItem(LAST_ACTIVITY_KEY)
+      localStorage.removeItem(COUNTDOWN_START_KEY)
+      localStorage.removeItem(STAY_LOGGED_IN_KEY)
+      localStorage.removeItem(LOGOUT_KEY)
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
     const mfaEnabled: string[] = user?.mfaEnabled || []
 
@@ -42,13 +47,22 @@ export const useLogin = () => {
       router.push(ROUTES.MFA.MFA_SETUP)
       return
     }
+
     router.push(ROUTES.VERIFY.ROOT)
   }
 
   useEffect(() => {
     if (isAuthenticated()) {
-      router.replace('/dashboard')
+      router.replace(ROUTES.DASHBOARD.ROOT)
+      return
     }
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === LOGIN_KEY && event.newValue) {
+        router.push(ROUTES.DASHBOARD.ROOT)
+      }
+    }
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
   }, [router])
   return {
     showPassword,
