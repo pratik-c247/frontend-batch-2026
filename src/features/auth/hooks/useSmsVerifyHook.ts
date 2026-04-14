@@ -65,27 +65,31 @@ export const useSmsVerifyHook = () => {
   }
 
   const onSubmit = async (data: FormData) => {
-    const storedOtp = sessionStorage.getItem(
-      AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP,
-    )
-    const expiresAt = Number(
-      sessionStorage.getItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES),
-    )
+    try {
+      const storedOtp = sessionStorage.getItem(
+        AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP,
+      )
+      const expiresAt = Number(
+        sessionStorage.getItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES),
+      )
 
-    if (Date.now() > expiresAt) {
-      notify.error(AUTH_MESSAGES.CODE_EXPIRED)
-      return
-    }
-    if (data.code.trim() !== storedOtp) {
-      notify.error(AUTH_MESSAGES.INVALID_CODE)
-      return
-    }
+      if (Date.now() > expiresAt) {
+        notify.error(AUTH_MESSAGES.CODE_EXPIRED)
+        return
+      }
+      if (data.code.trim() !== storedOtp) {
+        notify.error(AUTH_MESSAGES.INVALID_CODE)
+        return
+      }
 
-    sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
-    sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES)
-    notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
+      sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP)
+      sessionStorage.removeItem(AUTH_TEXTS.SESSION_VARIABLES.SMS_OTP_EXPIRES)
+      notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
       localStorage.setItem(LOGIN_KEY, Date.now().toString())
-    router.push(ROUTES.DASHBOARD.ROOT)
+      router.push(ROUTES.DASHBOARD.ROOT)
+    } catch (error) {
+      notify.error(AUTH_MESSAGES.SOMETHING_WENT_WRONG)
+    }
   }
 
   const hasRecoveryCodes = (user?.mfa?.recoveryCodes || []).some(

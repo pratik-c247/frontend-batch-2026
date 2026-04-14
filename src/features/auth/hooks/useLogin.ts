@@ -35,11 +35,8 @@ export const useLogin = () => {
       notify.error(AUTH_MESSAGES.SOMETHING_WENT_WRONG)
       return
     }
+    localStorage.clear()
     localStorage.setItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL, email)
-      localStorage.removeItem(LAST_ACTIVITY_KEY)
-      localStorage.removeItem(COUNTDOWN_START_KEY)
-      localStorage.removeItem(STAY_LOGGED_IN_KEY)
-      localStorage.removeItem(LOGOUT_KEY)
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
     const mfaEnabled: string[] = user?.mfaEnabled || []
 

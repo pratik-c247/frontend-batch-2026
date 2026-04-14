@@ -13,7 +13,8 @@ export const INACTIVITY_TIMEOUT = 5 * 1000
 export const COUNTDOWN_DURATION = 60
 export const LAST_ACTIVITY_KEY = 'last_activity'
 export const LOGOUT_KEY = 'logout_event'
-export const  LOGIN_KEY ='auto_login_broadcast'
+export const LOGIN_KEY = 'auto_login_broadcast'
+export const ONE_THOUSAND=1000
 export const AUTO_LOGOUT_CONST = {
   SECONDS: 'SECONDS',
   SESSION_TIMEOUT_WARNING: 'Session Timeout Warning',

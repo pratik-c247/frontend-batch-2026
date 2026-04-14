@@ -7,12 +7,12 @@ import {
   EVENT_LISTENER_STORAGE,
   INACTIVITY_TIMEOUT,
   LAST_ACTIVITY_KEY,
-  LOGIN_KEY,
   LOGOUT_KEY,
+  ONE_THOUSAND,
   STAY_LOGGED_IN_KEY,
 } from '@/constant/common'
-import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { ROUTES } from '@/constant/routes'
+import { clearAuthStorage } from '@/utils/localRemoveKeys'
 
 const clearTimeoutSafe = (timer: ReturnType<typeof setTimeout> | null) => {
   if (timer) clearTimeout(timer)
@@ -34,11 +34,7 @@ export const useAutoLogout = () => {
     clearIntervalSafe(countdownTimerRef.current)
     isWarningVisibleRef.current = false
     setShowWarning(false)
-    localStorage.removeItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL)
-    localStorage.removeItem(LAST_ACTIVITY_KEY)
-    localStorage.removeItem(COUNTDOWN_START_KEY)
-    localStorage.removeItem(LOGIN_KEY)
-    localStorage.removeItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL)
+    clearAuthStorage()
     sessionStorage.clear()
 
     router.push(ROUTES.LOGIN)
@@ -72,13 +68,10 @@ export const useAutoLogout = () => {
     const startedAt = Number(localStorage.getItem(COUNTDOWN_START_KEY))
     if (!startedAt) return
 
-    const elapsed = Math.floor((Date.now() - startedAt) / 1000)
+    const elapsed = Math.floor((Date.now() - startedAt) / ONE_THOUSAND)
     const remaining = COUNTDOWN_DURATION - elapsed
 
-    if (remaining <= 0) {
-      logout()
-      return
-    }
+    if (remaining <= 0) return logout()
 
     clearTimeoutSafe(inactivityTimerRef.current)
     clearIntervalSafe(countdownTimerRef.current)
@@ -89,14 +82,11 @@ export const useAutoLogout = () => {
 
     countdownTimerRef.current = setInterval(() => {
       const storedStart = Number(localStorage.getItem(COUNTDOWN_START_KEY))
-      if (!storedStart) {
-        clearIntervalSafe(countdownTimerRef.current)
-        return
-      }
+      if (!storedStart) return clearIntervalSafe(countdownTimerRef.current)
 
       const now = Date.now()
       const newRemaining =
-        COUNTDOWN_DURATION - Math.floor((now - storedStart) / 1000)
+        COUNTDOWN_DURATION - Math.floor((now - storedStart) / ONE_THOUSAND)
 
       if (newRemaining <= 0) {
         clearIntervalSafe(countdownTimerRef.current)
@@ -111,19 +101,15 @@ export const useAutoLogout = () => {
 
   const stayLoggedIn = useCallback(() => {
     localStorage.removeItem(COUNTDOWN_START_KEY)
-
     localStorage.setItem(STAY_LOGGED_IN_KEY, Date.now().toString())
     resetWarningState()
-
     localStorage.setItem(LAST_ACTIVITY_KEY, Date.now().toString())
     scheduleInactivityTimer(INACTIVITY_TIMEOUT)
   }, [resetWarningState, scheduleInactivityTimer])
 
   useEffect(() => {
     const handleActivity = () => {
-      if (isWarningVisibleRef.current) {
-        return
-      }
+      if (isWarningVisibleRef.current) return
 
       const now = Date.now()
       localStorage.setItem(LAST_ACTIVITY_KEY, now.toString())
@@ -132,43 +118,50 @@ export const useAutoLogout = () => {
 
     activityEvents.forEach((e) => window.addEventListener(e, handleActivity))
 
+    const now = Date.now()
     const existingCountdownStart = Number(
       localStorage.getItem(COUNTDOWN_START_KEY),
     )
+
     if (existingCountdownStart) {
-      const elapsed = Math.floor((Date.now() - existingCountdownStart) / 1000)
-      if (elapsed < COUNTDOWN_DURATION) {
-        startCountdownFromStorage()
-      } else {
+      const elapsed = Math.floor((now - existingCountdownStart) / ONE_THOUSAND)
+
+      if (elapsed >= COUNTDOWN_DURATION) {
         logout()
+        return cleanup
       }
-    } else {
-      const lastActivity = Number(localStorage.getItem(LAST_ACTIVITY_KEY))
-      const now = Date.now()
 
-      if (lastActivity) {
-        const timeLeft = INACTIVITY_TIMEOUT - (now - lastActivity)
-
-        if (timeLeft <= 0) {
-          localStorage.setItem(COUNTDOWN_START_KEY, Date.now().toString())
-          startCountdownFromStorage()
-        } else {
-          scheduleInactivityTimer(timeLeft)
-        }
-      } else {
-        scheduleInactivityTimer(INACTIVITY_TIMEOUT)
-      }
+      startCountdownFromStorage()
+      return cleanup
     }
 
-    return () => {
+    const lastActivity = Number(localStorage.getItem(LAST_ACTIVITY_KEY))
+
+    if (!lastActivity) {
+      scheduleInactivityTimer(INACTIVITY_TIMEOUT)
+      return cleanup
+    }
+
+    const timeLeft = INACTIVITY_TIMEOUT - (now - lastActivity)
+
+    if (timeLeft <= 0) {
+      localStorage.setItem(COUNTDOWN_START_KEY, now.toString())
+      startCountdownFromStorage()
+      return cleanup
+    }
+
+    scheduleInactivityTimer(timeLeft)
+
+    function cleanup() {
       activityEvents.forEach((e) =>
         window.removeEventListener(e, handleActivity),
       )
       clearTimeoutSafe(inactivityTimerRef.current)
       clearIntervalSafe(countdownTimerRef.current)
     }
-  }, [])
 
+    return cleanup
+  }, [])
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
       if (event.key === LAST_ACTIVITY_KEY && event.newValue) {
