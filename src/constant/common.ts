@@ -26,4 +26,6 @@ export const AUTO_LOGOUT_CONST = {
      'keypress',
      'scroll',
      'click',
-   ]
+ ]
+
+ export const EVENT_LISTENER_STORAGE='storage'

@@ -8,12 +8,3 @@ export default function OuterLayout({
 }>) {
   return <OuterWrapper>{children}</OuterWrapper>
 }
-
-// export default function DashboardLayout({ children }) {
-//   return (
-//     <div className="dashboard">
-//       <Sidebar />
-//       <main>{children}</main>
-//     </div>
-//   )
-// }

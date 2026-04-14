@@ -1,20 +1,17 @@
 import { CIRCUMFERENCE, RADIUS } from '@/constant/common'
 
-interface Props{
+interface Props {
   dashOffset: number
   strokeColor: string
-  className:string
-
+  className: string
 }
-export const CircleIcon = ({ dashOffset,strokeColor,className}:Props) => {
-
+export const CircleIcon = ({ dashOffset, strokeColor, className }: Props) => {
   return (
     <svg
       className={`${className}`}
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Background track */}
       <circle
         cx="50"
         cy="50"
@@ -23,7 +20,7 @@ export const CircleIcon = ({ dashOffset,strokeColor,className}:Props) => {
         stroke="#e5e7eb"
         strokeWidth="7"
       />
-      {/* Progress arc */}
+
       <circle
         cx="50"
         cy="50"

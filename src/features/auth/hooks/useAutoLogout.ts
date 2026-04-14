@@ -4,6 +4,7 @@ import {
   activityEvents,
   COUNTDOWN_DURATION,
   COUNTDOWN_START_KEY,
+  EVENT_LISTENER_STORAGE,
   INACTIVITY_TIMEOUT,
   LAST_ACTIVITY_KEY,
   LOGIN_KEY,
@@ -11,6 +12,7 @@ import {
   STAY_LOGGED_IN_KEY,
 } from '@/constant/common'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
+import { ROUTES } from '@/constant/routes'
 
 const clearTimeoutSafe = (timer: ReturnType<typeof setTimeout> | null) => {
   if (timer) clearTimeout(timer)
@@ -39,7 +41,7 @@ export const useAutoLogout = () => {
     localStorage.removeItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL)
     sessionStorage.clear()
 
-    router.push('/login')
+    router.push(ROUTES.LOGIN)
   }, [router])
 
   const logout = useCallback(() => {
@@ -119,8 +121,6 @@ export const useAutoLogout = () => {
 
   useEffect(() => {
     const handleActivity = () => {
-        
-
       if (isWarningVisibleRef.current) {
         return
       }
@@ -199,8 +199,9 @@ export const useAutoLogout = () => {
       }
     }
 
-    window.addEventListener('storage', handleStorage)
-    return () => window.removeEventListener('storage', handleStorage)
+    window.addEventListener(EVENT_LISTENER_STORAGE, handleStorage)
+    return () =>
+      window.removeEventListener(EVENT_LISTENER_STORAGE, handleStorage)
   }, [
     logoutCleanup,
     startCountdownFromStorage,
