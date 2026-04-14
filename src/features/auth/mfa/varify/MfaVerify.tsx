@@ -6,14 +6,14 @@ import { ROUTES } from '@/constant/routes'
 import type { User } from '@/types/auth.types'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 
 export default function MfaVerifyRouter() {
   const router = useRouter()
 
   useEffect(() => {
     const handleMfaRouting = async () => {
-      const email =
-        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const user: User = await getUserByEmail(email)
       if (!user) {
         router.push(ROUTES.LOGIN)

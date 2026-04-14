@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { verifyRecoveryCode } from '@/utils/recoveryCodeHelper'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { LOGIN_KEY } from '@/constant/common'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 
 type FormData = { recoveryCode: string }
 export const useRecoveryCodeVerify = () => {
@@ -21,7 +22,7 @@ export const useRecoveryCodeVerify = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)
@@ -42,7 +43,7 @@ export const useRecoveryCodeVerify = () => {
   }, [])
 
   const onSubmit = async (data: FormData) => {
-    const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+    const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
     const result = await verifyRecoveryCode(email, data.recoveryCode)
 
     if (!result.success) {

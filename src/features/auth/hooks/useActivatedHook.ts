@@ -4,6 +4,7 @@ import { getUserByEmail } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 
 export const useActivatedHook = () => {
   const router = useRouter()
@@ -12,7 +13,7 @@ export const useActivatedHook = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
 
       setUser(u)

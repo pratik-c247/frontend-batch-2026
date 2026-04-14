@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
@@ -88,7 +89,7 @@ export const useEmailSetupHook = () => {
   }
 
   const sendOtp = () => {
-    const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+    const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
     setUserEmail(email)
     const otp = Math.floor(100000 + Math.random() * 900000)
     const expiry = Date.now() + OTP_EXPIRY_SECONDS * 1000

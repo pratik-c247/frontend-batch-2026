@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import * as OTPAuth from 'otpauth'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import { LOGIN_KEY } from '@/constant/common'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 
 type FormData = { code: string }
 
@@ -22,8 +23,7 @@ export const useVerifyAuthenticatorHook = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email =
-        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)

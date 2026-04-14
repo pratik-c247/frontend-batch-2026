@@ -7,6 +7,7 @@ import type { User } from '@/types/auth.types'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { ROUTES } from '@/constant/routes'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 type FormData = {
   code: string
 }
@@ -16,7 +17,7 @@ export const useAuthenticatorSetup = () => {
   const [{ secret, otpUri }] = useState(() => {
     const email =
       typeof window !== 'undefined'
-        ? localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+        ? getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
         : ''
 
     const totp = new OTPAuth.TOTP({
@@ -55,8 +56,7 @@ export const useAuthenticatorSetup = () => {
         return
       }
 
-      const email =
-        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const user: User = await getUserByEmail(email)
       if (!user) return
 

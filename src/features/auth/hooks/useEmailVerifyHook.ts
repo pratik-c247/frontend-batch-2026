@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { AUTH_TEXTS } from '@/auth/auth.constant'
 import { useTimerStore } from '@/auth/hooks/useTimerStore'
 import { LOGIN_KEY } from '@/constant/common'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 
 const OTP_EXPIRY_SECONDS = Number(
   process.env.NEXT_PUBLIC_OTP_EXPIRY_SECONDS ?? 60,
@@ -30,8 +31,7 @@ export const useEmailVerifyHook = () => {
 
   useEffect(() => {
     const load = async () => {
-      const email =
-        localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+      const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
       const u: User = await getUserByEmail(email)
       if (!u) {
         router.push(ROUTES.LOGIN)

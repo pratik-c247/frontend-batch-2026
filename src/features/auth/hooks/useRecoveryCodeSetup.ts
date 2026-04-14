@@ -1,6 +1,7 @@
 import { AUTH_MESSAGES, notify } from '@/constant/authMessages'
 import { LOCAL_VARIABLES } from '@/constant/localVariables'
 import type { User } from '@/types/auth.types'
+import { getSecureItem } from '@/utils/encryptAndDecrypt'
 import { generateCodes } from '@/utils/generateCode'
 import { getUserByEmail, saveUser } from '@/utils/indexedDB'
 import { useRouter } from 'next/navigation'
@@ -13,7 +14,7 @@ export const useRecoveryCodeSetup = () => {
 
   const handleGenerate = async () => {
     const newCodes = generateCodes()
-    const email = localStorage.getItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
+    const email = getSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL) || ''
     const user: User = await getUserByEmail(email)
     if (!user) return
 

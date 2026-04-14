@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import type { LoginFormData, User } from '@/types/auth.types'
 import { isAuthenticated } from '@/utils/auth'
 import { COUNTDOWN_START_KEY, EVENT_LISTENER_STORAGE, LAST_ACTIVITY_KEY, LOGIN_KEY, LOGOUT_KEY, STAY_LOGGED_IN_KEY } from '@/constant/common'
+import { setSecureItem } from '@/utils/encryptAndDecrypt'
 
 export const useLogin = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -36,7 +37,7 @@ export const useLogin = () => {
       return
     }
     localStorage.clear()
-    localStorage.setItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL, email)
+    setSecureItem(LOCAL_VARIABLES.CURRENT_USER_EMAIL, email)
     notify.success(AUTH_MESSAGES.LOGIN_SUCCESS)
     const mfaEnabled: string[] = user?.mfaEnabled || []
 
