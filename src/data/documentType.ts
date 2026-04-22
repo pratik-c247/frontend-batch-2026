@@ -1,4 +1,4 @@
-import type { DocumentTypeItem } from '@/types/documentType.types';
+ import type { DocumentTypeItem } from '@/types/documentType.types';
 
 export const documentTypeData: DocumentTypeItem[]  = [
   {
@@ -38,7 +38,7 @@ export const documentTypeData: DocumentTypeItem[]  = [
     is_document_mandatory: 0,
     is_document_sensitive: 0,
     is_sensitive_check_mandatory: 0,
-    updated_at: '2026-01-27T10:02:39.000000Z',
+    updated_at: '2026-07-25T10:02:39.000000Z',
     fields_count: 1,
     is_required_document_approval: 1,
   },

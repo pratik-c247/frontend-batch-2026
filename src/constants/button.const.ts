@@ -22,18 +22,19 @@ export const BUTTON_TEXT = {
 //   DRAFTS_SMALL: 'drafts',
 //   SAVED_SMALL: 'saved',
 //   CROSS: '✕',
-// } as const
+} as const
 
-// export const BUTTON_TYPES = {
-//   BUTTON: 'button',
-// } as const
+export const BUTTON_TYPES = {
+  BUTTON: 'button',
+} as const
 
 // export const BUTTON_TITLE = {
 //   EDIT: 'Edit',
 //   DELETE: 'Delete',
 // } as const
 
-// export const VARIANT = {
-//   SECONDARY: 'secondary',
-//   BLUE: 'blue',
+export const VARIANT = {
+  SECONDARY: 'secondary',
+  BLUE: 'blue',
+  ICON:'icon'
 } as const

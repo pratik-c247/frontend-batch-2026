@@ -9,6 +9,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  border-spacing: $spacing-2;
   font-size: $font-size-sm;
 
   th {
@@ -26,27 +27,53 @@
     color: $gray-700;
     font-size: $font-size-sm;
     vertical-align: middle;
-
   }
 }
 
-
-.thDocType  { width: 55%; }
-.thFields   { width: 15%; }
-.thUpdated  { width: 18%; }
-.thActions  { width: 12%; text-align: right!important ; }
-
-.tdDocType  { font-weight: $font-weight-400; }
-.tdFields   { color: $gray-500; }
-.tdUpdated  { color: $gray-500; white-space: nowrap; }
-.tdActions  { text-align: right; }
-
-
-.rowEven { background-color: $white-color;
-
+.thDocType {
+  width: 55%;
 }
-.rowOdd  { background-color: $gray-150;}
+.thFields {
+  width: 15%;
+}
+.thUpdated {
+  width: 18%;
+}
+.thActions {
+  width: 12%;
+  text-align: right !important ;
+}
 
+.tdDocType {
+  font-weight: $font-weight-400;
+}
+.tdFields {
+  color: $gray-500;
+}
+.tdUpdated {
+  color: $gray-500;
+  white-space: nowrap;
+}
+.tdActions {
+  text-align: right;
+}
+
+.rowEven {
+  td {
+    background-color: $white-color;
+  }
+}
+.rowOdd {
+  td {
+    background-color: $gray-150;
+    &:first-child {
+      border-radius: $radius-md 0 0 $radius-md;
+    }
+    &:last-child {
+      border-radius: 0 $radius-md $radius-md 0;
+    }
+  }
+}
 
 .sortBtn {
   @include flex-align-center;
@@ -76,7 +103,9 @@
   border-radius: $radius-xxs;
   background-color: $gray-150;
   color: $gray-500;
-  transition: background-color 0.15s, color 0.15s;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
 
   .sortActive & {
     background-color: $sky-blue-very-light-color;
@@ -89,7 +118,6 @@
   }
 }
 
-
 .actionGroup {
   @include flex-align-center;
   gap: $spacing-2;
@@ -97,25 +125,22 @@
 }
 
 .actionBtn {
-  // @include action-icon-btn($sky-blue-color);
   background-color: $primary-color;
-  color:$white-color;
-
+  color: $white-color;
 }
-.EditBtn{
- background-color: $sky-blue-color;
-  color:$white-color;
+.EditBtn {
+  background-color: $sky-blue-color;
+  color: $white-color;
 }
 .deleteBtn {
   background-color: $white-color;
-  color:$gray-400;
-  border: 1px solid $gray-200!important;
+  color: $gray-400;
+  border: 1px solid $gray-200 !important;
 
   &:hover {
     background-color: $red-light-color;
   }
 }
-
 
 .emptyCell {
   text-align: center;

@@ -9,13 +9,12 @@ import DocumentTypeTable from './documentTypeTable'
 import { documentTypeData } from '@/data/documentType'
 import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { FilterIcon } from '@/assets/icons/FilterIcon'
+import { Button } from '@/comopents/common/button'
+import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
 
 interface SearchFormValues {
   search: string
 }
-
-
-
 
 const DocumentTypesPage: React.FC = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -51,9 +50,7 @@ const DocumentTypesPage: React.FC = () => {
         buttonLabel="Add Document Type"
         onButtonClick={handleAddDocumentType}
       >
-        {/* ── Toolbar: search + filter ── */}
         <div className={styles.toolbar}>
-         
           <div className={styles.searchWrapper}>
             <span className={styles.searchIcon}>
               <SearchIcon />
@@ -67,10 +64,10 @@ const DocumentTypesPage: React.FC = () => {
             />
           </div>
 
-          {/* Filter button + dropdown anchor */}
           <div ref={filterAnchorRef} className={styles.filterAnchor}>
-            <button
-              type="button"
+            <Button
+              type={BUTTON_TYPES.BUTTON}
+              variant={VARIANT.SECONDARY}
               className={`${styles.filterBtn} ${hasActiveFilter ? styles.filterActive : ''}`}
               onClick={() => setIsFilterOpen((prev) => !prev)}
               aria-expanded={isFilterOpen}
@@ -79,7 +76,7 @@ const DocumentTypesPage: React.FC = () => {
               <FilterIcon />
               Filters
               {hasActiveFilter && <span className={styles.filterDot} />}
-            </button>
+            </Button>
 
             <DocumentTypeFilter
               isOpen={isFilterOpen}
@@ -90,7 +87,6 @@ const DocumentTypesPage: React.FC = () => {
           </div>
         </div>
 
-        {/* ── Table ── */}
         <DocumentTypeTable
           data={documentTypeData}
           searchTerm={searchTerm}

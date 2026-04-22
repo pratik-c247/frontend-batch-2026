@@ -10,17 +10,14 @@
 
 .toolbar {
   @include flex-align-center;
-  gap: $spacing-4;
   margin-bottom: $spacing-7;
 }
-
 
 .searchWrapper {
   position: relative;
   @include flex-align-center;
   flex: 0 0 auto;
   width: 260px;
-  // gap:20px
 }
 
 .searchIcon {
@@ -35,20 +32,21 @@
 
 .searchInput {
   width: 100%;
-  height: 36px;
-  padding: 0 $spacing-4 0 $spacing-10 ;
+  height: 34px;
+  padding: 0 $spacing-4 0 $spacing-10;
   border: 1px solid $gray-300;
-  border-radius: $radius-xs;
+  border-radius: $radius-xs 0px 0px $radius-xs;
   font-size: $font-size-sm;
   color: $gray-700;
-  background-color: $white-color;
+  background-color: $gray-150;
   outline: none;
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
 
   &::placeholder {
-    color: $gray-400;
+    color: $gray-500;
+    font-size: $font-size-xs;
   }
 
   &:focus {
@@ -57,39 +55,37 @@
   }
 }
 
-// Filter anchor (positioning context for the dropdown)
 .filterAnchor {
   position: relative;
-}
 
-.filterBtn {
-  @include flex-align-center;
-  gap: $spacing-2;
-  height: 36px;
-  padding: 0 $spacing-6;
-  border: 1px solid $gray-300;
-  border-radius: $radius-xs;
-  background-color: $white-color;
-  color: $gray-600;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-500;
-  cursor: pointer;
-  transition:
-    border-color 0.15s,
-    color 0.15s,
-    background-color 0.15s;
-  white-space: nowrap;
-  position: relative;
+  .filterBtn {
+    @include flex-align-center;
+    gap: $spacing-2;
+    height: 36px;
+    padding: auto $spacing-7;
+    border: 1px solid $gray-300;
+    border-left: none;
+    border-radius: 0px $radius-xs $radius-xs 0px;
+    color: $primary-color;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-600;
 
-  &:hover {
-    border-color: $sky-blue-color;
-    color: $sky-blue-color;
-  }
+    transition:
+      border-color 0.15s,
+      color 0.15s,
+      background-color 0.15s;
+    white-space: nowrap;
 
-  &.filterActive {
-    border-color: $sky-blue-color;
-    color: $sky-blue-color;
-    background-color: $sky-blue-very-light-color;
+    &:hover {
+      border-color: $sky-blue-color;
+      color: $sky-blue-color;
+    }
+
+    &.filterActive {
+      border-color: $sky-blue-color;
+      color: $sky-blue-color;
+      background-color: $sky-blue-very-light-color;
+    }
   }
 }
 
