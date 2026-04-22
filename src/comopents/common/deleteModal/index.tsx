@@ -1,7 +1,8 @@
 'use client'
-import { BUTTON_TEXT, BUTTON_TITLE, VARIANT } from '@/constants/button.const'
+import { BUTTON_TEXT, VARIANT } from '@/constants/button.const'
 import styles from './DeleteModal.module.scss'
-import { Button } from '@/components/ui/button'
+import { Button } from '../button'
+
 
 interface ConfirmModalProps {
   open: boolean
@@ -41,7 +42,7 @@ export const DeleteModal = ({
             </Button>
 
             <Button className={styles.deleteBtn} onClick={onConfirm}>
-              {BUTTON_TITLE.DELETE}
+              {BUTTON_TEXT.DELETE}
             </Button>
           </div>
         </div>

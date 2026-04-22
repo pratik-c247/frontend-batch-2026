@@ -20,7 +20,6 @@ export const useDocumentTypeTable = ({
   const processedData = useMemo(() => {
     let result = [...data]
 
-    // 1. Search filter (document_type only)
     if (searchTerm.trim()) {
       const lower = searchTerm.toLowerCase()
       result = result.filter((item) =>
@@ -28,7 +27,6 @@ export const useDocumentTypeTable = ({
       )
     }
 
-    // 2. Date range filter
     if (filterValues) {
       const { startDate, endDate } = filterValues
       if (startDate) {
@@ -37,14 +35,12 @@ export const useDocumentTypeTable = ({
         )
       }
       if (endDate) {
-        // Include the entire end day
         const end = new Date(endDate)
         end.setHours(23, 59, 59, 999)
         result = result.filter((item) => new Date(item.updated_at) <= end)
       }
     }
 
-    // 3. Sort by updated_at
     if (sortOrder !== 'none') {
       result.sort((a, b) => {
         const diff =
@@ -60,5 +56,13 @@ export const useDocumentTypeTable = ({
     setSortOrder((prev) => nextSortOrder(prev))
   }
 
-  return { processedData, handleSortToggle, sortOrder ,page,setPage,perPage,setPerPage}
+  return {
+    processedData,
+    handleSortToggle,
+    sortOrder,
+    page,
+    setPage,
+    perPage,
+    setPerPage,
+  }
 }

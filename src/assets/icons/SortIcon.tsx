@@ -1,16 +1,10 @@
+import type { SortOrder } from '@/types/documentType.types'
 import React from 'react'
-import type { SortOrder } from '../../types'
 
 interface SortIconProps {
   order: SortOrder
 }
 
-/**
- * SortIcon – renders three distinct icons based on sort state:
- *  'none'  → neutral double-arrow (↕)
- *  'asc'   → single arrow pointing up  (↑)
- *  'desc'  → single arrow pointing down (↓)
- */
 const SortIcon: React.FC<SortIconProps> = ({ order }) => {
   const commonProps = {
     xmlns: 'http://www.w3.org/2000/svg',
@@ -41,7 +35,6 @@ const SortIcon: React.FC<SortIconProps> = ({ order }) => {
     )
   }
 
-  // 'none' – double-headed arrow
   return (
     <svg {...commonProps}>
       <polyline points="8 9 12 5 16 9" />

@@ -1,19 +1,20 @@
 'use client'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import styles from './DatePickerField.module.scss'
 import type { DatePickerFieldProps } from '@/types/documentType.types'
-import { InfoIcon } from '@/assets/icons/InfoIcon'
 import { CalendarIcon } from '@/assets/icons/CalendarIcon'
 import { BUTTON_TYPES } from '@/constants/button.const'
+import { INPUT_TYPES } from '@/constants/input.const'
+import { ToolTipIcon } from '@/assets/icons/ToolTipIcon'
 
-const DatePickerField: React.FC<DatePickerFieldProps> = ({
+const DatePickerField = ({
   label,
   tooltipText,
   value,
   onChange,
   placeholder = 'Choose a date',
   error,
-}) => {
+}: DatePickerFieldProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleIconClick = () => {
@@ -27,7 +28,7 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
         <span className={styles.label}>{label}</span>
         {tooltipText && (
           <span className={styles.tooltip} title={tooltipText}>
-            <InfoIcon />
+            <ToolTipIcon />
           </span>
         )}
       </div>
@@ -35,7 +36,7 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
       <div className={`${styles.inputWrapper} ${error ? styles.hasError : ''}`}>
         <input
           ref={inputRef}
-          type="date"
+          type={INPUT_TYPES.DATE}
           className={styles.input}
           value={value}
           onChange={(e) => onChange(e.target.value)}

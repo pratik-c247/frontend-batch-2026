@@ -1,8 +1,5 @@
 'use client'
-import React, { useState, useRef } from 'react'
-import { useForm } from 'react-hook-form'
 import styles from './DocumentTypeMainPage.module.scss'
-import type { FilterFormValues } from '@/types/documentType.types'
 import SectionWrapper from '@/comopents/common/sectionWrapper'
 import DocumentTypeFilter from '@/comopents/common/documentTypeFilter'
 import DocumentTypeTable from './documentTypeTable'
@@ -11,37 +8,22 @@ import { SearchIcon } from '@/assets/icons/SearchIcon'
 import { FilterIcon } from '@/assets/icons/FilterIcon'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
+import { useDocumentTypePage } from './hooks/useDocumentTypePage'
+import { INPUT_TYPES, PLACEHOLDERS, REGISTER } from '@/constants/input.const'
 
-interface SearchFormValues {
-  search: string
-}
-
-const DocumentTypesPage: React.FC = () => {
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const [activeFilter, setActiveFilter] = useState<FilterFormValues | null>(
-    null,
-  )
-  const [hasActiveFilter, setHasActiveFilter] = useState(false)
-  const filterAnchorRef = useRef<HTMLDivElement>(null)
-
-  const { register, watch } = useForm<SearchFormValues>({
-    defaultValues: { search: '' },
-  })
-  const searchTerm = watch('search')
-
-  const handleAddDocumentType = () => {
-    alert('Add Document Type clicked!')
-  }
-
-  const handleFilter = (values: FilterFormValues) => {
-    setActiveFilter(values)
-    setHasActiveFilter(!!(values.startDate || values.endDate))
-  }
-
-  const handleReset = () => {
-    setActiveFilter(null)
-    setHasActiveFilter(false)
-  }
+const DocumentTypesPage = () => {
+  const {
+    isFilterOpen,
+    setIsFilterOpen,
+    handleAddDocumentType,
+    register,
+    handleFilter,
+    handleReset,
+    filterAnchorRef,
+    hasActiveFilter,
+    searchTerm,
+    activeFilter,
+  } = useDocumentTypePage()
 
   return (
     <div className={styles.pageRoot}>
@@ -56,10 +38,10 @@ const DocumentTypesPage: React.FC = () => {
               <SearchIcon />
             </span>
             <input
-              {...register('search')}
-              type="text"
+              {...register(REGISTER.SEARCH)}
+              type={INPUT_TYPES.TEXT}
               className={styles.searchInput}
-              placeholder="Search by Document Type..."
+              placeholder={PLACEHOLDERS.SEARCH_BY_DOCUMENT_TYPE}
               autoComplete="off"
             />
           </div>
@@ -71,7 +53,6 @@ const DocumentTypesPage: React.FC = () => {
               className={`${styles.filterBtn} ${hasActiveFilter ? styles.filterActive : ''}`}
               onClick={() => setIsFilterOpen((prev) => !prev)}
               aria-expanded={isFilterOpen}
-              aria-haspopup="dialog"
             >
               <FilterIcon />
               Filters
@@ -91,9 +72,9 @@ const DocumentTypesPage: React.FC = () => {
           data={documentTypeData}
           searchTerm={searchTerm}
           filterValues={activeFilter}
-          onView={(item) => console.log('View:', item)}
-          onEdit={(item) => console.log('Edit:', item)}
-          onDelete={(item) => console.log('Delete:', item)}
+          onView={(item) => console.log('View:', item)} // will work in next pr
+          onEdit={(item) => console.log('Edit:', item)} // will work in next pr
+          onDelete={(item) => console.log('Delete:', item)} // will work in next pr
         />
       </SectionWrapper>
     </div>

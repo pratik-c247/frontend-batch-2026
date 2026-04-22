@@ -7,7 +7,9 @@ import type {
   FilterFormValues,
 } from '@/types/documentType.types'
 import DatePickerField from '../formfields/datePickerField'
-import { BUTTON_TYPES } from '@/constants/button.const'
+import { BUTTON_TEXT, BUTTON_TYPES } from '@/constants/button.const'
+import { Button } from '../button'
+import { LABELS, NAME, PLACEHOLDERS, TOOLTIPS_TEXT } from '@/constants/input.const'
 
 const DocumentTypeFilter = ({
   isOpen,
@@ -55,16 +57,11 @@ const DocumentTypeFilter = ({
   if (!isOpen) return null
 
   return (
-    <div
-      ref={panelRef}
-      className={styles.panel}
-      role="dialog"
-      aria-label="Date filter"
-    >
+    <div ref={panelRef} className={styles.panel} role="dialog">
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className={styles.dateRow}>
           <Controller
-            name="startDate"
+            name={NAME.START_DATE}
             control={control}
             rules={{
               validate: (value) => {
@@ -77,9 +74,9 @@ const DocumentTypeFilter = ({
             }}
             render={({ field }) => (
               <DatePickerField
-                label="Last Updated Start Range"
-                tooltipText="Filter by start date of last update"
-                placeholder="Choose a date"
+                label={LABELS.LAST_UPDATED_START_RANGE}
+                tooltipText={TOOLTIPS_TEXT.FILTER_BY_START_DATE_OF_LAST_UPDATE}
+                placeholder={PLACEHOLDERS.CHOOSE_DATE}
                 value={field.value}
                 onChange={field.onChange}
                 error={errors.startDate?.message}
@@ -88,7 +85,7 @@ const DocumentTypeFilter = ({
           />
 
           <Controller
-            name="endDate"
+            name={NAME.END_DATE}
             control={control}
             rules={{
               validate: (value) => {
@@ -101,9 +98,9 @@ const DocumentTypeFilter = ({
             }}
             render={({ field }) => (
               <DatePickerField
-                label="Last Updated End Range"
-                tooltipText="Filter by end date of last update"
-                placeholder="Choose a date"
+                label={LABELS.LAST_UPDATED_END_RANGE}
+                tooltipText={TOOLTIPS_TEXT.FILTER_BY_END_DATE_OF_LAST_UPDATE}
+                placeholder={PLACEHOLDERS.CHOOSE_DATE}
                 value={field.value}
                 onChange={field.onChange}
                 error={errors.endDate?.message}
@@ -113,16 +110,16 @@ const DocumentTypeFilter = ({
         </div>
 
         <div className={styles.actions}>
-          <button
+          <Button
             type={BUTTON_TYPES.BUTTON}
             className={styles.resetBtn}
             onClick={handleReset}
           >
-            Reset
-          </button>
-          <button type={BUTTON_TYPES.SUBMIT} className={styles.filterBtn}>
-            Filter
-          </button>
+            {BUTTON_TEXT.RESET}
+          </Button>
+          <Button type={BUTTON_TYPES.SUBMIT} className={styles.filterBtn}>
+            {BUTTON_TEXT.FILTER}
+          </Button>
         </div>
       </form>
     </div>

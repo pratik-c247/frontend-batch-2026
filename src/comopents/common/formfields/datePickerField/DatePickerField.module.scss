@@ -20,11 +20,10 @@
 
 .tooltip {
   @include flex-center;
-  color: $gray-400;
-  cursor: help;
-
+  color: $primary-color;
+  cursor: pointer;
   &:hover {
-    color: $sky-blue-color;
+    color: $primary-color-dark;
   }
 }
 
