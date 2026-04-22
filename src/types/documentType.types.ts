@@ -26,7 +26,7 @@ export interface SectionWrapperProps {
 
 export interface DatePickerFieldProps {
   label: string
-  name: string
+  name?: string
   tooltipText?: string
   value: string
   onChange: (val: string) => void

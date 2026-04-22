@@ -26,6 +26,8 @@ export const BUTTON_TEXT = {
 
 export const BUTTON_TYPES = {
   BUTTON: 'button',
+  NUMBER: 'number',
+  SUBMIT:'submit'
 } as const
 
 // export const BUTTON_TITLE = {

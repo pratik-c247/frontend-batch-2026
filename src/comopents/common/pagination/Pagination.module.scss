@@ -1,0 +1,144 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.paginationWrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: $spacing-7 $spacing-7;
+  border-top: 1px solid $gray-300;
+  background-color: $white-color;
+}
+
+.paginationInner {
+  @include flex-align-center;
+  gap: $spacing-7;
+}
+
+.label {
+  font-size: $font-size-sm;
+  color: $gray-800;
+  white-space: nowrap;
+}
+
+.goToPage {
+  @include flex-align-center;
+  gap: $spacing-4;
+}
+
+.pageInput {
+  width: 40px;
+  height: 28px;
+  padding: 0 $spacing-3;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  color: $gray-800;
+  background-color: $white-color;
+  text-align: center;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+
+  &:focus {
+    border-color: $sky-blue-color;
+    box-shadow: 0 0 0 2px rgba(26, 178, 238, 0.15);
+  }
+}
+
+.perPage {
+  @include flex-align-center;
+  gap: $spacing-4;
+}
+
+.selectWrapper {
+  position: relative;
+  @include flex-align-center;
+
+  &::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid $gray-500;
+  }
+}
+
+.perPageSelect {
+  height: 28px;
+  padding: 0 $spacing-8 0 $spacing-4;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  color: $gray-800;
+  background-color: $white-color;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:focus {
+    border-color: $sky-blue-color;
+    box-shadow: 0 0 0 2px rgba(26, 178, 238, 0.15);
+  }
+}
+
+.rangeText {
+  font-size: $font-size-sm;
+  color: $gray-800;
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: center;
+}
+
+.navButtons {
+  @include flex-align-center;
+  gap: $spacing-2;
+}
+
+.navBtn {
+  @include flex-center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  background-color: $white-color;
+  color: $gray-600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $sky-blue-very-light-color;
+    border-color: $sky-blue-color;
+    color: $sky-blue-color;
+  }
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+  }
+}
+
+.navBtnDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}

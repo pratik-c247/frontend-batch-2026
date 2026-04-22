@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import styles from './DocumentType.module.scss'
 import type {
@@ -7,13 +7,14 @@ import type {
   FilterFormValues,
 } from '@/types/documentType.types'
 import DatePickerField from '../formfields/datePickerField'
+import { BUTTON_TYPES } from '@/constants/button.const'
 
-const DocumentTypeFilter: React.FC<DocumentTypeFilterProps> = ({
+const DocumentTypeFilter = ({
   isOpen,
   onClose,
   onFilter,
   onReset,
-}) => {
+}: DocumentTypeFilterProps) => {
   const panelRef = useRef<HTMLDivElement>(null)
 
   const {
@@ -29,7 +30,6 @@ const DocumentTypeFilter: React.FC<DocumentTypeFilterProps> = ({
     },
   })
 
-  // Close panel on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
@@ -112,16 +112,15 @@ const DocumentTypeFilter: React.FC<DocumentTypeFilterProps> = ({
           />
         </div>
 
-        {/* Action buttons */}
         <div className={styles.actions}>
           <button
-            type="button"
+            type={BUTTON_TYPES.BUTTON}
             className={styles.resetBtn}
             onClick={handleReset}
           >
             Reset
           </button>
-          <button type="submit" className={styles.filterBtn}>
+          <button type={BUTTON_TYPES.SUBMIT} className={styles.filterBtn}>
             Filter
           </button>
         </div>

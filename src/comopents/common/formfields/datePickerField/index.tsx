@@ -4,6 +4,7 @@ import styles from './DatePickerField.module.scss'
 import type { DatePickerFieldProps } from '@/types/documentType.types'
 import { InfoIcon } from '@/assets/icons/InfoIcon'
 import { CalendarIcon } from '@/assets/icons/CalendarIcon'
+import { BUTTON_TYPES } from '@/constants/button.const'
 
 const DatePickerField: React.FC<DatePickerFieldProps> = ({
   label,
@@ -46,11 +47,10 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
           </span>
         )}
         <button
-          type="button"
+          type={BUTTON_TYPES.BUTTON}
           className={styles.calendarBtn}
           onClick={handleIconClick}
           tabIndex={-1}
-          aria-label="Open date picker"
         >
           <CalendarIcon />
         </button>

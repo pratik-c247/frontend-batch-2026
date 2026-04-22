@@ -15,6 +15,8 @@ export const useDocumentTypeTable = ({
   filterValues,
 }: Pick<DocumentTypeTableProps, 'data' | 'searchTerm' | 'filterValues'>) => {
   const [sortOrder, setSortOrder] = useState<SortOrder>('none')
+  const [page, setPage] = useState(1)
+  const [perPage, setPerPage] = useState(100)
   const processedData = useMemo(() => {
     let result = [...data]
 
@@ -57,5 +59,6 @@ export const useDocumentTypeTable = ({
   const handleSortToggle = () => {
     setSortOrder((prev) => nextSortOrder(prev))
   }
-  return { processedData, handleSortToggle, sortOrder }
+
+  return { processedData, handleSortToggle, sortOrder ,page,setPage,perPage,setPerPage}
 }

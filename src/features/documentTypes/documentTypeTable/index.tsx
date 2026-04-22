@@ -9,6 +9,9 @@ import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
 import { formatDate } from '@/utils/dateFormater'
 import { useDocumentTypeTable } from '../hooks/useDocumentTypeTable'
+import { GLOBAL_CONST } from '@/constants/global.const'
+import { DOCUMENT_TYPES_CONST } from '../documentType.const'
+import Pagination from '@/comopents/common/pagination'
 
 const DocumentTypeTable = ({
   data,
@@ -18,32 +21,61 @@ const DocumentTypeTable = ({
   onEdit,
   onDelete,
 }: DocumentTypeTableProps) => {
-  const { processedData, handleSortToggle, sortOrder } = useDocumentTypeTable({
+  const {
+    processedData,
+    handleSortToggle,
+    sortOrder,
+    page,
+    setPage,
+    perPage,
+    setPerPage,
+  } = useDocumentTypeTable({
     data,
     searchTerm,
     filterValues,
   })
+  const actionButtons = [
+    {
+      icon: <CopyIcon />,
+      className: styles.actionBtn,
+      handler: onView,
+    },
+    {
+      icon: <EditIcon />,
+      className: styles.EditBtn,
+      handler: onEdit,
+    },
+    {
+      icon: <DeleteIcon />,
+      className: `${styles.actionBtn} ${styles.deleteBtn}`,
+      handler: onDelete,
+    },
+  ]
 
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.thDocType}>Document Type</th>
-            <th className={styles.thFields}>Added Fields</th>
+            <th className={styles.thDocType}>
+              {DOCUMENT_TYPES_CONST.DOCUMENT_TYPE}
+            </th>
+            <th className={styles.thFields}>
+              {DOCUMENT_TYPES_CONST.ADDED_FIELDS}
+            </th>
             <th className={styles.thUpdated}>
               <button
                 type={BUTTON_TYPES.BUTTON}
                 className={`${styles.sortBtn} ${sortOrder !== 'none' ? styles.sortActive : ''}`}
                 onClick={handleSortToggle}
               >
-                Last Updated
+                {DOCUMENT_TYPES_CONST.LAST_UPDATED}
                 <span className={styles.sortIconWrap}>
                   <SortIcon order={sortOrder} />
                 </span>
               </button>
             </th>
-            <th className={styles.thActions}>Actions</th>
+            <th className={styles.thActions}>{DOCUMENT_TYPES_CONST.ACTIONS}</th>
           </tr>
         </thead>
 
@@ -51,7 +83,7 @@ const DocumentTypeTable = ({
           {processedData.length === 0 ? (
             <tr>
               <td colSpan={4} className={styles.emptyCell}>
-                No document types found.
+                {GLOBAL_CONST.NO_DOCUMENT_TYPE_FOUND}
               </td>
             </tr>
           ) : (
@@ -67,32 +99,17 @@ const DocumentTypeTable = ({
                 </td>
                 <td className={styles.tdActions}>
                   <div className={styles.actionGroup}>
-                    <Button
-                      variant={VARIANT.ICON}
-                      type={BUTTON_TYPES.BUTTON}
-                      className={styles.actionBtn}
-                      onClick={() => onView(item)}
-                    >
-                      <CopyIcon />
-                    </Button>
-
-                    <Button
-                      variant={VARIANT.ICON}
-                      type={BUTTON_TYPES.BUTTON}
-                      className={styles.EditBtn}
-                      onClick={() => onEdit(item)}
-                    >
-                      <EditIcon />
-                    </Button>
-
-                    <Button
-                      variant={VARIANT.ICON}
-                      type={BUTTON_TYPES.BUTTON}
-                      className={`${styles.actionBtn} ${styles.deleteBtn}`}
-                      onClick={() => onDelete(item)}
-                    >
-                      <DeleteIcon />
-                    </Button>
+                    {actionButtons.map((action, idx) => (
+                      <Button
+                        key={idx}
+                        variant={VARIANT.ICON}
+                        type={BUTTON_TYPES.BUTTON}
+                        className={action.className}
+                        onClick={() => action.handler(item)}
+                      >
+                        {action.icon}
+                      </Button>
+                    ))}
                   </div>
                 </td>
               </tr>
@@ -100,6 +117,17 @@ const DocumentTypeTable = ({
           )}
         </tbody>
       </table>
+     
+      <Pagination
+        total={processedData.length}
+        page={page}
+        perPage={perPage}
+        onPageChange={setPage}
+        onPerPageChange={(val) => {
+          setPerPage(val)
+          setPage(1)
+        }}
+      />
     </div>
   )
 }
