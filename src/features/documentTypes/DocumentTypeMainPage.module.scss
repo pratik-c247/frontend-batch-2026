@@ -1,0 +1,102 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+.pageRoot {
+  min-height: 100vh;
+  background-color: $gray-150;
+  padding: $spacing-9;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.toolbar {
+  @include flex-align-center;
+  gap: $spacing-4;
+  margin-bottom: $spacing-7;
+}
+
+
+.searchWrapper {
+  position: relative;
+  @include flex-align-center;
+  flex: 0 0 auto;
+  width: 260px;
+  // gap:20px
+}
+
+.searchIcon {
+  position: absolute;
+  left: $spacing-4;
+  top: 50%;
+  transform: translateY(-50%);
+  @include flex-center;
+  color: $primary-color;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 36px;
+  padding: 0 $spacing-4 0 $spacing-10 ;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  color: $gray-700;
+  background-color: $white-color;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: $gray-400;
+  }
+
+  &:focus {
+    border-color: $sky-blue-color;
+    box-shadow: 0 0 0 2px rgba(26, 178, 238, 0.15);
+  }
+}
+
+// Filter anchor (positioning context for the dropdown)
+.filterAnchor {
+  position: relative;
+}
+
+.filterBtn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  height: 36px;
+  padding: 0 $spacing-6;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  background-color: $white-color;
+  color: $gray-600;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-500;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background-color 0.15s;
+  white-space: nowrap;
+  position: relative;
+
+  &:hover {
+    border-color: $sky-blue-color;
+    color: $sky-blue-color;
+  }
+
+  &.filterActive {
+    border-color: $sky-blue-color;
+    color: $sky-blue-color;
+    background-color: $sky-blue-very-light-color;
+  }
+}
+
+.filterDot {
+  width: 7px;
+  height: 7px;
+  border-radius: $radius-full;
+  background-color: $sky-blue-color;
+  margin-left: $spacing-1;
+}

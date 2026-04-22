@@ -1,0 +1,49 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.wrapper {
+  @include flex-column;
+  gap: $spacing-2;
+  display: inline-flex;
+}
+
+.label {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $gray-700;
+}
+
+.toggle {
+  @include flex-align-center;
+  border: 1px solid $gray-300;
+  padding: $spacing-3 $spacing-6 $spacing-3 $spacing-3;
+  border-radius: $radius-xs;
+  overflow: hidden;
+  width: fit-content;
+  border-radius: $radius-sm;
+}
+
+.option {
+  padding: $spacing-3 $spacing-6;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  border: none;
+  background: $white-color;
+  color: $gray-400;
+  letter-spacing: 0.03em;
+  transition:
+    background 0.15s ease-in-out,
+    color 0.15s ease;
+
+  &:hover:not(.active) {
+    background: $gray-100;
+    color: $gray-600;
+  }
+
+  &.active {
+    background: $primary-color;
+    color: $white-color;
+  }
+}

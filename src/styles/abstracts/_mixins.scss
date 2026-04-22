@@ -1,0 +1,145 @@
+// @use './variables' as *;
+// @mixin flex-center {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+// @mixin flex-align-between {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+// }
+// @mixin flex-between {
+//   display: flex;
+//   justify-content: space-between;
+// }
+// @mixin flex-column {
+//   display: flex;
+//   flex-direction: column;
+// }
+// @mixin flex-align-center {
+//   display: flex;
+//   align-items: center;
+// }
+
+
+
+
+
+
+
+
+@use 'variables' as *;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-align-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+// @mixin action-icon-btn($bg-color: $sky-blue-color) {
+//   @include flex-center;
+//   width: 28px;
+//   height: 28px;
+//   border-radius: $radius-xs;
+//   border: none;
+//   background-color: $bg-color;
+//   color: $white-color;
+//   cursor: pointer;
+//   transition: background-color 0.15s ease, transform 0.1s ease;
+
+//   &:hover {
+//     background-color: $sky-blue-slight-dark-color;
+//     transform: scale(1.05);
+//   }
+
+//   &:active {
+//     transform: scale(0.97);
+//   }
+
+//   svg {
+//     width: 14px;
+//     height: 14px;
+//     flex-shrink: 0;
+//   }
+// }
+
+@mixin input-base {
+  width: 100%;
+  height: 36px;
+  padding: 0 $spacing-4;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  color: $gray-700;
+  background-color: $white-color;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: $gray-400;
+  }
+
+  &:focus {
+    border-color: $sky-blue-color;
+    box-shadow: 0 0 0 2px rgba(26, 178, 238, 0.15);
+  }
+}
+
+@mixin primary-btn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  padding: $spacing-3 $spacing-7;
+  background-color: $sky-blue-color;
+  color: $white-color;
+  border: none;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+  }
+}
+
+@mixin outline-btn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  padding: $spacing-3 $spacing-7;
+  background-color: $white-color;
+  color: $gray-600;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: $gray-400;
+    color: $gray-700;
+  }
+}

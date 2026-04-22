@@ -1,5 +1,6 @@
-import Example from '@/features/UseMain'
+import { DocumentTypesPage } from '@/features/documentTypes';
 
 export default function Home() {
-  return <Example />
+  return <DocumentTypesPage />
+
 }

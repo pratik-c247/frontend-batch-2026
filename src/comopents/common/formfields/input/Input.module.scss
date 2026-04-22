@@ -1,0 +1,93 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.wrapper {
+  @include flex-column;
+  gap: $spacing-3;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $gray-600;
+}
+
+.required {
+  color: $red-light-color;
+  padding-left: 1px;
+  font-weight:$font-weight-light;
+}
+
+.errorInput {
+  border-color: $red-text-color;
+}
+
+.error {
+  font-size: $font-size-sm;
+  color: $red-text-color;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-5 $spacing-6;
+  background-color: $gray-150;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.tooltipAnchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: $spacing-2;
+  cursor: pointer;
+}
+
+.infoIcon {
+  font-size: $font-size-xs;
+  color: $primary-color;
+  line-height: 1;
+  user-select: none;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.tooltipBox {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $gray-800;
+  color: $white-color;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-light;
+  padding: $spacing-3 $spacing-5;
+  border-radius: $radius-xs;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: $gray-800;
+  }
+}

@@ -1,0 +1,133 @@
+'use client'
+import React, { useEffect, useRef } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import styles from './DocumentType.module.scss'
+import type {
+  DocumentTypeFilterProps,
+  FilterFormValues,
+} from '@/types/documentType.types'
+import DatePickerField from '../formfields/datePickerField'
+
+const DocumentTypeFilter: React.FC<DocumentTypeFilterProps> = ({
+  isOpen,
+  onClose,
+  onFilter,
+  onReset,
+}) => {
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm<FilterFormValues>({
+    defaultValues: {
+      startDate: '',
+      endDate: '',
+    },
+  })
+
+  // Close panel on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        onClose()
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('mousedown', handler)
+    }
+    return () => document.removeEventListener('mousedown', handler)
+  }, [isOpen, onClose])
+
+  const handleReset = () => {
+    reset({ startDate: '', endDate: '' })
+    onReset()
+  }
+
+  const onSubmit = (values: FilterFormValues) => {
+    onFilter(values)
+    onClose()
+  }
+
+  if (!isOpen) return null
+
+  return (
+    <div
+      ref={panelRef}
+      className={styles.panel}
+      role="dialog"
+      aria-label="Date filter"
+    >
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className={styles.dateRow}>
+          <Controller
+            name="startDate"
+            control={control}
+            rules={{
+              validate: (value) => {
+                const end = getValues('endDate')
+                if (value && end && value > end) {
+                  return 'Start date must be before end date'
+                }
+                return true
+              },
+            }}
+            render={({ field }) => (
+              <DatePickerField
+                label="Last Updated Start Range"
+                tooltipText="Filter by start date of last update"
+                placeholder="Choose a date"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.startDate?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="endDate"
+            control={control}
+            rules={{
+              validate: (value) => {
+                const start = getValues('startDate')
+                if (start && value && value < start) {
+                  return 'End date must be after start date'
+                }
+                return true
+              },
+            }}
+            render={({ field }) => (
+              <DatePickerField
+                label="Last Updated End Range"
+                tooltipText="Filter by end date of last update"
+                placeholder="Choose a date"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.endDate?.message}
+              />
+            )}
+          />
+        </div>
+
+        {/* Action buttons */}
+        <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.resetBtn}
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+          <button type="submit" className={styles.filterBtn}>
+            Filter
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+export default DocumentTypeFilter

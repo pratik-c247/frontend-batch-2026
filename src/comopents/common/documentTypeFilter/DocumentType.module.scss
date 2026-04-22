@@ -1,0 +1,63 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.panel {
+  position: absolute;
+  top: calc(100% + $spacing-1);
+  left: 0;
+  z-index: 200;
+  background-color: $white-color;
+  border: 1px solid $gray-200;
+  border-radius: $radius-md;
+  padding: $spacing-7;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  min-width: 480px;
+
+  // Smooth entrance
+  animation: dropIn 0.18s ease both;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dateRow {
+  @include flex-align-center;
+  gap: $spacing-7;
+  margin-bottom: $spacing-7;
+}
+
+.actions {
+  @include flex-align-center;
+  gap: $spacing-4;
+  justify-content: flex-start;
+}
+
+.resetBtn {
+  @include primary-btn;
+  flex: 1;
+  justify-content: center;
+  background-color: $sky-blue-color;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+  }
+}
+
+.filterBtn {
+  @include primary-btn;
+  flex: 1;
+  justify-content: center;
+  background-color: $sky-blue-color;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+  }
+}

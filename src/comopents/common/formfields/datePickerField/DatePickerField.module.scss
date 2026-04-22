@@ -1,0 +1,125 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+.fieldWrapper {
+  @include flex-column;
+  gap: $spacing-2;
+  min-width: 180px;
+  flex: 1;
+}
+
+.labelRow {
+  @include flex-align-center;
+  gap: $spacing-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-500;
+  color: $gray-700;
+}
+
+.tooltip {
+  @include flex-center;
+  color: $gray-400;
+  cursor: help;
+
+  &:hover {
+    color: $sky-blue-color;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  @include flex-align-center;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  background-color: $white-color;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:focus-within {
+    border-color: $sky-blue-color;
+    box-shadow: 0 0 0 2px rgba(26, 178, 238, 0.15);
+  }
+
+  &.hasError {
+    border-color: $red-text-color;
+  }
+}
+
+.input {
+  flex: 1;
+  height: 34px;
+  padding: 0 $spacing-4;
+  border: none;
+  outline: none;
+  font-size: $font-size-sm;
+  color: $gray-700;
+  background: transparent;
+  // Hide native calendar icon & styling inconsistencies
+  cursor: pointer;
+
+  // Make the date input invisible but functional; overlay our placeholder on top
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+  }
+
+  &::-webkit-datetime-edit {
+    color: $gray-700;
+  }
+
+  &::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+
+  // Firefox
+  &[type='date']:not(:valid) {
+    color: transparent;
+  }
+
+  &:not([value='']) {
+    ~ .placeholder {
+      display: none;
+    }
+  }
+}
+
+// Fake placeholder overlay (shown when value is empty)
+.placeholder {
+  position: absolute;
+  left: $spacing-4;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: $font-size-sm;
+  color: $gray-400;
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.calendarBtn {
+  @include flex-center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-left: 1px solid $gray-200;
+  background-color: $sky-blue-color;
+  color: $white-color;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+  }
+}
+
+.errorText {
+  font-size: $font-size-xs;
+  color: $red-text-color;
+}

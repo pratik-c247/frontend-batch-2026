@@ -1,0 +1,54 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.button {
+  border: none;
+  border-radius: $radius-xs;
+  cursor: pointer;
+  font-weight: $font-weight-500;
+  transition: 0.2s ease;
+  padding: $spacing-4 $spacing-5;
+  font-weight: $font-weight-600;
+  width: fit-content;
+  gap: $spacing-1;
+  @include flex-center;
+}
+
+.primary {
+  background-color: $primary-color;
+  color: $white-color;
+
+  &:hover {
+    background-color: $primary-color-dark;
+    scale: 0.98;
+  }
+}
+
+.secondary {
+  background-color: $white-color;
+  color: $primary-color;
+  border: 1px solid $gray-300;
+
+  &:hover {
+    scale: 0.98;
+  }
+}
+
+.blue {
+  background-color: $sky-blue-color;
+  color: $white-color;
+
+  &:hover {
+    background-color: $sky-blue-slight-dark-color;
+    scale: 0.98;
+  }
+}
+.icon {
+  padding: $spacing-3 $spacing-3;
+  @include flex-center;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

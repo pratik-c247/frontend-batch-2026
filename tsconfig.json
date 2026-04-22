@@ -30,6 +30,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "src/constant"
-  ],
+, "src/features/documentTypes/DocumentTypesPage.tsx"  ],
   "exclude": ["node_modules"]
 }
