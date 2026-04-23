@@ -5,7 +5,9 @@ export const DOCUMENT_TYPES_CONST = {
   ACTIONS: 'Actions',
   SECTION_TITLE: 'Document Types - Trucks',
   SECTION_LABEL: 'Add Document Type',
-}
+  END_DATE:'endDate',
+  START_DATE:'startDate'
+}as const
 
 
 

@@ -13,6 +13,7 @@ import {
 } from '@/constants/input.const'
 import { useDocumentTypeFilter } from '../hooks/useDocumentTypeFilter'
 import { VALIDATION_MESSAGES } from '@/constants/validationMessages'
+import { DOCUMENT_TYPES_CONST } from '../documentType.const'
 
 const DocumentTypeFilter = ({
   isOpen,
@@ -41,7 +42,7 @@ const DocumentTypeFilter = ({
             control={control}
             rules={{
               validate: (value) => {
-                const end = getValues('endDate')
+                const end = getValues(DOCUMENT_TYPES_CONST.END_DATE)
                 if (value && end && value > end) {
                   return VALIDATION_MESSAGES.START_DATE_MUST_BE_BEFORE_END_DATE
                 }
@@ -65,7 +66,7 @@ const DocumentTypeFilter = ({
             control={control}
             rules={{
               validate: (value) => {
-                const start = getValues('startDate')
+                const start = getValues(DOCUMENT_TYPES_CONST.START_DATE)
                 if (start && value && value < start) {
                   return VALIDATION_MESSAGES.END_DATE_MUST_BE_AFTER_START_DATE
                 }

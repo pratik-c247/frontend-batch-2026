@@ -1,44 +1,61 @@
 import type { SortOrder } from '@/types/documentType.types'
-import React from 'react'
 
 interface SortIconProps {
   order: SortOrder
 }
 
-const SortIcon: React.FC<SortIconProps> = ({ order }) => {
-  const commonProps = {
-    xmlns: 'http://www.w3.org/2000/svg',
-    width: 14,
-    height: 14,
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    stroke: 'currentColor',
-    strokeWidth: 2.2,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-    'aria-hidden': true,
-  }
-
+const SortIcon = ({ order }: SortIconProps) => {
   if (order === 'asc') {
     return (
-      <svg {...commonProps}>
-        <polyline points="18 15 12 9 6 15" />
+      <svg
+        fill="#103960"
+        width={15}
+        height={15}
+        version="1.1"
+        viewBox="0 0 330 330"
+        enableBackground="new 0 0 32 32"
+      >
+        <path
+          id="XMLID_24_"
+          d="M216.358,271.76c-2.322-5.605-7.792-9.26-13.858-9.26H180V15c0-8.284-6.716-15-15-15
+  c-8.284,0-15,6.716-15,15v247.5h-22.5c-6.067,0-11.537,3.655-13.858,9.26c-2.321,5.605-1.038,12.057,3.252,16.347l37.5,37.5
+  C157.322,328.536,161.161,330,165,330s7.678-1.464,10.607-4.394l37.5-37.5C217.396,283.816,218.68,277.365,216.358,271.76z"
+        />
       </svg>
     )
   }
 
   if (order === 'desc') {
     return (
-      <svg {...commonProps}>
-        <polyline points="6 9 12 15 18 9" />
+      <svg
+        fill="#103960"
+        width={15}
+        height={15}
+        version="1.1"
+        viewBox="0 0 330 330"
+      >
+        <path
+          id="XMLID_21_"
+          d="M213.107,41.894l-37.5-37.5c-5.857-5.858-15.355-5.858-21.213,0l-37.5,37.5
+  c-4.29,4.29-5.573,10.742-3.252,16.347c2.322,5.605,7.792,9.26,13.858,9.26H150V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15
+  V67.5h22.5c6.067,0,11.537-3.655,13.858-9.26C218.68,52.635,217.397,46.184,213.107,41.894z"
+        />
       </svg>
     )
   }
 
   return (
-    <svg {...commonProps}>
-      <polyline points="8 9 12 5 16 9" />
-      <polyline points="16 15 12 19 8 15" />
+    <svg
+      width={9}
+      height={10}
+      viewBox="0 0 9 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.125 7.143H3V.357a.349.349 0 00-.11-.252A.385.385 0 002.625 0h-.75c-.1 0-.195.038-.265.105a.349.349 0 00-.11.252v6.786H.375c-.333 0-.5.385-.265.61l1.875 2.142a.385.385 0 00.53 0l1.876-2.143c.234-.224.067-.61-.266-.61zM8.89 2.248L7.015.105A.385.385 0 006.75 0c-.1 0-.195.038-.266.105L4.61 2.248c-.234.224-.067.61.266.61H6v6.785c0 .095.04.185.11.252s.166.105.265.105h.75c.1 0 .195-.038.265-.105a.349.349 0 00.11-.252V2.857h1.125c.333 0 .5-.385.265-.61z"
+        fill="#3D474F"
+      />
     </svg>
   )
 }

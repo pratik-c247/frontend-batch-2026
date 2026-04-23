@@ -94,7 +94,9 @@
   width: 18px;
   height: 18px;
   border-radius: $radius-xxs;
-  background-color: $gray-150;
+  background-color: $white-color;
+  border:1px solid $gray-300;
+  border-radius: $radius-xs;
   color: $gray-500;
   transition:
     background-color 0.15s,
