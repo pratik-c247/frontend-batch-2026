@@ -1,0 +1,154 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.formCard {
+  @include flex-column;
+  gap: $spacing-6;
+  padding: $spacing-7;
+  border: 1px solid $gray-200;
+  border-radius: $radius-sm;
+  background-color: $white-color;
+  margin-top: $spacing-6;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-7;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Info banner (add options / add subfield)
+.infoBanner {
+  @include flex-align-between;
+  gap: $spacing-4;
+  padding: $spacing-5 $spacing-7;
+  background-color: #e8f4fb;
+  border-radius: $radius-sm;
+}
+
+.bannerText {
+  font-size: $font-size-sm;
+  color: $gray-600;
+  flex: 1;
+}
+
+.optionsBadge {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-600;
+  color: $primary-color;
+  flex: 1;
+}
+
+.addOptionsBtn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  white-space: nowrap;
+  font-size: $font-size-xs;
+  padding: $spacing-3 $spacing-5;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// Subfields list
+.subfieldsList {
+  @include flex-column;
+  gap: $spacing-3;
+}
+
+.subfieldCard {
+  @include flex-align-between;
+  padding: $spacing-5 $spacing-7;
+  background-color: #e8f4fb;
+  border-radius: $radius-sm;
+}
+
+.subfieldInfo {
+  @include flex-column;
+  gap: $spacing-1;
+}
+
+.subfieldRow {
+  @include flex-align-center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  color: $gray-700;
+}
+
+.sfKey {
+  font-weight: $font-weight-500;
+  min-width: 160px;
+  color: $gray-600;
+}
+
+.subfieldActions {
+  @include flex-align-center;
+  gap: $spacing-3;
+}
+
+.sfEditBtn,
+.sfDeleteBtn {
+  width: 30px;
+  height: 30px;
+  @include flex-center;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sfEditBtn {
+  &:hover {
+    border-color: $sky-blue-color;
+    color: $sky-blue-color;
+  }
+}
+
+.sfDeleteBtn {
+  &:hover {
+    border-color: $red-text-color;
+    color: $red-text-color;
+  }
+}
+
+// Sub-document checkbox row
+.subDocRow {
+  @include flex-align-center;
+  gap: $spacing-3;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  color: $gray-700;
+}
+
+.subDocCheckbox {
+  width: 16px;
+  height: 16px;
+  accent-color: $sky-blue-color;
+  cursor: pointer;
+}
+
+// Action buttons
+.actions {
+  @include flex-align-center;
+  justify-content: flex-end;
+  gap: $spacing-4;
+  padding-top: $spacing-3;
+  border-top: 1px solid $gray-200;
+}
+
+.cancelBtn {
+  min-width: 90px;
+  justify-content: center;
+}
+
+.saveFieldBtn {
+  min-width: 100px;
+  justify-content: center;
+}

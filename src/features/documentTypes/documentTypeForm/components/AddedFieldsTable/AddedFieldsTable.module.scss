@@ -1,0 +1,125 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid $gray-200;
+  border-radius: $radius-sm;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    background-color: $gray-100;
+  }
+
+  th {
+    padding: $spacing-4 $spacing-5;
+    text-align: left;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-600;
+    color: $gray-600;
+    border-bottom: 1px solid $gray-200;
+    white-space: nowrap;
+  }
+}
+
+.row {
+  background-color: $white-color;
+  transition: background-color 0.1s ease;
+
+  &:hover {
+    background-color: $gray-100;
+  }
+
+  td {
+    padding: $spacing-4 $spacing-5;
+    font-size: $font-size-sm;
+    color: $gray-700;
+    border-bottom: 1px solid $gray-200;
+    vertical-align: middle;
+  }
+
+  &:last-child td {
+    border-bottom: none;
+  }
+}
+
+.editCell {
+  padding: 0 !important;
+  border-bottom: 1px solid $gray-200;
+}
+
+.thDrag,
+.dragCell {
+  width: 32px;
+}
+
+.thActions,
+.actionsCell {
+  width: 110px;
+}
+
+.thRequired,
+.requiredCell {
+  width: 130px;
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  color: $gray-400;
+  padding: 2px;
+  border-radius: $radius-xxs;
+  transition: color 0.1s;
+
+  &:active { cursor: grabbing; }
+  &:hover { color: $gray-600; }
+
+  svg { width: 14px; height: 14px; }
+}
+
+// Required badge
+.requiredBadge {
+  @include flex-align-center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  color: $gray-600;
+}
+
+.xIcon {
+  width: 16px;
+  height: 16px;
+  @include flex-center;
+  background-color: $gray-200;
+  border-radius: $radius-full;
+  font-size: 10px;
+  color: $gray-500;
+}
+
+// Action buttons
+.actionGroup {
+  @include flex-align-center;
+  gap: $spacing-2;
+}
+
+.actionBtn,
+.editBtn,
+.deleteBtn {
+  width: 28px;
+  height: 28px;
+  @include flex-center;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  color: $gray-500;
+  transition: all 0.15s ease;
+
+  svg { width: 13px; height: 13px; }
+}
+
+.actionBtn:hover { border-color: $sky-blue-color; color: $sky-blue-color; }
+.editBtn:hover   { border-color: $sky-blue-color; color: $sky-blue-color; }
+.deleteBtn:hover { border-color: $red-text-color; color: $red-text-color; }

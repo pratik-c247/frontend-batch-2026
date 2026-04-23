@@ -1,0 +1,114 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.modal {
+  max-width: 540px;
+}
+
+.header {
+  @include flex-align-between;
+  margin-bottom: $spacing-6;
+}
+
+.sectionTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-600;
+  color: $gray-700;
+}
+
+.count {
+  font-size: $font-size-sm;
+  color: $gray-500;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  gap: $spacing-4;
+  padding: 0 0 $spacing-3;
+  border-bottom: 1px solid $gray-200;
+  margin-bottom: $spacing-4;
+}
+
+.colLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-600;
+  color: $gray-500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.optionsList {
+  @include flex-column;
+  gap: $spacing-3;
+  margin-bottom: $spacing-5;
+}
+
+.optionRow {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  gap: $spacing-4;
+  align-items: flex-start;
+}
+
+.inputWrap {
+  @include flex-column;
+  gap: $spacing-1;
+}
+
+.optionInput {
+  @include input-base;
+
+  &.error {
+    border-color: $red-text-color;
+
+    &:focus {
+      border-color: $red-text-color;
+      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+    }
+  }
+}
+
+.errorText {
+  font-size: $font-size-xs;
+  color: $red-text-color;
+}
+
+.deleteBtn {
+  width: 32px;
+  height: 32px;
+  margin-top: 2px;
+  @include flex-center;
+  border: 1px solid $gray-300;
+  border-radius: $radius-xs;
+  color: $gray-500;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: $red-text-color;
+    color: $red-text-color;
+  }
+}
+
+.addRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $spacing-7;
+}
+
+.addBtn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  font-size: $font-size-xs;
+}
+
+.saveBtn {
+  width: 100%;
+  justify-content: center;
+  padding: $spacing-4;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,23 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.modal {
+  max-width: 560px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-7;
+  margin-bottom: $spacing-7;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.saveBtn {
+  width: 100%;
+  justify-content: center;
+  padding: $spacing-4;
+}

@@ -34,11 +34,7 @@ const DocumentTypeFilter = ({
   if (!isOpen) return null
 
   return (
-    <div
-      ref={panelRef}
-      className={styles.panel}
-      role={DOCUMENT_TYPES_CONST.ROLE_DIALOG}
-    >
+    <div ref={panelRef} className={styles.panel} role="dialog">
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className={styles.dateRow}>
           <Controller
@@ -56,7 +52,7 @@ const DocumentTypeFilter = ({
             render={({ field }) => (
               <DatePickerField
                 label={LABELS.LAST_UPDATED_START_RANGE}
-                tooltipText={TOOLTIPS_TEXT.FILTER_BY_START_DATE}
+                tooltipText={TOOLTIPS_TEXT.FILTER_BY_START_DATE_OF_LAST_UPDATE}
                 placeholder={PLACEHOLDERS.CHOOSE_DATE}
                 value={field.value}
                 onChange={field.onChange}
@@ -80,7 +76,7 @@ const DocumentTypeFilter = ({
             render={({ field }) => (
               <DatePickerField
                 label={LABELS.LAST_UPDATED_END_RANGE}
-                tooltipText={TOOLTIPS_TEXT.FILTER_BY_END_DATE}
+                tooltipText={TOOLTIPS_TEXT.FILTER_BY_END_DATE_OF_LAST_UPDATE}
                 placeholder={PLACEHOLDERS.CHOOSE_DATE}
                 value={field.value}
                 onChange={field.onChange}

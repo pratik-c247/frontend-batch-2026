@@ -1,0 +1,135 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid $gray-200;
+  border-radius: $radius-sm;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    tr {
+      background-color: $gray-100;
+    }
+  }
+
+  th {
+    padding: $spacing-4 $spacing-5;
+    text-align: left;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-600;
+    color: $gray-600;
+    border-bottom: 1px solid $gray-200;
+    white-space: nowrap;
+  }
+}
+
+.row {
+  background-color: $white-color;
+  transition: background-color 0.1s ease;
+
+  &:hover {
+    background-color: $gray-100;
+  }
+
+  td {
+    padding: $spacing-4 $spacing-5;
+    font-size: $font-size-sm;
+    color: $gray-700;
+    border-bottom: 1px solid $gray-200;
+  }
+
+  &:last-child td {
+    border-bottom: none;
+  }
+}
+
+.thDrag,
+.dragCell {
+  width: 32px;
+}
+
+.thCheck,
+.checkCell {
+  width: 40px;
+}
+
+.thRequired,
+.requiredCell {
+  width: 130px;
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  color: $gray-400;
+  padding: 2px;
+  border-radius: $radius-xxs;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:hover {
+    color: $gray-600;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: $sky-blue-color;
+}
+
+.toggleWrap {
+  @include flex-align-center;
+}
+
+// Pill-style YES / NO badge
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-1 $spacing-4;
+  border-radius: 999px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-600;
+
+  // Fake dot
+  &::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+  }
+}
+
+.toggleOn {
+  background-color: $green-very-light-color;
+  color: $green-color;
+
+  &::after {
+    background-color: $green-color;
+  }
+}
+
+.toggleOff {
+  background-color: $gray-200;
+  color: $gray-500;
+
+  &::after {
+    background-color: $gray-400;
+  }
+}

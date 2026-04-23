@@ -1,0 +1,59 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.formBody {
+  @include flex-column;
+  gap: $spacing-7;
+  padding-bottom: $spacing-7;
+}
+
+.totalCount {
+  text-align: right;
+  font-size: $font-size-sm;
+  color: $gray-600;
+  font-weight: $font-weight-500;
+}
+
+.section {
+  @include flex-column;
+  gap: $spacing-5;
+}
+
+.sectionTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-700;
+  color: $sky-blue-color;
+  margin: 0;
+  padding-bottom: $spacing-3;
+  border-bottom: 1px solid $gray-200;
+}
+
+.addFieldRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addFieldBtn {
+  @include flex-align-center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.footer {
+  border-top: 1px solid $gray-200;
+  padding-top: $spacing-7;
+  margin-top: $spacing-4;
+}
+
+.submitBtn {
+  width: 100%;
+  justify-content: center;
+  padding: $spacing-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-600;
+}

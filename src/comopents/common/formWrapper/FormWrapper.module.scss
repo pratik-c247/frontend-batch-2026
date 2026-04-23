@@ -1,0 +1,76 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  @include flex-center;
+  padding: $spacing-7;
+}
+
+.modal {
+  background-color: $white-color;
+  border-radius: $radius-md;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  @include flex-column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+  @include flex-align-between;
+  padding: $spacing-7 $spacing-9;
+  background-color: $primary-color;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: $font-size-md;
+  font-weight: $font-weight-600;
+  color: $white-color;
+  margin: 0;
+}
+
+.closeBtn {
+  width: 28px;
+  height: 28px;
+  @include flex-center;
+  background: transparent;
+  border: none;
+  color: $white-color;
+  cursor: pointer;
+  border-radius: $radius-xs;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-9;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gray-100;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gray-300;
+    border-radius: $radius-full;
+  }
+}
