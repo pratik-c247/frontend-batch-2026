@@ -1,5 +1,4 @@
 export { default as DocumentTypesPage } from './DocumentTypesPage'
-
 export { default as SectionWrapper } from '@/comopents/common/sectionWrapper'
 export { default as DatePickerField } from '@/comopents/common/formfields/datePickerField'
 export { default as DocumentTypeFilter } from '@/comopents/common/documentTypeFilter'

@@ -1,6 +1,6 @@
 export const PLACEHOLDERS = {
   SEARCH_BY_DOCUMENT_TYPE: 'Search by Document Type...',
-  CHOOSE_DATE:'Choose a date'
+  CHOOSE_DATE: 'Choose a date',
 }
 
 export const LABELS = {
@@ -22,10 +22,10 @@ export const INPUT_TYPES = {
 }
 
 export const REGISTER = {
-  SEARCH:'search'
+  SEARCH: 'search',
 } as const
 
 export const NAME = {
   END_DATE: 'endDate',
-  START_DATE:'startDate'
+  START_DATE: 'startDate',
 } as const

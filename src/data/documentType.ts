@@ -1,6 +1,6 @@
- import type { DocumentTypeItem } from '@/types/documentType.types';
+import type { DocumentTypeItem } from '@/types/documentType.types'
 
-export const documentTypeData: DocumentTypeItem[]  = [
+export const documentTypeData: DocumentTypeItem[] = [
   {
     id: 989,
     document_type: 'Certificate of Insurance (COI)',
