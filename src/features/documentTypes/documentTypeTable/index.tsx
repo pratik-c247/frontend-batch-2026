@@ -64,7 +64,7 @@ const DocumentTypeTable = ({
               {DOCUMENT_TYPES_CONST.ADDED_FIELDS}
             </th>
             <th className={styles.thUpdated}>
-              <Button
+              <Button variant={VARIANT.ICON }
                 type={BUTTON_TYPES.BUTTON}
                 className={`${styles.sortBtn} ${sortOrder !== 'none' ? styles.sortActive : ''}`}
                 onClick={handleSortToggle}

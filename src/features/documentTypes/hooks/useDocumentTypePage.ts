@@ -33,15 +33,19 @@ export const useDocumentTypePage = () => {
   }
 
   return {
-    isFilterOpen,
-    setIsFilterOpen,
-    handleAddDocumentType,
+    state: {
+      isFilterOpen,
+      setIsFilterOpen,
+      hasActiveFilter,
+      activeFilter,
+    },
+    handlers: {
+      handleAddDocumentType,
+      handleReset,
+      handleFilter,
+    },
     register,
-    handleFilter,
-    handleReset,
     filterAnchorRef,
-    hasActiveFilter,
     searchTerm,
-    activeFilter,
   }
 }

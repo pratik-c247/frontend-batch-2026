@@ -10,26 +10,22 @@ import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
 import { useDocumentTypePage } from './hooks/useDocumentTypePage'
 import { INPUT_TYPES, PLACEHOLDERS, REGISTER } from '@/constants/input.const'
+import { DOCUMENT_TYPES_CONST } from './documentType.const'
 
 const DocumentTypesPage = () => {
   const {
-    isFilterOpen,
-    setIsFilterOpen,
-    handleAddDocumentType,
+    state: { isFilterOpen, setIsFilterOpen, hasActiveFilter, activeFilter },
+    handlers: { handleAddDocumentType, handleReset, handleFilter },
     register,
-    handleFilter,
-    handleReset,
     filterAnchorRef,
-    hasActiveFilter,
     searchTerm,
-    activeFilter,
   } = useDocumentTypePage()
 
   return (
     <div className={styles.pageRoot}>
       <SectionWrapper
-        title="Document Types - Trucks"
-        buttonLabel="Add Document Type"
+        title={DOCUMENT_TYPES_CONST.SECTION_TITLE}
+        buttonLabel={DOCUMENT_TYPES_CONST.SECTION_LABEL}
         onButtonClick={handleAddDocumentType}
       >
         <div className={styles.toolbar}>

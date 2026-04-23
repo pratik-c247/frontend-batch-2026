@@ -87,14 +87,6 @@
   font-weight: $font-weight-600;
   color: $gray-700;
   white-space: nowrap;
-
-  &:hover {
-    color: $sky-blue-color;
-  }
-
-  &.sortActive {
-    color: $sky-blue-color;
-  }
 }
 
 .sortIconWrap {
@@ -107,16 +99,6 @@
   transition:
     background-color 0.15s,
     color 0.15s;
-
-  .sortActive & {
-    background-color: $sky-blue-very-light-color;
-    color: $sky-blue-color;
-  }
-
-  .sortBtn:hover & {
-    background-color: $sky-blue-very-light-color;
-    color: $sky-blue-color;
-  }
 }
 
 .actionGroup {
@@ -149,4 +131,3 @@
   color: $gray-400;
   font-style: italic;
 }
-

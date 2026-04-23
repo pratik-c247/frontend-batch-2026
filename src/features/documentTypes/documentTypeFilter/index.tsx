@@ -4,7 +4,6 @@ import styles from './DocumentType.module.scss'
 import type { DocumentTypeFilterProps } from '@/types/documentType.types'
 import DatePickerField from '@/comopents/common/formfields/datePickerField'
 import { BUTTON_TEXT, BUTTON_TYPES } from '@/constants/button.const'
-
 import { Button } from '@/comopents/common/button'
 import {
   LABELS,
@@ -13,6 +12,7 @@ import {
   TOOLTIPS_TEXT,
 } from '@/constants/input.const'
 import { useDocumentTypeFilter } from '../hooks/useDocumentTypeFilter'
+import { VALIDATION_MESSAGES } from '@/constants/validationMessages'
 
 const DocumentTypeFilter = ({
   isOpen,
@@ -43,7 +43,7 @@ const DocumentTypeFilter = ({
               validate: (value) => {
                 const end = getValues('endDate')
                 if (value && end && value > end) {
-                  return 'Start date must be before end date'
+                  return VALIDATION_MESSAGES.START_DATE_MUST_BE_BEFORE_END_DATE
                 }
                 return true
               },
@@ -67,7 +67,7 @@ const DocumentTypeFilter = ({
               validate: (value) => {
                 const start = getValues('startDate')
                 if (start && value && value < start) {
-                  return 'End date must be after start date'
+                  return VALIDATION_MESSAGES.END_DATE_MUST_BE_AFTER_START_DATE
                 }
                 return true
               },
