@@ -1,7 +1,7 @@
 'use client'
 import styles from './DocumentTypeMainPage.module.scss'
 import SectionWrapper from '@/comopents/common/sectionWrapper'
-import DocumentTypeFilter from '@/comopents/common/documentTypeFilter'
+import DocumentTypeFilter from '@/features/documentTypes/documentTypeFilter'
 import DocumentTypeTable from './documentTypeTable'
 import { documentTypeData } from '@/data/documentType'
 import { SearchIcon } from '@/assets/icons/SearchIcon'

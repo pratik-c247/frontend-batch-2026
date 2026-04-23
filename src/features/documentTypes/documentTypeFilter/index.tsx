@@ -1,15 +1,18 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 import styles from './DocumentType.module.scss'
-import type {
-  DocumentTypeFilterProps,
-  FilterFormValues,
-} from '@/types/documentType.types'
-import DatePickerField from '../formfields/datePickerField'
+import type { DocumentTypeFilterProps } from '@/types/documentType.types'
+import DatePickerField from '@/comopents/common/formfields/datePickerField'
 import { BUTTON_TEXT, BUTTON_TYPES } from '@/constants/button.const'
-import { Button } from '../button'
-import { LABELS, NAME, PLACEHOLDERS, TOOLTIPS_TEXT } from '@/constants/input.const'
+
+import { Button } from '@/comopents/common/button'
+import {
+  LABELS,
+  NAME,
+  PLACEHOLDERS,
+  TOOLTIPS_TEXT,
+} from '@/constants/input.const'
+import { useDocumentTypeFilter } from '../hooks/useDocumentTypeFilter'
 
 const DocumentTypeFilter = ({
   isOpen,
@@ -17,42 +20,15 @@ const DocumentTypeFilter = ({
   onFilter,
   onReset,
 }: DocumentTypeFilterProps) => {
-  const panelRef = useRef<HTMLDivElement>(null)
-
   const {
-    control,
     handleSubmit,
-    reset,
+    panelRef,
+    onSubmit,
+    control,
     getValues,
-    formState: { errors },
-  } = useForm<FilterFormValues>({
-    defaultValues: {
-      startDate: '',
-      endDate: '',
-    },
-  })
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        onClose()
-      }
-    }
-    if (isOpen) {
-      document.addEventListener('mousedown', handler)
-    }
-    return () => document.removeEventListener('mousedown', handler)
-  }, [isOpen, onClose])
-
-  const handleReset = () => {
-    reset({ startDate: '', endDate: '' })
-    onReset()
-  }
-
-  const onSubmit = (values: FilterFormValues) => {
-    onFilter(values)
-    onClose()
-  }
+    errors,
+    handleReset,
+  } = useDocumentTypeFilter({ onClose, onFilter, onReset, isOpen })
 
   if (!isOpen) return null
 
