@@ -64,7 +64,7 @@ const DocumentTypeTable = ({
               {DOCUMENT_TYPES_CONST.ADDED_FIELDS}
             </th>
             <th className={styles.thUpdated}>
-              <button
+              <Button
                 type={BUTTON_TYPES.BUTTON}
                 className={`${styles.sortBtn} ${sortOrder !== 'none' ? styles.sortActive : ''}`}
                 onClick={handleSortToggle}
@@ -73,7 +73,7 @@ const DocumentTypeTable = ({
                 <span className={styles.sortIconWrap}>
                   <SortIcon order={sortOrder} />
                 </span>
-              </button>
+              </Button>
             </th>
             <th className={styles.thActions}>{DOCUMENT_TYPES_CONST.ACTIONS}</th>
           </tr>
@@ -117,7 +117,7 @@ const DocumentTypeTable = ({
           )}
         </tbody>
       </table>
-     
+
       <Pagination
         total={processedData.length}
         page={page}
