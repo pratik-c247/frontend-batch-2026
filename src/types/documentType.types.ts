@@ -50,7 +50,6 @@ export interface DocumentTypeTableProps {
   onEdit: (item: DocumentTypeItem) => void
   onDelete: (item: DocumentTypeItem) => void
 }
-// ─── Existing listing types ───────────────────────────────────────────────────
 
 export interface DocumentTypeItem {
   id: number
@@ -66,7 +65,7 @@ export interface DocumentTypeItem {
 export interface DocumentTypeTableProps {
   data: DocumentTypeRecord[]
   searchTerm: string
-  filterValues: FilterFormValues |null
+  filterValues: FilterFormValues | null
   onView: (item: DocumentTypeItem) => void
   onEdit: (item: DocumentTypeItem) => void
   onDelete: (item: DocumentTypeItem) => void
@@ -86,8 +85,6 @@ export interface DatePickerFieldProps {
   error?: string
 }
 
-// ─── Form types ───────────────────────────────────────────────────────────────
-
 export interface SubField {
   id: string
   label_name: string
@@ -102,11 +99,11 @@ export interface DocumentField {
   field_type: string
   placeholder_text: string
   is_required: boolean
-  /** for custom_dropdown | multi_select_dropdown | radio_button | checkbox */
+
   options?: string[]
-  /** for toggle_switch */
+
   subfields?: SubField[]
-  /** for checkbox – "Is this a sub-document field?" */
+
   is_sub_document?: boolean
 }
 
@@ -122,6 +119,8 @@ export interface DocumentTypeFormValues {
   is_required_document_approval: boolean
   predefined_fields: PredefinedFieldState
   fields: DocumentField[]
+  fields_count: number
+  updated_at: string
 }
 
 // ─── IndexDB stored record ────────────────────────────────────────────────────

@@ -3,20 +3,20 @@
 
 .wrapper {
   @include flex-column;
-  gap: $spacing-2;
+  gap: $spacing-5;
   display: inline-flex;
 }
 
 .label {
   font-size: $font-size-md;
-  font-weight: $font-weight-500;
+  font-weight: $font-weight-600;
   color: $gray-700;
 }
 
 .toggle {
   @include flex-align-center;
   border: 1px solid $gray-300;
-  padding: $spacing-3 $spacing-6 $spacing-3 $spacing-3;
+  padding: $spacing-3 $spacing-4 $spacing-3 $spacing-3;
   border-radius: $radius-xs;
   overflow: hidden;
   width: fit-content;

@@ -3,15 +3,15 @@
 
 .formBody {
   @include flex-column;
-  gap: $spacing-7;
+  gap: $spacing-4;
   padding-bottom: $spacing-7;
 }
 
 .totalCount {
   text-align: right;
   font-size: $font-size-sm;
-  color: $gray-600;
-  font-weight: $font-weight-500;
+  color: $gray-700;
+  font-weight: $font-weight-600;
 }
 
 .section {
@@ -20,12 +20,12 @@
 }
 
 .sectionTitle {
-  font-size: $font-size-sm;
+  font-size: $font-size-md;
   font-weight: $font-weight-700;
-  color: $sky-blue-color;
+  color: $primary-color;
   margin: 0;
-  padding-bottom: $spacing-3;
-  border-bottom: 1px solid $gray-200;
+  padding-bottom: $spacing-4;
+  border-bottom: 1px solid $gray-300;
 }
 
 .addFieldRow {

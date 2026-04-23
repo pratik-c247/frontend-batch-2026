@@ -41,8 +41,6 @@ const toRecord = (
   values: DocumentTypeFormValues,
   id?: number,
 ): Omit<DocumentTypeRecord, 'id'> & { id?: number } => {
-  console.log('values:', values)
-  console.log('id:', id)
   return {
     ...(id !== undefined && { id }),
 

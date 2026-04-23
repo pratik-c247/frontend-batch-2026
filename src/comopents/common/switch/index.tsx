@@ -11,7 +11,7 @@ type SwitchProps = {
 export const Switch = ({ label, checked, onChange }: SwitchProps) => {
   return (
     <div className={styles.wrapper}>
-      <span className={styles.label}>{label}</span>
+      <span className='label'>{label}</span>
       <div className={styles.toggle}>
         <Button
           type={BUTTON_TYPES.BUTTON}

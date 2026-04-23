@@ -1,0 +1,12 @@
+@use './abstracts/variables' as * ;
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-600;
+  color: $gray-700;
+}
+.required {
+  color: $red-light-color;
+  padding-left: 1px;
+  font-weight:$font-weight-400;
+}

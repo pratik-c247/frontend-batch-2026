@@ -74,7 +74,6 @@ const seedInitialData = async (): Promise<DocumentTypeRecord[]> => {
   if (existing.length > 0) return existing
 
   for (const item of documentTypeData) {
-    console.log('data2',item)
     await addDocumentType({
       document_type: item.document_type,
       is_document_sensitive: false,
@@ -82,7 +81,7 @@ const seedInitialData = async (): Promise<DocumentTypeRecord[]> => {
       predefined_fields: { expiry_date: false, document_date: false },
       fields: [],
       fields_count: item.fields_count,
-      updated_at:item.updated_at
+      updated_at: item.updated_at,
     })
   }
   return getAllDocumentTypes()
@@ -111,7 +110,6 @@ export const useDocumentTypePage = () => {
 
   const { register, watch } = useForm({ defaultValues: { search: '' } })
   const searchTerm = watch('search')
-
 
   const loadData = useCallback(async () => {
     setIsLoading(true)

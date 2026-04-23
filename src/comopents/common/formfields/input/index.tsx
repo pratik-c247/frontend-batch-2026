@@ -18,10 +18,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const [tooltipVisible, setTooltipVisible] = useState(false)
     return (
       <div className={`${styles.wrapper} ${fullWidth ? styles.fullWidth : ''}`}>
-        <label className={styles.label}>
+        <label className='label'>
           {label}
           {required && (
-            <span className={styles.required}>{GLOBAL_CONST.REQUIRED}</span>
+            <span className='required'>{GLOBAL_CONST.REQUIRED}</span>
           )}
           {tooltip && (
             <span

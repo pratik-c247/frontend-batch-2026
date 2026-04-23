@@ -2,8 +2,6 @@
 import styles from './PredefinedFieldsTable.module.scss'
 import { DndContext, closestCenter } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-// import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
-import { Switch as ToggleSwitch } from '@/comopents/common/switch'
 import { DragHandleIcon } from '@/assets/icons/DragHandleIcon'
 import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
 
@@ -61,7 +59,7 @@ const PredefinedRow = ({
   )
 }
 
-// ─── Table ────────────────────────────────────────────────────────────────────
+
 const PredefinedFieldsTable = ({
   rows,
   onReorder,

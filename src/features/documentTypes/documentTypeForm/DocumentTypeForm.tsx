@@ -2,10 +2,8 @@
 import styles from './DocumentTypeForm.module.scss'
 import FormWrapper from '@/comopents/common/formWrapper/FormWrapper'
 import { Switch } from '@/comopents/common/switch'
-// import { Input } from '@/comopents/common/input'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
-// import { PlusIcon } from '@/assets/icons/PlusIcon'
 import PredefinedFieldsTable from './components/PredefinedFieldsTable/PredefinedFieldsTable'
 import AddedFieldsTable from './components/AddedFieldsTable/AddedFieldsTable'
 import AddFieldForm from './components/AddFieldForm/AddFieldForm'
@@ -62,7 +60,6 @@ const DocumentTypeForm = ({
   return (
     <FormWrapper title={title} onClose={onClose}>
       <div className={styles.formBody}>
-        {/* Document type name */}
         <Input
           label="Document Type Name"
           required
@@ -72,7 +69,6 @@ const DocumentTypeForm = ({
           placeholder=""
         />
 
-        {/* Toggles */}
         <Switch
           label="Is this document marked as sensitive by default"
           checked={isSensitive}
@@ -84,12 +80,10 @@ const DocumentTypeForm = ({
           onChange={setRequiresApproval}
         />
 
-        {/* Total count */}
         <div className={styles.totalCount}>
           Total Added Fields : {totalAddedFields}
         </div>
 
-        {/* Predefined Fields */}
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>Predefined Fields</h3>
           <PredefinedFieldsTable
@@ -107,7 +101,7 @@ const DocumentTypeForm = ({
             <AddedFieldsTable
               fields={fields}
               onReorder={(reordered) =>
-                reordered.forEach((_, i) => {
+                reordered.forEach((_) => {
                   // Update internal order by replacing the full array
                 })
               }

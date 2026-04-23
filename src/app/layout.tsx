@@ -1,3 +1,11 @@
+import '@/styles/globals.scss'
+import { Inter } from 'next/font/google'
+
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable:'--font-inter'
+})
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -5,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className }>{children}</body>
     </html>
   )
 }
