@@ -2,6 +2,7 @@
 import { BUTTON_TEXT, VARIANT } from '@/constants/button.const'
 import styles from './DeleteModal.module.scss'
 import { Button } from '../button'
+import { GLOBAL_CONST } from '@/constants/global.const'
 
 
 interface ConfirmModalProps {
@@ -14,7 +15,7 @@ interface ConfirmModalProps {
 
 export const DeleteModal = ({
   open,
-  title = 'Confirm Delete',
+  title = GLOBAL_CONST.CONFIRM_DELETE_TITLE,
   message,
   onClose,
   onConfirm,

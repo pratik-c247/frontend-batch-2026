@@ -51,7 +51,7 @@ const DocumentTypesPage = () => {
               aria-expanded={isFilterOpen}
             >
               <FilterIcon />
-              Filters
+              {DOCUMENT_TYPES_CONST.FILTERS }
               {hasActiveFilter && <span className={styles.filterDot} />}
             </Button>
 

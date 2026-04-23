@@ -34,7 +34,7 @@ const DocumentTypeFilter = ({
   if (!isOpen) return null
 
   return (
-    <div ref={panelRef} className={styles.panel} role="dialog">
+    <div ref={panelRef} className={styles.panel} role={DOCUMENT_TYPES_CONST.ROLE_DIALOG }>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className={styles.dateRow}>
           <Controller
