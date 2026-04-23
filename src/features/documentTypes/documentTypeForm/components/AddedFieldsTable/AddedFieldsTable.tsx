@@ -1,22 +1,18 @@
 'use client'
 import { useState } from 'react'
 import styles from './AddedFieldsTable.module.scss'
-import {
-  DndContext,
-  closestCenter,
-  SortableContext,
-  verticalListSortingStrategy,
-} from '@dnd-kit/core'
-import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
+import { DndContext, closestCenter } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
 import { EditIcon } from '@/assets/icons/EditIcon'
 import { DeleteIcon } from '@/assets/icons/DeleteIcon'
 import { CopyIcon } from '@/assets/icons/CopyIcon'
 import { DragHandleIcon } from '@/assets/icons/DragHandleIcon'
-import { FIELD_TYPE_OPTIONS } from '@/data/documentType'
 import type { DocumentField } from '@/types/documentType.types'
 import AddFieldForm from '../AddFieldForm/AddFieldForm'
+import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
+import { FIELD_TYPE_OPTIONS } from '@/data/fieldTypeOptions'
 
 interface AddedFieldsTableProps {
   fields: DocumentField[]
@@ -41,7 +37,8 @@ const FieldRow = ({
 }) => {
   const { attributes, listeners, setNodeRef, style } = useSortableRow(field.id)
   const typeLabel =
-    FIELD_TYPE_OPTIONS.find((o) => o.value === field.field_type)?.label ?? field.field_type
+    FIELD_TYPE_OPTIONS.find((o) => o.value === field.field_type)?.label ??
+    field.field_type
 
   return (
     <tr ref={setNodeRef} style={style} className={styles.row}>
@@ -51,10 +48,14 @@ const FieldRow = ({
         </span>
       </td>
       <td className={styles.labelCell}>{field.label_name}</td>
-      <td className={styles.placeholderCell}>{field.placeholder_text || '-'}</td>
+      <td className={styles.placeholderCell}>
+        {field.placeholder_text || '-'}
+      </td>
       <td className={styles.typeCell}>{typeLabel}</td>
       <td className={styles.requiredCell}>
-        <span className={`${styles.requiredBadge} ${field.is_required ? styles.no : styles.no}`}>
+        <span
+          className={`${styles.requiredBadge} ${field.is_required ? styles.no : styles.no}`}
+        >
           {field.is_required ? (
             <span className={styles.xIcon}>✕</span>
           ) : (
@@ -113,8 +114,15 @@ const AddedFieldsTable = ({
   if (fields.length === 0) return null
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={fields.map((f) => f.id)} strategy={verticalListSortingStrategy}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext
+        items={fields.map((f) => f.id)}
+        strategy={verticalListSortingStrategy}
+      >
         <div className={styles.tableWrapper}>
           <table className={styles.table}>
             <thead>

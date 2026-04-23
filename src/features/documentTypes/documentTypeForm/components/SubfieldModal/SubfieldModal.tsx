@@ -2,12 +2,15 @@
 import { useState } from 'react'
 import styles from './SubfieldModal.module.scss'
 import FormWrapper from '@/comopents/common/formWrapper/FormWrapper'
-import { Input } from '@/comopents/common/input'
-import { Select } from '@/comopents/common/select'
+// import { Input } from '@/comopents/common/input'
+// import { Select } from '@/comopents/common/select'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
-import { FIELD_TYPE_OPTIONS } from '@/data/documentType'
+// import { FIELD_TYPE_OPTIONS } from '@/data/documentType'
 import type { SubField } from '@/types/documentType.types'
+import { Input } from '@/comopents/common/formfields/input'
+import { Select } from '@/comopents/common/formfields/select'
+import { FIELD_TYPE_OPTIONS } from '@/data/fieldTypeOptions'
 
 const REQUIRED_OPTIONS = [
   { label: 'Yes', value: 'yes' },

@@ -1,14 +1,11 @@
 'use client'
 import styles from './PredefinedFieldsTable.module.scss'
-import {
-  DndContext,
-  closestCenter,
-  SortableContext,
-  verticalListSortingStrategy,
-} from '@dnd-kit/core'
-import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
+import { DndContext, closestCenter } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+// import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
 import { Switch as ToggleSwitch } from '@/comopents/common/switch'
 import { DragHandleIcon } from '@/assets/icons/DragHandleIcon'
+import { useDragAndDrop, useSortableRow } from '@/hooks/useDragAndDrop'
 
 interface PredefinedRow {
   id: string

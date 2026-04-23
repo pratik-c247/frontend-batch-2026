@@ -13,7 +13,7 @@ import { GLOBAL_CONST } from '@/constants/global.const'
 import { DOCUMENT_TYPES_CONST } from '../documentType.const'
 import Pagination from '@/comopents/common/pagination'
 
-const DocumentTypeTable = ({
+const  DocumentTypeTable = ({
   data,
   searchTerm,
   filterValues,

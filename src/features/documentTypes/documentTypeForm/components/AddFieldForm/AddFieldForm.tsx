@@ -1,44 +1,60 @@
 'use client'
 import { useState } from 'react'
 import styles from './AddFieldForm.module.scss'
-import { Input } from '@/comopents/common/input'
-import { Select } from '@/comopents/common/select'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
-import { PlusIcon } from '@/assets/icons/PlusIcon'
-import { FIELD_TYPE_OPTIONS } from '@/data/documentType'
 import OptionsModal from '../OptionsModal/OptionsModal'
 import SubfieldModal from '../SubfieldModal/SubfieldModal'
 import type { DocumentField, SubField } from '@/types/documentType.types'
+import { Input } from '@/comopents/common/formfields/input'
+import { Select } from '@/comopents/common/formfields/select'
+import { FIELD_TYPE_OPTIONS } from '@/data/fieldTypeOptions'
+import PlusIcon from '@/assets/icons/PlusIcon'
 
 const REQUIRED_OPTIONS = [
   { label: 'Yes', value: 'yes' },
   { label: 'No', value: 'no' },
 ]
 
-const TYPES_WITH_OPTIONS = ['custom_dropdown', 'multi_select_dropdown', 'radio_button', 'checkbox']
+const TYPES_WITH_OPTIONS = [
+  'custom_dropdown',
+  'multi_select_dropdown',
+  'radio_button',
+  'checkbox',
+]
 const TYPES_WITH_SUBFIELDS = ['toggle_switch']
 const TYPES_WITHOUT_PLACEHOLDER = ['checkbox', 'toggle_switch', 'radio_button']
 
 interface AddFieldFormProps {
-  /** Pass field to pre-fill when editing */
+
   initialField?: DocumentField
   onSave: (field: DocumentField) => void
   onCancel: () => void
 }
 
-const generateId = () => `field_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`
+const generateId = () =>
+  `field_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`
 
-const AddFieldForm = ({ initialField, onSave, onCancel }: AddFieldFormProps) => {
+const AddFieldForm = ({
+  initialField,
+  onSave,
+  onCancel,
+}: AddFieldFormProps) => {
   const [labelName, setLabelName] = useState(initialField?.label_name ?? '')
   const [fieldType, setFieldType] = useState(initialField?.field_type ?? '')
-  const [placeholderText, setPlaceholderText] = useState(initialField?.placeholder_text ?? '')
+  const [placeholderText, setPlaceholderText] = useState(
+    initialField?.placeholder_text ?? '',
+  )
   const [isRequired, setIsRequired] = useState<string>(
     initialField ? (initialField.is_required ? 'yes' : 'no') : '',
   )
   const [options, setOptions] = useState<string[]>(initialField?.options ?? [])
-  const [subfields, setSubfields] = useState<SubField[]>(initialField?.subfields ?? [])
-  const [isSubDocument, setIsSubDocument] = useState(initialField?.is_sub_document ?? false)
+  const [subfields, setSubfields] = useState<SubField[]>(
+    initialField?.subfields ?? [],
+  )
+  const [isSubDocument, setIsSubDocument] = useState(
+    initialField?.is_sub_document ?? false,
+  )
 
   const [showOptionsModal, setShowOptionsModal] = useState(false)
   const [showSubfieldModal, setShowSubfieldModal] = useState(false)
@@ -49,13 +65,14 @@ const AddFieldForm = ({ initialField, onSave, onCancel }: AddFieldFormProps) => 
   const hasOptions = TYPES_WITH_OPTIONS.includes(fieldType)
   const hasSubfields = TYPES_WITH_SUBFIELDS.includes(fieldType)
   const showPlaceholder = !TYPES_WITHOUT_PLACEHOLDER.includes(fieldType)
-  const showIsRequired = !hasSubfields // toggle_switch doesn't need mark-as-required at field level
+  const showIsRequired = !hasSubfields
 
   const validate = () => {
     const e: Record<string, string> = {}
     if (!labelName.trim()) e.labelName = 'Label name is required'
     if (!fieldType) e.fieldType = 'Field type is required'
-    if (showIsRequired && !isRequired) e.isRequired = 'Mark as required is required'
+    if (showIsRequired && !isRequired)
+      e.isRequired = 'Mark as required is required'
     return e
   }
 
@@ -130,7 +147,9 @@ const AddFieldForm = ({ initialField, onSave, onCancel }: AddFieldFormProps) => 
         {hasOptions && (
           <div className={styles.infoBanner}>
             {options.length > 0 ? (
-              <span className={styles.optionsBadge}>Added Options : {options.length}</span>
+              <span className={styles.optionsBadge}>
+                Added Options : {options.length}
+              </span>
             ) : (
               <span className={styles.bannerText}>
                 Use the button on the right to add options to this field type.
@@ -176,12 +195,19 @@ const AddFieldForm = ({ initialField, onSave, onCancel }: AddFieldFormProps) => 
                   <div key={sf.id} className={styles.subfieldCard}>
                     <div className={styles.subfieldInfo}>
                       <div className={styles.subfieldRow}>
-                        <span className={styles.sfKey}>Subfield Label Name</span>
+                        <span className={styles.sfKey}>
+                          Subfield Label Name
+                        </span>
                         <span>: {sf.label_name}</span>
                       </div>
                       <div className={styles.subfieldRow}>
                         <span className={styles.sfKey}>Field Type</span>
-                        <span>: {FIELD_TYPE_OPTIONS.find((o) => o.value === sf.field_type)?.label ?? sf.field_type}</span>
+                        <span>
+                          :{' '}
+                          {FIELD_TYPE_OPTIONS.find(
+                            (o) => o.value === sf.field_type,
+                          )?.label ?? sf.field_type}
+                        </span>
                       </div>
                       <div className={styles.subfieldRow}>
                         <span className={styles.sfKey}>Placeholder Text</span>

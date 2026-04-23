@@ -9,7 +9,7 @@
 
 .label {
   font-size: $font-size-md;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-500;
   color: $gray-700;
 }
 
@@ -26,7 +26,7 @@
 .option {
   padding: $spacing-3 $spacing-6;
   font-size: $font-size-md;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-500;
   border-radius: $radius-sm;
   cursor: pointer;
   border: none;

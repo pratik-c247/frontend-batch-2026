@@ -12,14 +12,14 @@
 
 .label {
   font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-500;
   color: $gray-600;
 }
 
 .required {
   color: $red-light-color;
   padding-left: 1px;
-  font-weight:$font-weight-light;
+  font-weight:$font-weight-400;
 }
 
 .errorInput {
@@ -74,7 +74,7 @@
   background-color: $gray-800;
   color: $white-color;
   font-size: $font-size-xs;
-  font-weight: $font-weight-light;
+  font-weight: $font-weight-400;
   padding: $spacing-3 $spacing-5;
   border-radius: $radius-xs;
   white-space: nowrap;

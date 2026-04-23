@@ -5,7 +5,8 @@ import FormWrapper from '@/comopents/common/formWrapper/FormWrapper'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
 import { DeleteIcon } from '@/assets/icons/DeleteIcon'
-import { PlusIcon } from '@/assets/icons/PlusIcon'
+import PlusIcon from '@/assets/icons/PlusIcon'
+// import { PlusIcon } from '@/assets/icons/PlusIcon'
 
 interface OptionsModalProps {
   initialOptions?: string[]

@@ -1,6 +1,5 @@
-@use 'styles/variables' as *;
-@use 'styles/mixins' as *;
-
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
 .formCard {
   @include flex-column;
   gap: $spacing-6;

@@ -42,7 +42,8 @@ export interface DocumentTypeFilterProps {
 }
 
 export interface DocumentTypeTableProps {
-  data: DocumentTypeItem[]
+  // data: DocumentTypeItem[]
+  data: DocumentTypeRecord[]
   searchTerm: string
   filterValues: FilterFormValues | null
   onView: (item: DocumentTypeItem) => void
@@ -63,18 +64,18 @@ export interface DocumentTypeItem {
 }
 
 export interface DocumentTypeTableProps {
-  data: DocumentTypeItem[]
+  data: DocumentTypeRecord[]
   searchTerm: string
-  filterValues: FilterValues
+  filterValues: FilterFormValues |null
   onView: (item: DocumentTypeItem) => void
   onEdit: (item: DocumentTypeItem) => void
   onDelete: (item: DocumentTypeItem) => void
 }
 
-export interface FilterValues {
-  is_document_sensitive?: string
-  is_document_mandatory?: string
-}
+// export interface FilterValues {
+//   is_document_sensitive?: string
+//   is_document_mandatory?: string
+// }
 
 export interface DatePickerFieldProps {
   label: string

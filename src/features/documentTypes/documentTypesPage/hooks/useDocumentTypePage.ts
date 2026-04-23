@@ -6,7 +6,7 @@ import {
   updateDocumentType,
   deleteDocumentType,
   duplicateDocumentType,
-} from '@/lib/indexDB/documentTypeDB'
+} from '@/utils/indexDB/documentTypeDB'
 import { documentTypeData } from '@/data/documentType'
 import type { DocumentTypeRecord, DocumentTypeFormValues, FilterValues } from '@/types/documentType.types'
 
