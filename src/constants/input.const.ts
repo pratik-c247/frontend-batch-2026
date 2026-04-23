@@ -9,8 +9,8 @@ export const LABELS = {
 }
 
 export const TOOLTIPS_TEXT = {
-  FILTER_BY_START_DATE_OF_LAST_UPDATE: 'Filter by start date of last update',
-  FILTER_BY_END_DATE_OF_LAST_UPDATE: 'Filter by end date of last update',
+  FILTER_BY_START_DATE: 'Filter by start date of last update',
+  FILTER_BY_END_DATE: 'Filter by end date of last update',
 }
 
 export const INPUT_TYPES = {
