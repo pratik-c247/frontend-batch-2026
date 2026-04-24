@@ -10,28 +10,21 @@
   width: 100%;
 }
 
-.label {
-  font-size: $font-size-sm;
-  color: $gray-600;
-  display: flex;
-  align-items: center;
-  font-weight: $font-weight-500;
-}
 
-.required {
-  color: $red-light-color;
-  padding-left: $spacing-1;
+.errorInput {
+  border-color: $red-text-color !important;
+
+  &:focus {
+    border-color: $red-text-color;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.12);
+  }
 }
 
 .error {
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   color: $red-text-color;
+  margin-top: $spacing-1;
 }
-
-.errorInput {
-  border-color: $red-text-color;
-}
-
 .selectContainer {
   position: relative;
   width: 100%;
@@ -47,6 +40,9 @@
   outline: none;
   cursor: pointer;
   transition: 0.2s ease;
+  &:focus{
+    outline: none;
+  }
 }
 
 .select:disabled {
@@ -78,7 +74,9 @@
     color: $primary-color;
   }
 }
-
+:global(.customSelect__placeholder) {
+  font-size: $font-size-sm;
+}
 .tooltipBox {
   position: absolute;
   bottom: calc(100% + 6px);

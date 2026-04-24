@@ -134,7 +134,7 @@ const AddFieldForm = ({
             label="Field Type"
             required
             value={fieldType}
-            onChange={(e) => handleFieldTypeChange(e.target.value)}
+            onChange={(value) => handleFieldTypeChange(String(value))}
             options={FIELD_TYPE_OPTIONS}
             placeholder="Select Field Type"
             error={errors.fieldType}
@@ -273,13 +273,16 @@ const AddFieldForm = ({
                 label="Mark as Required?"
                 required
                 value={isRequired}
-                onChange={(e) => {
-                  setIsRequired(e.target.value)
-                  setErrors((prev) => ({ ...prev, isRequired: '' }))
-                }}
                 options={REQUIRED_OPTIONS}
                 placeholder="Select Mark As Required?"
                 error={errors.isRequired}
+                onChange={(value) => {
+                  setIsRequired(String(value))
+                  setErrors((prev) => ({
+                    ...prev,
+                    isRequired: '',
+                  }))
+                }}
               />
             )}
           </div>

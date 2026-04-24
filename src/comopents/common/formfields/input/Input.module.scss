@@ -4,19 +4,11 @@
 .wrapper {
   @include flex-column;
   gap: $spacing-3;
+   align-self: start;
 }
 
 .fullWidth {
   width: 100%;
-}
-
-.errorInput {
-  border-color: $red-text-color;
-}
-
-.error {
-  font-size: $font-size-sm;
-  color: $red-text-color;
 }
 
 .inputContainer {
@@ -27,12 +19,33 @@
 .input {
   width: 100%;
   padding: $spacing-5 $spacing-6;
-  background-color: $gray-150;
+  background-color: $white-color;
   border: 1px solid $gray-300;
   border-radius: $radius-xs;
   font-size: $font-size-sm;
+  color: $gray-700;
   outline: none;
-  transition: 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $gray-400;
+  }
+}
+
+.errorInput {
+  border-color: $red-text-color !important;
+
+  &:focus {
+    border-color: $red-text-color;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.12);
+  }
+}
+
+.error {
+  font-size: $font-size-xs;
+  color: $red-text-color;
+  margin-top: $spacing-1;
 }
 
 .tooltipAnchor {
@@ -48,10 +61,6 @@
   color: $primary-color;
   line-height: 1;
   user-select: none;
-
-  &:hover {
-    color: $primary-color;
-  }
 }
 
 .tooltipBox {

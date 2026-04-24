@@ -23,7 +23,6 @@ interface AddedFieldsTableProps {
   onSaveEdit: (field: DocumentField) => void
 }
 
-
 const FieldRow = ({
   field,
   onEdit,
@@ -98,8 +97,6 @@ const FieldRow = ({
     </tr>
   )
 }
-
-// ─── Table ─────────────────────────────────────────────────────────────────────
 const AddedFieldsTable = ({
   fields,
   onReorder,
