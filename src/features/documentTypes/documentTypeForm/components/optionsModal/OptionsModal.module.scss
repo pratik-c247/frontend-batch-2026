@@ -6,33 +6,34 @@
 
 .header {
   @include flex-align-between;
-  margin-bottom: $spacing-6;
+  padding-bottom: $spacing-4;
+    border-bottom: 1px solid $gray-400;
 }
 
 .sectionTitle {
-  font-size: $font-size-sm;
+  font-size: $font-size-md;
   font-weight: $font-weight-600;
-  color: $gray-700;
+  color: $primary-color;
 }
 
 .count {
   font-size: $font-size-sm;
-  color: $gray-500;
+  color: $gray-800;
+  font-weight: $font-weight-600;
 }
 
 .columns {
   display: grid;
   grid-template-columns: 1fr 40px;
   gap: $spacing-4;
-  padding: 0 0 $spacing-3;
-  border-bottom: 1px solid $gray-200;
+  padding: $spacing-6 $spacing-3;
   margin-bottom: $spacing-4;
 }
 
 .colLabel {
   font-size: $font-size-xs;
   font-weight: $font-weight-600;
-  color: $gray-500;
+  color: $gray-800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -47,7 +48,6 @@
   display: grid;
   grid-template-columns: 1fr 40px;
   gap: $spacing-4;
-  align-items: flex-start;
 }
 
 .inputWrap {
@@ -62,8 +62,7 @@
     border-color: $red-text-color;
 
     &:focus {
-      border-color: $red-text-color;
-      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+    transform: scale(0.97);
     }
   }
 }
@@ -80,7 +79,7 @@
   @include flex-center;
   border: 1px solid $gray-300;
   border-radius: $radius-xs;
-  color: $gray-500;
+  color: $gray-600;
   transition: all 0.15s ease;
 
   &:hover {

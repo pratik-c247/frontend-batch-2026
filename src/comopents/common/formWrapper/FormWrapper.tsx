@@ -18,7 +18,7 @@ const FormWrapper = ({
   children,
   className,
 }: FormWrapperProps) => (
-  <div className={styles.overlay} role="dialog" aria-modal="true">
+  <div className={styles.overlay} >
     <div className={`${styles.modal} ${className ?? ''}`}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>

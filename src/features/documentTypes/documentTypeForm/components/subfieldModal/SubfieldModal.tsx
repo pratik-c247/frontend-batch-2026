@@ -75,8 +75,8 @@ const SubfieldModal = ({ initialSubfield, onSave, onClose }: SubfieldModalProps)
           label="Field Type"
           required
           value={fieldType}
-          onChange={(e) => {
-            setFieldType(e.target.value)
+          onChange={(value) => {
+            setFieldType(String(value))
             setErrors((p) => ({ ...p, fieldType: '' }))
           }}
           options={FIELD_TYPE_OPTIONS}
@@ -95,8 +95,8 @@ const SubfieldModal = ({ initialSubfield, onSave, onClose }: SubfieldModalProps)
           label="Mark as Required?"
           required
           value={isRequired}
-          onChange={(e) => {
-            setIsRequired(e.target.value)
+          onChange={(value) => {
+            setIsRequired(String(value))
             setErrors((p) => ({ ...p, isRequired: '' }))
           }}
           options={REQUIRED_OPTIONS}
@@ -107,11 +107,11 @@ const SubfieldModal = ({ initialSubfield, onSave, onClose }: SubfieldModalProps)
 
       <Button
         type={BUTTON_TYPES.BUTTON}
-        variant={VARIANT.PRIMARY}
+        variant={VARIANT.BLUE}
         className={styles.saveBtn}
         onClick={handleSave}
       >
-        Save Field
+        Save Fields
       </Button>
     </FormWrapper>
   )

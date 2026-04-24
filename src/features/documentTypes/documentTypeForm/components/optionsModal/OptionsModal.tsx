@@ -6,7 +6,6 @@ import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
 import { DeleteIcon } from '@/assets/icons/DeleteIcon'
 import PlusIcon from '@/assets/icons/PlusIcon'
-// import { PlusIcon } from '@/assets/icons/PlusIcon'
 
 interface OptionsModalProps {
   initialOptions?: string[]
@@ -14,7 +13,11 @@ interface OptionsModalProps {
   onClose: () => void
 }
 
-const OptionsModal = ({ initialOptions = [], onSave, onClose }: OptionsModalProps) => {
+const OptionsModal = ({
+  initialOptions = [],
+  onSave,
+  onClose,
+}: OptionsModalProps) => {
   const [options, setOptions] = useState<string[]>(
     initialOptions.length ? initialOptions : ['', '', '', ''],
   )
@@ -31,10 +34,16 @@ const OptionsModal = ({ initialOptions = [], onSave, onClose }: OptionsModalProp
 
   const handleAdd = () => setOptions((prev) => [...prev, ''])
 
-  const handleDelete = (index: number) =>
-    setOptions((prev) => prev.filter((_, i) => i !== index))
+  const handleDelete = (index: number) => {
+    setOptions((prev) => {
+      if (prev.length === 1) {
+        alert('Can Not Delete, At Least One Option Required')
+        return prev
+      }
+      return prev.filter((_, i) => i !== index)
+    })
+  }
 
-  // Validation: duplicate values
   const duplicateIndexes = options.reduce<Set<number>>((acc, val, i) => {
     if (val && options.indexOf(val) !== i) acc.add(i)
     return acc
@@ -75,7 +84,9 @@ const OptionsModal = ({ initialOptions = [], onSave, onClose }: OptionsModalProp
                 placeholder={`Option ${i + 1}`}
               />
               {duplicateIndexes.has(i) && (
-                <span className={styles.errorText}>Field options must be unique</span>
+                <span className={styles.errorText}>
+                  Field options must be unique
+                </span>
               )}
             </div>
             <Button
@@ -93,7 +104,6 @@ const OptionsModal = ({ initialOptions = [], onSave, onClose }: OptionsModalProp
       <div className={styles.addRow}>
         <Button
           type={BUTTON_TYPES.BUTTON}
-          variant={VARIANT.SECONDARY}
           className={styles.addBtn}
           onClick={handleAdd}
         >
@@ -104,7 +114,7 @@ const OptionsModal = ({ initialOptions = [], onSave, onClose }: OptionsModalProp
 
       <Button
         type={BUTTON_TYPES.BUTTON}
-        variant={VARIANT.PRIMARY}
+        variant={VARIANT.BLUE}
         className={styles.saveBtn}
         onClick={handleSave}
         disabled={hasError}

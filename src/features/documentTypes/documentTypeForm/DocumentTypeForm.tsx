@@ -4,9 +4,9 @@ import FormWrapper from '@/comopents/common/formWrapper/FormWrapper'
 import { Switch } from '@/comopents/common/switch'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
-import PredefinedFieldsTable from './components/PredefinedFieldsTable/PredefinedFieldsTable'
-import AddedFieldsTable from './components/AddedFieldsTable/AddedFieldsTable'
-import AddFieldForm from './components/AddFieldForm/AddFieldForm'
+import PredefinedFieldsTable from './components/predefinedFieldsTable/PredefinedFieldsTable'
+import AddedFieldsTable from './components/addedFieldsTable/AddedFieldsTable'
+import AddFieldForm from './components/addFieldForm/AddFieldForm'
 import { useDocumentTypeForm } from './hooks/useDocumentTypeForm'
 import type { DocumentTypeFormValues } from '@/types/documentType.types'
 import { Input } from '@/comopents/common/formfields/input'
@@ -94,7 +94,6 @@ const DocumentTypeForm = ({
           />
         </section>
 
-        {/* Added Fields */}
         {fields.length > 0 && (
           <section className={styles.section}>
             <h3 className={styles.sectionTitle}>Added Fields</h3>
@@ -138,7 +137,7 @@ const DocumentTypeForm = ({
       <div className={styles.footer}>
         <Button
           type={BUTTON_TYPES.BUTTON}
-          variant={VARIANT.PRIMARY}
+          variant={VARIANT.BLUE}
           className={styles.submitBtn}
           onClick={handleSubmit}
         >

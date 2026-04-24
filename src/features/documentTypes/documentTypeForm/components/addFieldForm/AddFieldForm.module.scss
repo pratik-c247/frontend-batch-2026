@@ -18,12 +18,11 @@
 
   > * {
     min-width: 0;
-    flex:1;
+    flex: 1;
   }
   @media (max-width: 520px) {
     grid-template-columns: 1fr;
   }
-
 }
 
 // Info banner (add options / add subfield)
@@ -61,14 +60,13 @@
   }
 }
 
-// Subfields list
 .subfieldsList {
   @include flex-column;
   gap: $spacing-3;
 }
 
 .subfieldCard {
-  @include flex-align-between;
+  @include flex-between;
   padding: $spacing-5 $spacing-7;
   background-color: #e8f4fb;
   border-radius: $radius-sm;
@@ -76,7 +74,7 @@
 
 .subfieldInfo {
   @include flex-column;
-  gap: $spacing-1;
+  gap: $spacing-3;
 }
 
 .subfieldRow {
@@ -87,13 +85,13 @@
 }
 
 .sfKey {
-  font-weight: $font-weight-500;
   min-width: 160px;
+  font-weight: $font-weight-600;
   color: $gray-600;
 }
 
 .subfieldActions {
-  @include flex-align-center;
+  display: flex;
   gap: $spacing-3;
 }
 
@@ -110,6 +108,8 @@
 }
 
 .sfEditBtn {
+  background-color: $sky-blue-color;
+  color: $white-color;
   &:hover {
     border-color: $sky-blue-color;
     color: $sky-blue-color;
@@ -139,21 +139,15 @@
   cursor: pointer;
 }
 
-// Action buttons
 .actions {
   @include flex-align-center;
   justify-content: flex-end;
   gap: $spacing-4;
-  padding-top: $spacing-3;
-  border-top: 1px solid $gray-200;
+  padding-top: $spacing-5;
 }
 
-.cancelBtn {
-  min-width: 90px;
-  justify-content: center;
-}
-
+.cancelBtn,
 .saveFieldBtn {
-  min-width: 100px;
+  min-width: 130px;
   justify-content: center;
 }

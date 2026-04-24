@@ -3,13 +3,15 @@ import { useState } from 'react'
 import styles from './AddFieldForm.module.scss'
 import { Button } from '@/comopents/common/button'
 import { BUTTON_TYPES, VARIANT } from '@/constants/button.const'
-import OptionsModal from '../OptionsModal/OptionsModal'
-import SubfieldModal from '../SubfieldModal/SubfieldModal'
+import OptionsModal from '../optionsModal/OptionsModal'
+import SubfieldModal from '../subfieldModal/SubfieldModal'
 import type { DocumentField, SubField } from '@/types/documentType.types'
 import { Input } from '@/comopents/common/formfields/input'
 import { Select } from '@/comopents/common/formfields/select'
 import { FIELD_TYPE_OPTIONS } from '@/data/fieldTypeOptions'
 import PlusIcon from '@/assets/icons/PlusIcon'
+import { EditIcon } from '@/assets/icons/EditIcon'
+import { DeleteIcon } from '@/assets/icons/DeleteIcon'
 
 const REQUIRED_OPTIONS = [
   { label: 'Yes', value: 'yes' },
@@ -155,7 +157,6 @@ const AddFieldForm = ({
             )}
             <Button
               type={BUTTON_TYPES.BUTTON}
-              variant={VARIANT.PRIMARY}
               className={styles.addOptionsBtn}
               onClick={() => setShowOptionsModal(true)}
             >
@@ -226,7 +227,7 @@ const AddFieldForm = ({
                           setShowSubfieldModal(true)
                         }}
                       >
-                        ✎
+                        <EditIcon />
                       </Button>
                       <Button
                         type={BUTTON_TYPES.BUTTON}
@@ -234,7 +235,7 @@ const AddFieldForm = ({
                         className={styles.sfDeleteBtn}
                         onClick={() => handleDeleteSubfield(sf.id)}
                       >
-                        🗑
+                        <DeleteIcon />
                       </Button>
                     </div>
                   </div>
@@ -265,7 +266,6 @@ const AddFieldForm = ({
                 label="Placeholder Text"
                 value={placeholderText}
                 onChange={(e) => setPlaceholderText(e.target.value)}
-                placeholder=""
               />
             )}
             {showIsRequired && (
@@ -288,7 +288,6 @@ const AddFieldForm = ({
           </div>
         )}
 
-        {/* Action buttons */}
         <div className={styles.actions}>
           <Button
             type={BUTTON_TYPES.BUTTON}
@@ -300,7 +299,7 @@ const AddFieldForm = ({
           </Button>
           <Button
             type={BUTTON_TYPES.BUTTON}
-            variant={VARIANT.PRIMARY}
+            variant={VARIANT.BLUE}
             className={styles.saveFieldBtn}
             onClick={handleSave}
           >
