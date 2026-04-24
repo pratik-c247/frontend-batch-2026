@@ -13,11 +13,17 @@
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $spacing-7;
+  gap: $spacing-8;
+  align-items: start;
 
+  > * {
+    min-width: 0;
+    flex:1;
+  }
   @media (max-width: 520px) {
     grid-template-columns: 1fr;
   }
+
 }
 
 // Info banner (add options / add subfield)

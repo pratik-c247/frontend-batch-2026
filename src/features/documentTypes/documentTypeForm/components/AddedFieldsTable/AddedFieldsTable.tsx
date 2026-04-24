@@ -23,7 +23,7 @@ interface AddedFieldsTableProps {
   onSaveEdit: (field: DocumentField) => void
 }
 
-// ─── Single sortable row ───────────────────────────────────────────────────────
+
 const FieldRow = ({
   field,
   onEdit,

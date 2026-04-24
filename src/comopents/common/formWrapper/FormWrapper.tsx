@@ -9,14 +9,17 @@ interface FormWrapperProps {
   title: string
   onClose: () => void
   children: ReactNode
-  /** Extra class on the modal panel itself */
   className?: string
 }
 
-const FormWrapper = ({ title, onClose, children, className }: FormWrapperProps) => (
+const FormWrapper = ({
+  title,
+  onClose,
+  children,
+  className,
+}: FormWrapperProps) => (
   <div className={styles.overlay} role="dialog" aria-modal="true">
     <div className={`${styles.modal} ${className ?? ''}`}>
-      {/* ── Blue header ── */}
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
         <Button
@@ -24,13 +27,11 @@ const FormWrapper = ({ title, onClose, children, className }: FormWrapperProps) 
           variant={VARIANT.ICON}
           className={styles.closeBtn}
           onClick={onClose}
-          aria-label="Close"
         >
           <CloseIcon />
         </Button>
       </div>
 
-      {/* ── Scrollable body ── */}
       <div className={styles.body}>{children}</div>
     </div>
   </div>

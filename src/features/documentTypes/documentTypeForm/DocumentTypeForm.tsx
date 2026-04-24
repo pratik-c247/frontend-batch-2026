@@ -123,12 +123,12 @@ const DocumentTypeForm = ({
           <div className={styles.addFieldRow}>
             <Button
               type={BUTTON_TYPES.BUTTON}
-              variant={VARIANT.SECONDARY}
               className={styles.addFieldBtn}
               onClick={() => setShowAddField(true)}
             >
-              <PlusIcon />
+              {' '}
               Add Field
+              <PlusIcon />
             </Button>
           </div>
         )}

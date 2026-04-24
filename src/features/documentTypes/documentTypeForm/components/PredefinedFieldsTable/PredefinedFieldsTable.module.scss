@@ -38,7 +38,7 @@
 
   td {
     padding: $spacing-4 $spacing-5;
-    font-size: $font-size-sm;
+    font-size: $font-size-xs;
     color: $gray-700;
     border-bottom: 1px solid $gray-200;
   }
@@ -50,13 +50,18 @@
 
 .thDrag,
 .dragCell {
-  width: 32px;
+  width: 2px;
 }
+
 
 .thCheck,
 .checkCell {
-  width: 40px;
+  width: 2px;
 }
+.labelCell{
+  margin-left:$spacing-5;
+}
+
 
 .thRequired,
 .requiredCell {
@@ -86,10 +91,9 @@
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   cursor: pointer;
-  accent-color: $sky-blue-color;
 }
 
 .toggleWrap {

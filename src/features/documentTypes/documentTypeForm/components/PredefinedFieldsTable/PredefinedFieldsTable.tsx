@@ -35,6 +35,7 @@ const PredefinedRow = ({
       <td className={styles.dragCell}>
         <span className={styles.dragHandle} {...attributes} {...listeners}>
           <DragHandleIcon />
+
         </span>
       </td>
       <td className={styles.checkCell}>

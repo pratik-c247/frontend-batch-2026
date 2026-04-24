@@ -26,7 +26,6 @@ const TYPES_WITH_SUBFIELDS = ['toggle_switch']
 const TYPES_WITHOUT_PLACEHOLDER = ['checkbox', 'toggle_switch', 'radio_button']
 
 interface AddFieldFormProps {
-
   initialField?: DocumentField
   onSave: (field: DocumentField) => void
   onCancel: () => void
@@ -119,7 +118,6 @@ const AddFieldForm = ({
   return (
     <>
       <div className={styles.formCard}>
-        {/* Row 1: Label Name + Field Type */}
         <div className={styles.row}>
           <Input
             label="Label Name"
@@ -308,7 +306,6 @@ const AddFieldForm = ({
         </div>
       </div>
 
-      {/* Modals */}
       {showOptionsModal && (
         <OptionsModal
           initialOptions={options}
