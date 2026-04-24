@@ -25,7 +25,7 @@
   }
 }
 
-// Info banner (add options / add subfield)
+
 .infoBanner {
   @include flex-align-between;
   gap: $spacing-4;
@@ -52,7 +52,7 @@
   gap: $spacing-2;
   white-space: nowrap;
   font-size: $font-size-xs;
-  padding: $spacing-3 $spacing-5;
+  padding: $spacing-5 $spacing-6;
 
   svg {
     width: 12px;

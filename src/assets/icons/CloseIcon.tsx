@@ -6,7 +6,7 @@ export const CloseIcon = () => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="4"
     strokeLinecap="round"
     strokeLinejoin="round"
   >

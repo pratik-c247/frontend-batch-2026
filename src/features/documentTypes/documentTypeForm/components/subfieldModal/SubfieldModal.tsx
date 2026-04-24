@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+
 import styles from './SubfieldModal.module.scss'
 import FormWrapper from '@/comopents/common/formWrapper/FormWrapper'
 import { Button } from '@/comopents/common/button'
@@ -8,13 +8,8 @@ import type { SubField } from '@/types/documentType.types'
 import { Input } from '@/comopents/common/formfields/input'
 import { Select } from '@/comopents/common/formfields/select'
 import { FIELD_TYPE_OPTIONS } from '@/data/fieldTypeOptions'
-
-const REQUIRED_OPTIONS = [
-  { label: 'Yes', value: 'yes' },
-  { label: 'No', value: 'no' },
-]
-
-const generateId = () => `sf_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`
+import { useSubfiledModal } from '@/features/documentTypes/hooks/useSubfiledModal'
+import { REQUIRED_FIELD_OPTIONS } from '@/data/helper'
 
 interface SubfieldModalProps {
   initialSubfield?: SubField
@@ -22,38 +17,26 @@ interface SubfieldModalProps {
   onClose: () => void
 }
 
-const SubfieldModal = ({ initialSubfield, onSave, onClose }: SubfieldModalProps) => {
-  const [labelName, setLabelName] = useState(initialSubfield?.label_name ?? '')
-  const [fieldType, setFieldType] = useState(initialSubfield?.field_type ?? '')
-  const [placeholder, setPlaceholder] = useState(initialSubfield?.placeholder_text ?? '')
-  const [isRequired, setIsRequired] = useState(
-    initialSubfield ? (initialSubfield.is_required ? 'yes' : 'no') : '',
-  )
-  const [errors, setErrors] = useState<Record<string, string>>({})
-
-  const validate = () => {
-    const e: Record<string, string> = {}
-    if (!labelName.trim()) e.labelName = 'Label name is required'
-    if (!fieldType) e.fieldType = 'Field type is required'
-    if (!isRequired) e.isRequired = 'Mark as required is required'
-    return e
-  }
-
-  const handleSave = () => {
-    const e = validate()
-    if (Object.keys(e).length) {
-      setErrors(e)
-      return
-    }
-    onSave({
-      id: initialSubfield?.id ?? generateId(),
-      label_name: labelName.trim(),
-      field_type: fieldType,
-      placeholder_text: placeholder.trim(),
-      is_required: isRequired === 'yes',
-    })
-  }
-
+const SubfieldModal = ({
+  initialSubfield,
+  onSave,
+  onClose,
+}: SubfieldModalProps) => {
+  const {
+    handlers: { handleSave },
+    states: {
+      errors,
+      fieldType,
+      placeholder,
+      isRequired,
+      labelName,
+      setPlaceholder,
+      setErrors,
+      setIsRequired,
+      setLabelName,
+      setFieldType,
+    },
+  } = useSubfiledModal({ initialSubfield, onSave })
   return (
     <FormWrapper
       title={initialSubfield ? 'Edit Subfield' : 'Add Subfield'}
@@ -99,7 +82,7 @@ const SubfieldModal = ({ initialSubfield, onSave, onClose }: SubfieldModalProps)
             setIsRequired(String(value))
             setErrors((p) => ({ ...p, isRequired: '' }))
           }}
-          options={REQUIRED_OPTIONS}
+          options={REQUIRED_FIELD_OPTIONS}
           placeholder="Select Mark As Required?"
           error={errors.isRequired}
         />

@@ -1,4 +1,3 @@
-
 'use client'
 import type { FieldsTableRow } from '../fieldsTable/FieldsTable'
 import FieldsTable from '../fieldsTable/FieldsTable'
@@ -18,14 +17,12 @@ interface PredefinedFieldsTableProps {
   onToggleAll: (checked: boolean) => void
 }
 
-// ─── Map PredefinedRow → FieldsTableRow ───────────────────────────────────────
 const toTableRow = (r: PredefinedRow): FieldsTableRow => ({
   id: r.id,
   label: r.label,
   placeholder: r.placeholder,
   field_type: r.field_type,
   checked: r.checked,
-  // Document Date is always checked and non-toggleable
   locked: r.label === 'Document Date',
 })
 
@@ -36,10 +33,9 @@ const PredefinedFieldsTable = ({
   onToggleAll,
 }: PredefinedFieldsTableProps) => (
   <FieldsTable
-    config={PREDEFINED_TABLE_CONFIG }
+    config={PREDEFINED_TABLE_CONFIG}
     rows={rows.map(toTableRow)}
     onReorder={(tableRows) =>
-      // Map back to PredefinedRow before calling parent
       onReorder(
         tableRows.map((tr) => ({
           id: tr.id,

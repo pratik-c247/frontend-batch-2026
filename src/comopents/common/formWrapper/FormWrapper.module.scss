@@ -38,15 +38,17 @@
   width: 28px;
   height: 28px;
   @include flex-center;
-  background: transparent;
+  background: $white-color;
   border: none;
-  color: $white-color;
+  color: $primary-color;
   cursor: pointer;
   border-radius: $radius-xs;
   transition: background-color 0.15s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background: $white-color;
+    color: $primary-color;
+    transform: scale(0.97);
   }
 
   svg {

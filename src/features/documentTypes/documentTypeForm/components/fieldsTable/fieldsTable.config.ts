@@ -1,7 +1,5 @@
 import type { DocumentField } from '@/types/documentType.types'
 
-// ─── What each cell in a row can render ───────────────────────────────────────
-
 export interface RowAction {
   icon: React.ReactNode
   title: string
@@ -10,11 +8,9 @@ export interface RowAction {
 }
 
 export interface FieldsTableConfig {
-  /** Show the checkbox select column (predefined table) */
   showCheckbox: boolean
-  /** Show copy/edit/delete action buttons column (added fields table) */
   showActions: boolean
-  /** Allow inline edit by expanding a row (added fields table) */
+
   allowInlineEdit: boolean
 }
 

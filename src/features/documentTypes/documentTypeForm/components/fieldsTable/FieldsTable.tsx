@@ -114,8 +114,6 @@ const TableRow = ({
   )
 }
 
-// ─── Main table ────────────────────────────────────────────────────────────────
-
 interface FieldsTableProps {
   rows: FieldsTableRow[]
   config: FieldsTableConfig
@@ -175,7 +173,7 @@ const FieldsTable = ({
                 <th className={styles.thLabel}>Label Name</th>
                 <th className={styles.thPlaceholder}>Placeholder Text</th>
                 <th className={styles.thType}>Field Type</th>
-                <th className={styles.thRequired}>Mark as Requiredddfdf</th>
+                <th className={styles.thRequired}>Mark as Required</th>
 
                 {config.showActions && (
                   <th className={styles.thActions}>Actions</th>

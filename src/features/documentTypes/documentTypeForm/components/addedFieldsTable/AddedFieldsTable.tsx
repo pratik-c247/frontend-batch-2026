@@ -20,14 +20,13 @@ interface AddedFieldsTableProps {
   onSaveEdit: (field: DocumentField) => void
 }
 
-// ─── Map DocumentField → FieldsTableRow ───────────────────────────────────────
-const toTableRow = (f: DocumentField): FieldsTableRow => ({
-  id: f.id,
-  label: f.label_name,
-  placeholder: f.placeholder_text,
-  field_type: f.field_type,
-  checked: f.is_required,
-  _raw: f,
+const toTableRow = (field: DocumentField): FieldsTableRow => ({
+  id: field.id,
+  label: field.label_name,
+  placeholder: field.placeholder_text,
+  field_type: field.field_type,
+  checked: field.is_required,
+  _raw: field,
 })
 
 const AddedFieldsTable = ({
@@ -40,7 +39,6 @@ const AddedFieldsTable = ({
 }: AddedFieldsTableProps) => {
   if (fields.length === 0) return null
 
-  // ── Build actions from props so FieldsTable stays prop-driven ────────────────
   const actions: RowAction[] = [
     {
       icon: <CopyIcon />,
@@ -52,7 +50,7 @@ const AddedFieldsTable = ({
       icon: <EditIcon />,
       title: 'Edit',
       className: styles.EditBtn,
-      onClick: (f) => onEdit(f), 
+      onClick: (f) => onEdit(f),
     },
     {
       icon: <DeleteIcon />,
@@ -62,16 +60,11 @@ const AddedFieldsTable = ({
     },
   ]
 
-
-
   return (
     <FieldsTable
       config={ADDED_FIELDS_TABLE_CONFIG}
       rows={fields.map(toTableRow)}
-      onReorder={(tableRows) =>
-        // Map back to DocumentField[] before calling parent
-        onReorder(tableRows.map((tr) => tr._raw!))
-      }
+      onReorder={(tableRows) => onReorder(tableRows.map((tr) => tr._raw!))}
       actions={actions}
       onSaveEdit={onSaveEdit}
     />
